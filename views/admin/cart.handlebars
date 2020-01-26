@@ -1,0 +1,199 @@
+<section id="cartEmptyFalse">
+    <div class="container" style="margin-top: 6vh;">
+        <div class="row">
+            <div class="col-md-7">
+                <div style="border: 1px solid #eaeaec;font-size:13.5px;padding: 10px;">
+                    <img src="/img/icon/truck.svg" style="width:22px;margin-right:8px;position:relative;top:-2px;"> Yay!
+                    <strong>Free Delivery</strong> on this order
+                </div>
+                <div style="margin-top:20px;font-size:15px;">
+                    <strong> My Shopping Bag</strong>
+                    <strong style="float: right;">Total: Rs <span id="ajax-cart-total"></span></strong>
+                </div>
+                <div id="ajax-cart-detail">
+
+                </div>
+            </div>
+
+            <div class="col-md-5" style="font-size:13px;border: 1px solid #eaeaec;padding: 10px;">
+                <strong style="font-size:15px;">DELIVERY ADRESS</strong>
+                <div style="float: right;"><img src="/img/icon/shield-green.svg" style="width: 22px;"> 100% SECURE</div>
+                <form id="newOrder-form" class="cart-orderform">
+                    <input type="text" class="form-control" placeholder="Name *" name="name" id="name" required>
+                    <input type="text" class="form-control" placeholder="Mobile No *" name="mobile" id="mobile"
+                        required>
+                    <input type="text" class="form-control" placeholder="Pin Code *" name="pincode" id="pincode"
+                        required>
+                    <input type="text" class="form-control" placeholder="Adress (House No, Building, Street, Area) *"
+                        name="address" id="address" required>
+                    <input type="text" class="form-control" placeholder="Locality / Town *" name="locality"
+                        id="locality" required>
+                    <input type="text" class="form-control" placeholder="City / District *" name="city" id="city"
+                        required>
+                    <button
+                        style="margin-top:25px;width:100%;background:#FF4747;color:#fff;border:none;padding:10px 0;">Place
+                        Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="cartEmptyTrue">
+
+</section>
+
+
+<script>
+    //cart variables=================================================
+    let cartItems = [];
+    let cartData;
+    let total = 0;
+    let cartEmpty = true;
+
+    //for add order
+    let cartDetail;
+
+    const renderCart = () => {
+        $.getJSON("/api/users/auth", function (data) {
+            if (data.cart.length > 0) {
+                data.cart.forEach(item => {
+                    cartItems.push(item.id)
+                })
+                cartEmpty = false;
+            } else {
+                cartEmpty = true;
+            }
+
+            cartData = data.cart;
+        }).then(() => {
+            if (!cartEmpty) {
+                $.getJSON(`/api/product/articles_by_id?id=${cartItems}&type=array`, function (data) {
+                    cartData.forEach(item => {
+                        data.forEach((k, i) => {
+                            if (item.id === k._id) {
+                                data[i].quantity = item.quantity;
+                            }
+                        })
+                    })
+
+                    //for add order
+                    cartDetail = data;
+
+                    //calculate total
+                    data.forEach(item => {
+                        let qty = (item.stock - item.sold) - item.quantity < 0 ?
+                            item.stock - item.sold <= 0 ?
+                                0
+                                :
+                                item.stock - item.sold
+                            : item.quantity;
+                        total += parseInt(item.price, 10) * qty;
+                    })
+                    $('#ajax-cart-total').empty().append(`${total}`)
+
+                    //display cart detail
+                    data.forEach(item => {
+                        $('#ajax-cart-detail').append(` <div style="border: 1px solid #eaeaec;padding: 10px;margin-top:20px;">
+                    <div class="row">
+                        <div class="col-md-2" style="padding-right:0;">
+                            <img src="/productUploads/${item.file}"
+                                style="width: 100%;">
+                        </div>
+                        <div class="col-md-10">
+                            <strong style="font-size:15px">Roadster</strong>
+                            <div style="float: right;font-size:13.5px">
+                                <strong>Rs ${
+                            item.stock - item.sold <= 0 ?
+                                0
+                                :
+                                item.price
+                            }</strong>
+                                <div style="text-decoration:line-through;color:#FF4747;">Rs ${item.cutoffprice}</div>
+                            </div>
+                            <p style="color:#454545;font-size:13.5px;margin-bottom:0px;">
+                                ${item.available && item.sold < item.stock ?
+                                item.name
+                                :
+                                "<span style='color:red;'>Out of stock please remove it from your cart</span>"
+                            }
+                            </p>
+                            <p style="color:#888;font-size:11.5px;">Sold by: ${item.seller.name}</p>
+                            <button style="float: right;background:#FF4747;color:#fff;border:none;font-size:13.5px;padding:2px 8px;" onclick="cartDelete('${item._id}')">REMOVE</button>
+                            <button style="font-size:13.5px;background:#eee;border:none;padding:5px 8px;">Qty:
+                                ${
+                            (item.stock - item.sold) - item.quantity < 0 ?
+                                item.stock - item.sold <= 0 ?
+                                    0
+                                    :
+                                    item.stock - item.sold  //available stock
+                                :
+                                item.quantity
+                            }</button>
+                        </div>
+                    </div>
+                </div>`)
+                    })
+                })
+            } else {
+                $('#cartEmptyFalse').empty();
+
+                $('#cartEmptyTrue').empty().append(`<div style="text-align: center;padding-top:24vh;padding-bottom:30vh;">
+                       <strong style="font-size:19px;color:#222;"> Hey, it feels so light!</strong>
+                       <img src="/img/logo.svg" style="width: 24px;position:relative;top:-20px;left:-18px;">
+                        <div style="margin-top:16px;font-size:13.5px;color:#777;">There is nothing in your bag, Let's add some items.</div>
+                        <a href="/shop" class="btn"
+                            style="color:#FF4747;font-size:15px;font-weight:bold;background:none;margin-top:25px;border: solid 1px #FF4747;padding:11px 30px;">
+                            SHOP NOW
+                        </a>
+                    </div>`);
+            }
+        })
+    }
+
+    renderCart();
+
+    //delete cart items=====================================
+    const cartDelete = (id) => {
+        $.getJSON(`/api/users/removeFromCart?_id=${id}`, function (data) {
+            $('#ajax-cart-detail').empty();
+
+            cartItems = [];
+            cartData;
+            total = 0;
+
+            renderCart();
+        })
+    }
+
+    //add new order/ make a purchase=============================
+    function newOrderForm(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: '/api/users/addorder',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/x-www-form-urlencoded',
+            data: {
+                dataToSubmit: {
+                    name: document.getElementById('name').value,
+                    mobile: document.getElementById('mobile').value,
+                    pincode: document.getElementById('pincode').value,
+                    address: document.getElementById('address').value,
+                    locality: document.getElementById('locality').value,
+                    city: document.getElementById('city').value
+                },
+                cartDetail
+            },
+            success: function (data, textStatus, jQxhr) {
+                console.log(data)
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#newOrder-form').submit(newOrderForm);
+</script>

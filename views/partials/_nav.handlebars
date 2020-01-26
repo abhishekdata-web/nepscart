@@ -1,0 +1,102 @@
+<header class="display-pc">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"><a href="/" style="font-size:25px;color:#FF4747;font-weight:bold;">
+                    <span>Nepscart</span> <img src="/img/logo.svg"
+                        style="width: 24px;position:relative;top:-20px;left:-18px;">
+                </a></div>
+            <div class="col-md-6">
+                <div class="nav">
+                    <a href="/">Home</a>
+                    <a href="/shop">Shop</a>
+                    <a href="/">Blog</a>
+                    <a href="/">Contact</a>
+                    <a href="/">About</a>
+                    <a href="/">Sell</a>
+                </div>
+            </div>
+            <div id="nav-pc" class="col-md-4" style="text-align:right;padding-top:6px;">
+
+            </div>
+        </div>
+    </div>
+</header>
+
+<header class="display-mobile">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-7">
+                <a href=""><img src="/img/icon/menu.svg" style="width: 17px;margin-right:10px;"></a>
+                <a href="/" style="font-size:21px;color:#FF4747;font-weight:bold;position:relative;top:2.5px;">
+                    Nepscart
+                    <img src="/img/logo.svg" style="width: 20px;position:relative;top:-17px;left:-16px;">
+                </a>
+            </div>
+            <div id="nav-mobile" class="col-5" style="padding-top:6px;text-align:right;">
+
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    //media queries == universal
+    const mq = window.matchMedia("(min-width: 500px)");
+
+    $.getJSON("/api/users/auth", function (data) {
+        if (data.isAuth) {
+            if (mq.matches) {
+                $('#nav-pc').append(`<a href="/cart" style="font-size: 14px;padding-right:20px;font-weight: bold;color:#444;">
+                    <img src="/img/heart.svg" style="width: 18px;">
+                    Cart
+                </a>
+                <a href="/user-login" style="font-size: 14px;padding-right:20px;font-weight: bold;color:#444;">
+                    <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M17.5 6.5c0 3-2.5 5.5-5.5 5.5S6.5 9.5 6.5 6.5 9 1 12 1s5.5 2.5 5.5 5.5zm-3 0C14.5 5.1 13.4 4 12 4S9.5 5.1 9.5 6.5 10.6 9 12 9s2.5-1.1 2.5-2.5zM3 20c0-3.3 2.7-6 6-6h6c3.3 0 6 2.7 6 6v3h-3v-3c0-1.7-1.4-3-3-3H9c-1.6 0-3 1.3-3 3v3H3v-3z"
+                            fill="currentColor"></path>
+                    </svg>
+                    My Account
+                </a>
+                <a href="#" onClick="logoutHandler()" style="background: #FF4747;color:#fff;padding:8px 12px;font-size: 14px;">Log
+                    out</a>`)
+            } else {
+                $('#nav-mobile').append(`<a href="/shop" style="font-size: 14px;padding-right:20px;font-weight: bold;color:#444;">
+                    <img src="/img/icon/search-black.svg" style="width: 20px;">
+                </a>
+                <a href="/cart" style="font-size: 14px;font-weight: bold;color:#444;">
+                    <img src="/img/heart.svg" style="width: 21px;">
+                </a>`)
+            }
+        } else {
+            if (mq.matches) {
+                $('#nav-pc').append(`<a href="/user-login" style="font-size: 14px;padding-right:8px;font-weight: bold;color:#444;">
+                    <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M17.5 6.5c0 3-2.5 5.5-5.5 5.5S6.5 9.5 6.5 6.5 9 1 12 1s5.5 2.5 5.5 5.5zm-3 0C14.5 5.1 13.4 4 12 4S9.5 5.1 9.5 6.5 10.6 9 12 9s2.5-1.1 2.5-2.5zM3 20c0-3.3 2.7-6 6-6h6c3.3 0 6 2.7 6 6v3h-3v-3c0-1.7-1.4-3-3-3H9c-1.6 0-3 1.3-3 3v3H3v-3z"
+                            fill="currentColor"></path>
+                    </svg>
+                    Log in
+                </a>
+                <a href="/admin-register" style="background: #FF4747;color:#fff;padding:8px 12px;font-size: 14px;">Sign
+                    up</a>`)
+            } else {
+                $('#nav-mobile').append(`<a href="/user-login" style="font-size: 14px;padding-right:8px;font-weight: bold;color:#444;">
+                    Log in
+                </a>
+                <a href="/admin-register" style="background: #FF4747;color:#fff;padding:8px 12px;font-size: 14px;">Sign
+                    up</a>`)
+            }
+        }
+    })
+
+
+    //logout handler
+    const logoutHandler = () => {
+        $.getJSON("/api/users/logout", function (data) {
+            if (data.success === true) {
+                window.location.replace("/user-login");
+            }
+        })
+    }
+</script>

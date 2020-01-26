@@ -1,0 +1,160 @@
+<section>
+    <div class="container-fluid" style="padding-top: 3vh;">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+                <center>
+                    <h5 style="font-size:18px;margin-bottom: 40px;background:#03A685;color:#fff;padding:10px 0;">NEW
+                        PRODUCT</h5>
+                </center>
+                <form id="product-form">
+                    <input type="file" name="file"
+                        style="margin-bottom: 30px;border: 1px solid #ced4da;color: #495057;width:49%;padding:16px 10px;">
+                    <input type="file" name="file1"
+                        style="margin-bottom: 30px;border: 1px solid #ced4da;color: #495057;width:49%;padding:16px 10px;">
+                    <input type="file" name="file2"
+                        style="margin-bottom: 30px;border: 1px solid #ced4da;color: #495057;width:49%;padding:16px 10px;">
+                    <input type="file" name="file3"
+                        style="margin-bottom: 30px;border: 1px solid #ced4da;color: #495057;width:49%;padding:16px 10px;">
+                    <input type="file" name="file4"
+                        style="margin-bottom: 30px;border: 1px solid #ced4da;color: #495057;width:49%;padding:16px 10px;">
+                    <input type="text" name="name" placeholder="NAME" class="form-control"
+                        style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
+                    <input type="text" name="price" placeholder="PRICE" class="form-control"
+                        style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
+                    <input type="text" name="cutoffprice" placeholder="CUT-OFF-PRICE" class="form-control"
+                        style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
+                    <input type="text" name="stock" placeholder="STOCK" class="form-control"
+                        style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
+                    <textarea name="description" id="description" cols="30" rows="10">DESCRIPTION</textarea>
+                    <div style="margin-top:30px;">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="shipping" value="true" checked>
+                            <label class="form-check-label">SHIPPING-YES</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="shipping" value="false">
+                            <label class="form-check-label">SHIPPING-NO</label>
+                        </div>
+                    </div>
+                    <select id="category-select" class="form-control" name="category"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">CATEGORY</option>
+                    </select>
+                    <select id="subcategory-select" class="form-control" name="subcategory"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">SUBCATEGORY</option>
+                    </select>
+                    <select id="color-select" class="form-control" name="color"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">COLOR</option>
+                    </select>
+                    <select id="size-select" class="form-control" name="size"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">SIZE</option>
+                    </select>
+                    <select id="seller-select" class="form-control" name="seller"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">SELLER</option>
+                    </select>
+                    <div style="margin-top:30px;">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="available" value="true" checked>
+                            <label class="form-check-label">AVAILABLE-YES</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="available" value="false">
+                            <label class="form-check-label">AVAILABLE-NO</label>
+                        </div>
+                    </div>
+                    <div id="product-error" style="color:red;font-size:13px;"></div>
+                    <div id="product-success" style="color:green;font-size:13px;"></div>
+                    <button id="product-btn"
+                        style="margin-top:30px;width:100%;background:#FF4747;color:#fff;border:none;padding:10px 0;">ADD
+                        PRODUCT</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{!-- Ckeditor --}}
+<script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('description', {
+        format_tags: 'p;h1;h2;h3;h4;h5;h6;pre;address;div'
+    });
+
+
+
+
+    $.getJSON("/api/product/categories", function (data) {
+        $.each(data, function (i, category) {
+            $('#category-select').append(`<option value="${category._id}">${category.name}</option>`)
+        })
+    })
+
+    $.getJSON("/api/product/subcategories", function (data) {
+        $.each(data, function (i, subcategory) {
+            $('#subcategory-select').append(`<option value="${subcategory._id}">${subcategory.name}</option>`)
+        })
+    })
+
+    $.getJSON("/api/product/colors", function (data) {
+        $.each(data, function (i, color) {
+            $('#color-select').append(`<option value="${color._id}">${color.name}</option>`)
+        })
+    })
+
+    $.getJSON("/api/product/sellers", function (data) {
+        $.each(data, function (i, seller) {
+            $('#seller-select').append(`<option value="${seller._id}">${seller.name}</option>`)
+        })
+    })
+
+    $.getJSON("/api/product/sizes", function (data) {
+        $.each(data, function (i, size) {
+            $('#size-select').append(`<option value="${size._id}">${size.name}</option>`)
+        })
+    })
+
+
+
+
+
+
+    //add products
+    function processForm(e) {
+        e.preventDefault();
+
+        $('#product-btn').empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById("product-form");
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: '/api/product/article',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data.success === true) {
+                    $('#product-btn').empty().append(`ADD PRODUCT`);
+                    $('#product-error').empty();
+                    $('#product-success').empty().append(`<div style="margin-top:30px;">Product Added Successfully</div>`);
+                } else if (data.success === false) {
+                    $('#product-btn').empty().append(`ADD PRODUCT`);
+                    $('#product-success').empty();
+                    $('#product-error').empty().append(`<div style="margin-top:30px;">${data.err.errmsg}</div>`);
+                    console.log(data)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#product-form').submit(processForm);
+</script>

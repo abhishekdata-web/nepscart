@@ -1,0 +1,402 @@
+<div style="background: #03A685;color:#fff;font-size:14px;padding:4px 0;">
+    <center>Prices are inclusive of all taxes </center>
+</div>
+
+<div class="page-top display-pc">
+    <div class="container-fluid">
+        <a href="/" style="font-size:13px;">Home</a> / <a href="/shop" style="font-size:13px;">Blog</a> / <a href="/shop" style="font-weight: bold;color:#000;font-size:13px;">Shop</a>
+    </div>
+</div>
+
+<section id="desktop-version">
+    <div class="container-fluid" style="margin-top:17px;">
+        <div class="row">
+            <div class="col-md-2">
+                <h6 style="font-weight: bold;font-size:14.5px;">FILTERS</h6 style="font-weight: bold;font-size:14.5px;">
+            </div>
+            <div class="col-md-10">
+                <form id="search-form" class="product-searchbox">
+                    <input type="text" placeholder="Search for products and brands" id="search">
+                    <button><img src="/img/icon/search.svg" style="width: 20px;"></button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2" style="padding-right: 0;">
+                <div id="ajax-category" style="border: 1px solid #ddd;padding:20px 0;border-left:none;">
+                    <h6 style="font-weight: bold;font-size:14.5px;">CATEGORIES</h6>
+                </div>
+                <div id="ajax-subcategory"
+                    style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;">
+                    <h6 style="font-weight: bold;font-size:14.5px;">SUB-CATEGORIES</h6>
+                </div>
+                <div id="ajax-color" style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;">
+                    <h6 style="font-weight: bold;font-size:14.5px;">COLORS</h6>
+                </div>
+                <div id="ajax-size" style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;">
+                    <h6 style="font-weight: bold;font-size:14.5px;">SIZES</h6>
+                </div>
+                <div id="ajax-seller" style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;">
+                    <h6 style="font-weight: bold;font-size:14.5px;">SELLERS</h6>
+                </div>
+            </div>
+            <div class="col-md-10" style="padding-left: 0;">
+                <div style="border-top: 1px solid #ddd;padding:20px 0 20px 20px;">
+                    <div id="ajax-loading" style="width: 100%;padding-top:25vh;padding-bottom:25vh;">
+                        <center><img src="/img/loading.svg" style="width: 50px;"></center>
+                    </div>
+                    <div id="ajax-shop"
+                        style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
+
+                    </div>
+                    <div id="ajax-loadmore">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="mobile-version">
+    <div id="ajax-loading" style="width: 100%;padding-top:25vh;padding-bottom:25vh;">
+        <center><img src="/img/loading.svg" style="width: 50px;"></center>
+    </div>
+
+    <div id="ajax-shop" style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
+
+    </div>
+
+    <center>
+        <div id="ajax-loadmore" style="margin-top:19px;margin-bottom:65px;">
+
+        </div>
+    </center>
+
+    <div class="fixed-bottom" style="background: #fff;">
+        <center>
+            <div class="row"
+                style="border-top:1px solid #ddd;padding: 15px 0;font-size:14px;font-weight:bold;color:#444;">
+                <div class="col-6" style="border-right:1px solid #ddd;" data-toggle="modal" data-target="#search-modal">
+                    <img src="/img/icon/search-black.svg"
+                        style="width:15px;margin-right:8px;position:relative;top:-1.5px;">
+                    SEARCH
+                </div>
+                <div class="col-6" data-toggle="modal" data-target="#filter-modal">
+                    <img src="/img/icon/filter.svg" style="width:18px;margin-right:8px;position:relative;top:-1.5px;">
+                    FILTER
+                </div>
+            </div>
+        </center>
+    </div>
+
+    <div class="modal fade" id="filter-modal" tabindex="-1">
+        <div class="modal-dialog" role="document" style="margin:0;">
+            <div class="modal-content" style="border-radius:0;border:none;">
+                <div class="modal-header" style="padding:20px 16px;">
+                    <div style="font-size:14.5px;font-weight:bold;position:relative;top:6px;">
+                        <img src="/img/icon/filter.svg"
+                            style="width:18px;margin-right:8px;position:relative;top:-1.5px;">
+                        FILTERS
+                    </div>
+                    <button type="button" data-dismiss="modal"
+                        style="background: #FF4747;color:#fff;font-size:14.5px;border:none;padding:4px 12px 3px 12px;">
+                        APPLY
+                    </button>
+                </div>
+                <div class="modal-body" style="background:#fff;font-size:13.5px;padding-top:0;padding-bottom:0;">
+                    <div id="ajax-category" style="border-bottom: 1px solid #ddd;padding:20px 0;">
+                        <h6 style="font-weight: bold;font-size:14.5px;">CATEGORIES</h6>
+                    </div>
+                    <div id="ajax-subcategory"
+                        style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;border-right:none;">
+                        <h6 style="font-weight: bold;font-size:14.5px;">SUB-CATEGORIES</h6>
+                    </div>
+                    <div id="ajax-color"
+                        style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;border-right:none;">
+                        <h6 style="font-weight: bold;font-size:14.5px;">COLORS</h6>
+                    </div>
+                    <div id="ajax-size"
+                        style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;border-right:none;">
+                        <h6 style="font-weight: bold;font-size:14.5px;">SIZES</h6>
+                    </div>
+                    <div id="ajax-seller" style="border-top: 1px solid #ddd;padding:20px 0;">
+                        <h6 style="font-weight: bold;font-size:14.5px;">SELLERS</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="search-modal" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="border-radius:0;border:none;display:block;">
+                <div class="modal-body" style="padding:0;margin-top:28px;">
+                    <form id="search-form" class="product-searchbox">
+                        <input type="text" placeholder="Search for products and brands" id="search">
+                        <button><img src="/img/icon/search.svg" style="width: 20px;"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+<script>
+    //media queries from nav.handlebars
+    if (mq.matches) {
+        //make the mobile-version div empty
+        document.getElementById('mobile-version').innerHTML = '';
+    } else {
+        //make the desktop-version div empty
+        document.getElementById('desktop-version').innerHTML = '';
+    } // media qury ends here
+
+
+    //load shop =====================
+    let limit = 5;
+    let skip = 0;
+    let search = '';
+    let category = [];
+    let subcategory = [];
+    let color = [];
+    let size = [];
+    let seller = [];
+
+    const loadShop = () => {
+        $.ajax({
+            url: '/api/product/shop',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/x-www-form-urlencoded',
+            data: {
+                limit: limit,
+                skip: skip,
+                search: search,
+                category: category,
+                subcategory: subcategory,
+                color: color,
+                size: size,
+                seller: seller
+            },
+            success: function (data, textStatus, jQxhr) {
+                console.log(data.articles)
+                document.getElementById('ajax-loading').style.display = 'none';
+
+                if (data.size >= limit) {
+                    $("#ajax-loadmore").empty().append(`<button id="btn-loadmore" onclick="lodMoreProducts()" style="font-size:14px;color:#fff;background: #FF4747;border:none;padding:5px 10px;">Load More</button>`);
+                } else {
+                    $("#ajax-loadmore").empty();
+                }
+
+                if (data.articles.length > 0) {
+                    $.each(data.articles, function (i, article) {
+                        if (mq.matches) {
+                            $('#ajax-shop').append(`<div style="width: 18%;margin-bottom:19px;">
+                                <a href="/shop-detail/${article._id}" style="color:#000;">
+                                    <img src="/productUploads/${article.file}" style="width: 100%;">
+                                    <div style="font-size:13.5px;padding:12px 8px;">
+                                        <strong>Ives</strong> <br>
+                                        <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
+                                        <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #FF4747;text-decoration:line-through;">Rs.
+                                            ${article.cutoffprice}</span>
+                                    </div>
+                                </a>
+                            </div>`)
+                        } else {
+                            $('#ajax-shop').append(`<div style="width: 50%;border: 1px solid #ddd;">
+                                <a href="/shop-detail/${article._id}" style="color:#000;">
+                                    <img src="/productUploads/${article.file}" style="width: 100%;">
+                                    <div style="font-size:13.5px;padding:12px 8px;">
+                                        <strong>Ives</strong> <br>
+                                        <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
+                                        <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #FF4747;text-decoration:line-through;">Rs.
+                                            ${article.cutoffprice}</span>
+                                    </div>
+                                 </a>
+                            </div>`)
+                        }
+                    })
+                } else {
+                    $('#ajax-shop').append(`<div style="color: red;width: 100%;">Try searching something else</div>`);
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        })
+    }
+
+    loadShop();
+
+
+
+
+
+
+
+
+
+
+
+
+    //load filters===================
+    $.getJSON("/api/product/categories", function (data) {
+        $.each(data, function (i, category) {
+            $('#ajax-category').append(`<div style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleCategory('${category._id}')"> ${category.name}</div>`)
+        })
+    })
+
+    $.getJSON("/api/product/subcategories", function (data) {
+        $.each(data, function (i, subcategory) {
+            $('#ajax-subcategory').append(`<div style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSubcategory('${subcategory._id}')"> ${subcategory.name}</div>`)
+        })
+    })
+
+    $.getJSON("/api/product/colors", function (data) {
+        $.each(data, function (i, color) {
+            $('#ajax-color').append(`<div style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleColor('${color._id}')"> ${color.name}</div>`)
+        })
+    })
+
+    $.getJSON("/api/product/sellers", function (data) {
+        $.each(data, function (i, seller) {
+            $('#ajax-seller').append(`<div style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSeller('${seller._id}')"> ${seller.name}</div>`)
+        })
+    })
+
+    $.getJSON("/api/product/sizes", function (data) {
+        $.each(data, function (i, size) {
+            $('#ajax-size').append(`<div style="font-size: 13px;"><input type="checkbox" style="margin-top:10px;" onclick="handleToggleSize('${size._id}')"> ${size.name}</div>`)
+        })
+    })
+
+
+
+    //handletoggle category===========================================
+    const handleToggleCategory = (value) => {
+        $('#ajax-shop').empty();
+        document.getElementById('ajax-loading').style.display = 'block';
+
+        skip = 0;
+
+        const currentIndex = category.indexOf(value);
+        const newValue = [...category];
+
+        if (currentIndex === -1) {
+            newValue.push(value)
+        } else {
+            newValue.splice(currentIndex, 1)
+        }
+
+        category = newValue;
+
+        loadShop();
+    }
+    //handletoggle subcategory
+    const handleToggleSubcategory = (value) => {
+        $('#ajax-shop').empty();
+        document.getElementById('ajax-loading').style.display = 'block';
+
+        skip = 0;
+
+        const currentIndex = subcategory.indexOf(value);
+        const newValue = [...subcategory];
+
+        if (currentIndex === -1) {
+            newValue.push(value)
+        } else {
+            newValue.splice(currentIndex, 1)
+        }
+
+        subcategory = newValue;
+
+        loadShop();
+    }
+    //handletoggle color
+    const handleToggleColor = (value) => {
+        $('#ajax-shop').empty();
+        document.getElementById('ajax-loading').style.display = 'block';
+
+        skip = 0;
+
+        const currentIndex = color.indexOf(value);
+        const newValue = [...color];
+
+        if (currentIndex === -1) {
+            newValue.push(value)
+        } else {
+            newValue.splice(currentIndex, 1)
+        }
+
+        color = newValue;
+
+        loadShop();
+    }
+    //handletoggle size
+    const handleToggleSize = (value) => {
+        $('#ajax-shop').empty();
+        document.getElementById('ajax-loading').style.display = 'block';
+
+        skip = 0;
+
+        const currentIndex = size.indexOf(value);
+        const newValue = [...size];
+
+        if (currentIndex === -1) {
+            newValue.push(value)
+        } else {
+            newValue.splice(currentIndex, 1)
+        }
+
+        size = newValue;
+
+        loadShop();
+    }
+    //handletoggle seller
+    const handleToggleSeller = (value) => {
+        $('#ajax-shop').empty();
+        document.getElementById('ajax-loading').style.display = 'block';
+
+        skip = 0;
+
+        const currentIndex = seller.indexOf(value);
+        const newValue = [...seller];
+
+        if (currentIndex === -1) {
+            newValue.push(value)
+        } else {
+            newValue.splice(currentIndex, 1)
+        }
+
+        seller = newValue;
+
+        loadShop();
+    }
+
+    //handle search ============================================================================
+    const searchProducts = (e) => {
+        e.preventDefault();
+        $("#ajax-shop").empty();
+
+        document.getElementById('ajax-loading').style.display = 'block';
+
+        skip = 0;
+        search = document.getElementById("search").value;
+
+        loadShop();
+    }
+
+    $('#search-form').submit(searchProducts);
+
+    //load more products =======================================================================
+    const lodMoreProducts = () => {
+        $('#btn-loadmore').empty().append(`<img src="/img/loader.svg" style="width:18px;">`)
+
+        skip = skip + 5;
+        loadShop();
+    }
+</script>

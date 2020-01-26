@@ -1,0 +1,141 @@
+/* universal css */
+*{
+    font-family: 'Roboto', sans-serif;
+}
+.container-fluid{
+    width: 85%;
+}
+
+.display-mobile{
+    display: none;
+}
+
+input:focus{
+    outline:0px !important;
+    box-shadow: none !important;
+}
+
+/* header================== */
+header{
+    padding: 20px 0;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+}
+
+.nav{
+    margin-top:10px;
+}
+
+.nav a{
+    padding-right: 31px;
+    color: #444;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* shop ========================= */
+.page-top{
+    padding:4px 0;
+}
+
+.page-top a{
+    color:#555;
+    font-size: 14px;
+}
+
+.product-searchbox{
+    margin-top: -16px;
+    width: 50%;
+    float: right;
+}
+
+.product-searchbox input{
+    width: 100%;
+    padding: 6px 15px;
+    font-size: 13px;
+    border: 1px solid #e9e9eb;
+}
+
+.product-searchbox button{
+    margin-left: -57px;
+    padding: 3px 16px 6px 16px;
+    background: #FF4747;
+    border:none;
+    color: #fff;
+}
+
+/* cart ============================== */
+.cart-orderform input{
+    font-size: 13px;
+    border: none;
+    border-bottom: 1px solid #a9abb3;
+    border-radius: 0;
+    padding:50px 0 10px 0;
+}
+
+/* footer============================= */
+footer{
+    margin-top: 35px;
+    background: rgb(250, 251, 252);;
+    padding: 35px 0;
+    font-size: 15.5px;
+    color: #777;
+}
+footer h6, footer strong{
+    color:#444;
+}
+.footer-link a{
+  display: block;  
+  color: #777;
+  font-size: 14px;
+  padding-top:4px;
+}
+.footer-social div{
+    padding-top:4px;
+}
+.footer-social div a{
+    padding-right:8px;
+}
+.footer-secure div{
+    margin-bottom: 26px;
+    line-height: 21px;
+}
+
+
+
+
+
+
+/* media queries==================== */
+@media only screen and (max-width: 600px) {
+    /* universal css */
+    .container-fluid{
+        width: 100%;
+    }
+
+    .display-mobile{
+        display: block;
+    }
+
+    .display-pc{
+        display: none;
+    }
+
+    /* shop============= */
+    .product-searchbox{
+        width: 100%;
+    }
+
+    .product-searchbox input{
+        padding: 8px 15px;
+    }
+    
+    .product-searchbox button{
+        margin-left: -56px;
+        padding: 6px 16px 8px 16px;
+    }
+
+    /* footer=========== */
+    footer{
+        display: none;
+    }
+  }

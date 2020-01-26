@@ -1,0 +1,57 @@
+<center>
+    <section style="padding:90px 0 60px 0;">
+        <div class="container-fluid">
+            <div style="width:40%;box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);padding:60px 30px;">
+                <h3 style="font-size:26px;">Login to Nepscart</h3> <br>
+                <form id="login-form">
+                    <input type="email" class="form-control" placeholder="Your Email Adress"
+                        style="font-size:13px;height:40px;border-radius: 6px 6px 0 0;" name="email" required>
+                    <input type="password" class="form-control" placeholder="Enter Password"
+                        style="font-size:13px;height:40px;border-top:none;border-radius:0 0 6px 6px;" name="password"
+                        required>
+                    <div id="login-error" style="text-align: left;color:red;font-size:13px;"></div>
+                    <br>
+                    <button id="login-btn" class="btn" style="width:100%;background:#FF4747;color:#fff;">LOG IN</button>
+                </form>
+                <div style="font-size: 13px;margin-top:20px;text-align:left;">
+                    <span><a href="" style="color: #FF4747;">Recover password</a></span>
+                    <span style="float: right;">New to Nepscart? <a href="" style="color: #FF4747;">Create Account</a></span>
+                </div>
+            </div>
+        </div>
+    </section>
+</center>
+
+<script>
+    function processForm(e) {
+        e.preventDefault();
+
+        $('#login-btn').empty().append(`<img src="/img/loader.svg">`)
+
+        $.ajax({
+            url: '/api/users/login',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/x-www-form-urlencoded',
+            data: $(this).serialize(),
+            success: function (data, textStatus, jQxhr) {
+                console.log(data)
+
+                if (data.loginSuccess === true) {
+                    console.log("logged in successfully")
+                    setTimeout(function () {
+                        window.location.replace("/my-account");
+                    }, 3000);
+                } else if (data.loginSuccess === false) {
+                    $('#login-btn').empty().append(`LOG IN`)
+                    $('#login-error').empty().append(`<br> ${data.message}`)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#login-form').submit(processForm);
+</script>
