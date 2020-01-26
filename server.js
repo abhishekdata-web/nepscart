@@ -570,7 +570,7 @@ app.get('/cart', (req, res) => {
     res.render('admin/cart');
 })
 
-const PORT = 3000;
+const PORT = (process.env.PORT || 8000);
 
 app.listen(PORT, () => {
     console.log("server started at port 3000");
