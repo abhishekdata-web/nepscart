@@ -40,7 +40,7 @@ const resetPass = (data) => {
                     </tr>
                     <tr>
                         <td align="center" bgcolor="#ffffff" style="padding: 20px 0 20px 0;">
-                            <a href="http://localhost:3000/reset_password/${data.resetToken}"
+                            <a href="https://nepscart.herokuapp.com/reset_password/${data.resetToken}"
                                 style="background: #FF4747;color:#ffffff;border:none;font-family: Arial, sans-serif; font-size: 14px;padding: 10px 18px 10px 18px;text-decoration: none;">Reset Password</a>
                         </td>
                     </tr>
@@ -56,7 +56,7 @@ const resetPass = (data) => {
                         <td align="center" bgcolor="#f9f9f9"
                             style="padding: 20px 0 20px 0;font-family: Arial, sans-serif;font-size: 14px;color:#444444;">
                             Need more help? <br />
-                            <a href="http://nepscart.com/contactus"
+                            <a href="https://nepscart.herokuapp.com/contactus"
                                 style="color:#FF4747;border:none;font-family: Arial, sans-serif; font-size: 14px;">We’re
                                 here, ready to talk</a>
                         </td>
