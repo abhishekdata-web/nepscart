@@ -180,6 +180,10 @@ footer h6, footer strong{
         padding: 6px 16px 8px 16px;
     }
 
+    .shop-not-found{
+        padding: 8px 0 0 16px;
+    }
+
     /* cart ====================== */
     .cart-detail{
         margin-bottom: 20px;

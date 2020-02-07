@@ -134,7 +134,6 @@
                 <div class="modal-body" style="padding:0;margin-top:28px;">
                     <form id="search-form" class="product-searchbox">
                         <input type="text" placeholder="Search for products and brands" id="search">
-                        <button><img src="/img/icon/search.svg" style="width: 20px;"></button>
                     </form>
                 </div>
             </div>
@@ -221,7 +220,7 @@
                         }
                     })
                 } else {
-                    $('#ajax-shop').append(`<div style="color: red;width: 100%;">Try searching something else</div>`);
+                    $('#ajax-shop').append(`<div class="shop-not-found" style="color: red;width: 100%;font-size:14px;">Try searching something else</div>`);
                 }
             },
             error: function (jqXhr, textStatus, errorThrown) {
