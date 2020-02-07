@@ -1,21 +1,50 @@
+<style>
+    .login-section {
+        padding: 50px 0 20px 0;
+    }
+
+    .login-wrapper {
+        width: 40%;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        padding: 20px 20px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .login-section {
+            padding: 30px 0 0 0;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            box-shadow: none;
+            padding: 0;
+        }
+    }
+</style>
+
 <center>
-    <section style="padding:90px 0 60px 0;">
+    <section class="login-section">
         <div class="container-fluid">
-            <div style="width:40%;box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);padding:60px 30px;">
-                <h3 style="font-size:26px;">Login to Nepscart</h3> <br>
+            <div class="login-wrapper">
+                <div style="margin-bottom:40px;">
+                    <img src="/img/register-offer.webp" style="width: 100%;">
+                </div>
+                <h3 style="font-size:17px;margin-bottom:20px;">PLEASE LOGIN <img src="/img/icon/login-img.svg"
+                        style="margin-left:4px;width: 17.5px;position:relative;top:-1px;"></h3>
                 <form id="login-form">
-                    <input type="email" class="form-control" placeholder="Your Email Adress"
-                        style="font-size:13px;height:40px;border-radius: 6px 6px 0 0;" name="email" required>
-                    <input type="password" class="form-control" placeholder="Enter Password"
-                        style="font-size:13px;height:40px;border-top:none;border-radius:0 0 6px 6px;" name="password"
+                    <input type="email" class="form-control" placeholder="Email"
+                        style="font-size: 13px;border-radius:0;padding:21px 10px;margin-bottom:20px;" name="email"
+                        required>
+                    <input type="password" class="form-control" placeholder="Password"
+                        style="font-size: 13px;border-radius:0;padding:21px 10px;margin-bottom:15px;" name="password"
                         required>
                     <div id="login-error" style="text-align: left;color:red;font-size:13px;"></div>
-                    <br>
-                    <button id="login-btn" class="btn" style="width:100%;background:#FF4747;color:#fff;">LOG IN</button>
+                    <button id="login-btn" class="btn" style="border-radius:0;margin-top:15px;width:100%;background:#FF4747;color:#fff;">LOG IN</button>
                 </form>
-                <div style="font-size: 13px;margin-top:20px;text-align:left;">
-                    <span><a href="" style="color: #FF4747;">Recover password</a></span>
-                    <span style="float: right;">New to Nepscart? <a href="" style="color: #FF4747;">Create Account</a></span>
+                <div style="font-size: 13px;margin-top:20px;">
+                    <div style="margin-bottom:12px;"><a href="/reset-user" style="color: #FF4747;">Forgot password?</a></div>
+                    <div>New to Nepscart? <a href="/user-register" style="color: #FF4747;">Create
+                            Account</a></div>
                 </div>
             </div>
         </div>
@@ -38,13 +67,10 @@
                 console.log(data)
 
                 if (data.loginSuccess === true) {
-                    console.log("logged in successfully")
-                    setTimeout(function () {
-                        window.location.replace("/my-account");
-                    }, 3000);
+                    window.location.replace("/my-account");
                 } else if (data.loginSuccess === false) {
                     $('#login-btn').empty().append(`LOG IN`)
-                    $('#login-error').empty().append(`<br> ${data.message}`)
+                    $('#login-error').empty().append(`${data.message}`)
                 }
             },
             error: function (jqXhr, textStatus, errorThrown) {

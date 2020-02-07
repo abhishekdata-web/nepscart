@@ -1,0 +1,177 @@
+<section>
+    <div class="container-fluid" style="padding-top: 3vh;">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+                <center>
+                    <h5 style="font-size:18px;margin-bottom: 40px;background:#03A685;color:#fff;padding:10px 0;">EDIT
+                        PRODUCT</h5>
+                </center>
+                <form id="product-form">
+                    <input type="text" name="name" id="name" placeholder="NAME" class="form-control"
+                        style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
+                    <input type="text" name="price" id="price" placeholder="PRICE" class="form-control"
+                        style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
+                    <input type="text" name="cutoffprice" id="cutoffprice" placeholder="CUT-OFF-PRICE"
+                        class="form-control"
+                        style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
+                    <input type="text" name="stock" id="stock" placeholder="STOCK" class="form-control"
+                        style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
+                    <input type="text" name="sold" id="sold" placeholder="SOLD" class="form-control"
+                        style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
+                    <textarea class="form-control" name="description" id="description" rows="10" style="width: 100%;border-radius:0;font-size: 14px;"></textarea>
+                    <div style="margin-top:30px;">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="shipping" id="shipping-yes" value="true" required>
+                            <label class="form-check-label">SHIPPING-YES</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="shipping" id="shipping-no" value="false">
+                            <label class="form-check-label">SHIPPING-NO</label>
+                        </div>
+                    </div>
+                    <select id="category-select" class="form-control" name="category"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">CATEGORY</option>
+                    </select>
+                    <select id="subcategory-select" class="form-control" name="subcategory"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">SUBCATEGORY</option>
+                    </select>
+                    <select id="color-select" class="form-control" name="color"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">COLOR</option>
+                    </select>
+                    <select id="size-select" class="form-control" name="size"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">SIZE</option>
+                    </select>
+                    <select id="seller-select" class="form-control" name="seller"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">SELLER</option>
+                    </select>
+                    <div style="margin-top:30px;">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="available" id="available-yes" value="true" required>
+                            <label class="form-check-label">AVAILABLE-YES</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="available" id="available-no" value="false">
+                            <label class="form-check-label">AVAILABLE-NO</label>
+                        </div>
+                    </div>
+                    <div id="product-error" style="color:red;font-size:13px;"></div>
+                    <div id="product-success" style="color:green;font-size:13px;"></div>
+                    <button id="product-btn"
+                        style="margin-top:30px;width:100%;background:#FF4747;color:#fff;border:none;padding:10px 0;">EDIT
+                        PRODUCT</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $.getJSON("/api/product/categories", function (data) {
+        $.each(data, function (i, category) {
+            $('#category-select').append(`<option value="${category._id}">${category.name}</option>`)
+        })
+    })
+
+    $.getJSON("/api/product/subcategories", function (data) {
+        $.each(data, function (i, subcategory) {
+            $('#subcategory-select').append(`<option value="${subcategory._id}">${subcategory.name}</option>`)
+        })
+    })
+
+    $.getJSON("/api/product/colors", function (data) {
+        $.each(data, function (i, color) {
+            $('#color-select').append(`<option value="${color._id}">${color.name}</option>`)
+        })
+    })
+
+    $.getJSON("/api/product/sellers", function (data) {
+        $.each(data, function (i, seller) {
+            $('#seller-select').append(`<option value="${seller._id}">${seller.name}</option>`)
+        })
+    })
+
+    $.getJSON("/api/product/sizes", function (data) {
+        $.each(data, function (i, size) {
+            $('#size-select').append(`<option value="${size._id}">${size.name}</option>`)
+        })
+    })
+
+
+
+    //product id from the url ===============================
+    var url = window.location.pathname;
+    var productID = url.substring(url.lastIndexOf('/') + 1);
+
+
+    //edit products
+    function processForm(e) {
+        e.preventDefault();
+
+        $('#product-btn').empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById("product-form");
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: `/api/product/edit_product?_id=${productID}`,
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data.success === true) {
+                    $('#product-btn').empty().append(`EDIT PRODUCT`);
+                    $('#product-error').empty();
+                    $('#product-success').empty().append(`<div style="margin-top:30px;">Product Edited Successfully</div>`);
+                } else if (data.success === false) {
+                    $('#product-btn').empty().append(`EDIT PRODUCT`);
+                    $('#product-success').empty();
+                    $('#product-error').empty().append(`<div style="margin-top:30px;">${data.err.errmsg}</div>`);
+                    console.log(data)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#product-form').submit(processForm);
+
+
+
+    //get the product values to the form from database
+    $.getJSON(`/api/product/articles_by_id?id=${productID}&type=single`, function (data) {
+        let productDetail = data[0];
+
+        console.log(productDetail)
+
+        document.getElementById('name').value = productDetail.name;
+        document.getElementById('price').value = productDetail.price;
+        document.getElementById('cutoffprice').value = productDetail.cutoffprice;
+        document.getElementById('stock').value = productDetail.stock;
+        document.getElementById('sold').value = productDetail.sold;
+        document.getElementById('description').value = productDetail.description;
+        document.getElementById('category-select').value = productDetail.category._id;
+        document.getElementById('subcategory-select').value = productDetail.subcategory._id;
+        document.getElementById('color-select').value = productDetail.color._id;
+        document.getElementById('size-select').value = productDetail.size._id;
+        document.getElementById('seller-select').value = productDetail.seller._id;
+        if(productDetail.available){
+            document.getElementById("available-yes").checked = true;
+        }else{
+            document.getElementById("available-no").checked = true;
+        }
+        if(productDetail.shipping){
+            document.getElementById("shipping-yes").checked = true;
+        }else{
+            document.getElementById("shipping-no").checked = true;
+        }
+    })
+</script>

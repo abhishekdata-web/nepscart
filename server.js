@@ -7,6 +7,7 @@ const path = require('path');
 const upload = require('express-fileupload');
 const fs = require('fs');
 const SHA1 = require('crypto-js/sha1');
+const moment = require('moment');
 
 const app = express();
 require('dotenv').config();
@@ -55,6 +56,9 @@ const { Order } = require('./models/order');
 //Middlewares
 const { auth } = require('./middleware/auth');
 
+//============UTILS=============
+const { sendEmail } = require('./utils/mail/index');
+
 //============================================= api routes ==========================================
 //user routes========
 app.post('/api/users/register', (req, res) => {
@@ -66,11 +70,11 @@ app.post('/api/users/register', (req, res) => {
                 const newUser = new User(req.body);
 
                 newUser.save((err, doc) => {
-                    if (err) return res.json({ success: false, err });
+                    if (err) return res.json({ registerSuccess: false, err });
 
                     //sendEmail(doc.email, doc.name, null, "welcome");
                     return res.status(200).json({
-                        success: true
+                        registerSuccess: true
                     })
                 })
             }
@@ -100,7 +104,7 @@ app.get('/api/users/auth', auth, (req, res) => {
         isAdmin: req.user.role === 0 ? false : true,
         isAuth: true,
         email: req.user.email,
-        name: req.user.name,
+        firstname: req.user.firstname,
         lastname: req.user.lastname,
         role: req.user.role,
         cart: req.user.cart,
@@ -207,6 +211,7 @@ app.post('/api/users/addorder', auth, (req, res) => {
             porder: po,
             dateOfPurchase: Date.now(),
             name: item.name,
+            file: item.file,
             seller: item.seller.name,
             size: item.size.name,
             id: item._id,
@@ -379,6 +384,23 @@ app.get('/api/product/sizes', (req, res) => {
 })
 
 //product routes ==============
+app.post('/api/product/edit_product', auth, (req, res) => {
+    Product.findOneAndUpdate(
+        { _id: req.query._id },
+        {
+            "$set": req.body
+        },
+        { new: true },
+        (err, doc) => {
+            if (err) return res.json({ success: false, err });
+
+            return res.status(200).send({
+                success: true
+            })
+        }
+    )
+})
+
 app.get('/api/product/delete', (req, res) => {
     Product.findOne({ _id: req.query._id })
         .then(product => {
@@ -544,13 +566,54 @@ app.get('/api/product/articles_by_id', (req, res) => {
         })
 })
 
+// get products by best selling or recent arrival or similar products from cat and sub-cat
+app.get('/api/product/articles', (req, res) => {
+    let order = req.query.order ? req.query.order : 'asc';
+    let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
+    let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+
+    let findArgs = {};
+    if(req.query.category){
+        findArgs['category'] = req.query.category;
+    }
+    if(req.query.subcategory){
+        findArgs['subcategory'] = req.query.subcategory;
+    }
+    findArgs['available'] = true;
+
+    Product.find(findArgs)
+        .populate('category')
+        .populate('subcategory')
+        .populate('color')
+        .populate('size')
+        .populate('seller')
+        .sort([[sortBy, order]])
+        .limit(limit)
+        .exec((err, articles) => {
+            if (err) return res.status(400).send(err);
+            res.send(articles);
+        })
+})
+
 //============================frontend routes=======================================
 app.get('/', (req, res) => {
     res.render('index/index');
 })
 
+app.get('/contactus', (req, res) => {
+    res.render('index/contactus');
+})
+
+app.get('/partners', (req, res) => {
+    res.render('index/partner');
+})
+
 app.get('/user-login', (req, res) => {
     res.render('index/login');
+})
+
+app.get('/user-register', (req, res) => {
+    res.render('index/register');
 })
 
 app.get('/shop', (req, res) => {
@@ -561,16 +624,109 @@ app.get('/shop-detail/:_id', (req, res) => {
     res.render('index/shop-detail');
 })
 
+app.get('/reset-user', (req, res) => {
+    res.render('index/reset_user');
+})
+
+app.get('/reset_password/:resetToken', (req, res) => {
+    res.render('index/reset_password');
+})
+
+app.post('/api/users/reset_user', (req, res) => {
+    User.findOne(
+        { 'email': req.body.email },
+        (err, user) => {
+            if (!user) return res.json({ success: false, message: 'Request failed, email not found' });
+
+            user.generateResetToken((err, user) => {
+                if (err) return res.json({ success: false, err });
+                sendEmail(user.email, user.firstname, null, "reset_password", user)
+                return res.json({ success: true })
+            })
+        }
+    )
+})
+
+app.post('/api/users/reset_password', (req, res) => {
+    var today = moment().startOf('day').valueOf();
+
+    User.findOne({
+        resetToken: req.body.resetToken,
+        resetTokenExp: {
+            $gte: today
+        }
+    }, (err, user) => {
+        if (!user) return res.json({ success: false, message: 'Sorry, token bad, generate a new one' });
+
+        user.password = req.body.password;
+        user.resetToken = '';
+        user.resetTokenExp = '';
+
+        user.save((err, doc) => {
+            if (err) return res.json({ success: false, err });
+
+            return res.status(200).json({
+                success: true
+            })
+        })
+    })
+})
 //============================frontend auth routes====================================
 app.get('/admin/add_product', (req, res) => {
     res.render('admin/add_product');
+})
+
+app.get('/admin/order-success', (req, res) => {
+    res.render('admin/ordersuccess');
+})
+
+app.get('/admin/edit_product/:_id', (req, res) => {
+    res.render('admin/edit_product');
 })
 
 app.get('/cart', (req, res) => {
     res.render('admin/cart');
 })
 
-const PORT = (process.env.PORT || 8000);
+app.get('/my-account', (req, res) => {
+    res.render('admin/my_account');
+})
+
+app.get('/my-orders', (req, res) => {
+    res.render('admin/my_orders');
+})
+
+app.get('/api/order-track', (req, res) => {
+    Order.find({ "data": { "$elemMatch": { "porder": { "$regex": req.query['porder'].trim(), "$options": "i" } } } }).exec((err, orders) => {
+        if (err) return res.status(400).send(err);
+        res.status(200).json({
+            orders
+        })
+    })
+})
+
+app.get('/order-track/:porder', (req, res) => {
+    res.render('admin/ordertrack');
+})
+
+app.post('/api/order-track/cancel_order', auth, (req, res) => {
+    Order.findOneAndUpdate(
+        { "data": { "$elemMatch": { "porder": { "$regex": req.query['porder'], "$options": "i" } } } },
+        {
+            "$set": req.body
+        },
+        { new: true },
+        (err, doc) => {
+            if (err) return res.json({ success: false, err });
+
+            return res.status(200).send({
+                success: true
+            })
+        }
+    )
+})
+
+const PORT = (process.env.PORT || 3000);
 
 app.listen(PORT, () => {
     console.log("server started at port 3000");

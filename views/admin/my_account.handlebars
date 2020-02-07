@@ -1,0 +1,77 @@
+<style>
+    .my-account {
+        background: #F5F5F6;
+    }
+
+    .my-acoount-container {
+        width: 50%;
+        margin: auto;
+        padding-bottom: 90px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .my-acoount-container {
+            width: 100%;
+            padding-bottom: 0;
+        }
+    }
+</style>
+
+<section class="my-account" style="padding-top:12vh;">
+    <div class="my-acoount-container">
+        <center>
+            <img src="/img/profile-img.png" style="width: 120px;margin-bottom:-30px;">
+            <div id="profile-email" style="background: #fff;padding:48px 0 28px 0;font-size:14px;color:#555;">
+
+            </div>
+        </center>
+
+        <div style="background: #fff;margin-top:14px;">
+            <div class="container">
+                <a href="/my-orders">
+                    <div style="border-bottom: 1px solid #F5F5F6;padding-top:18px;">
+                        <img src="/img/profile-orders.png" style="width: 24px;">
+                        <img src="/img/icon/arrow.svg" style="width: 7px;float:right;margin-top:12px;">
+                        <div style="position: relative;top:-32px;padding-left:40px;">
+                            <strong style="font-size: 14px;color:#000;">Orders</strong>
+                            <div style="font-size: 12.5px;color:#94969F;">Check your order status</div>
+                        </div>
+                    </div>
+                </a>
+                <div style="border-bottom: 1px solid #F5F5F6;padding-top:18px;">
+                    <img src="/img/profile-offer.png" style="width: 24px;">
+                    <img src="/img/icon/arrow.svg" style="width: 7px;float:right;margin-top:12px;">
+                    <div style="position: relative;top:-32px;padding-left:40px;">
+                        <strong style="font-size: 14px;">View Offers</strong>
+                        <div style="font-size: 12.5px;color:#94969F;">View latest offers just for you</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: #fff;margin-top:14px;">
+            <div class="container">
+                <div style="border-bottom: 1px solid #F5F5F6;padding-top:18px;">
+                    <img src="/img/profile-details.png" style="width: 24px;">
+                    <img src="/img/icon/arrow.svg" style="width: 7px;float:right;margin-top:12px;">
+                    <div style="position: relative;top:-32px;padding-left:40px;">
+                        <strong style="font-size: 14px;">Profile Details</strong>
+                        <div style="font-size: 12.5px;color:#94969F;">Change your profile details</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <button onClick="logoutHandler()"
+            style="font-size:15px;font-weight:bold;margin:25px 0;width:100%;background:#ff5a5a;color:#fff;border:none;padding:13px 0;border-radius:4px;">
+            LOGOUT</button>
+
+    </div>
+</section>
+
+<script>
+    $.getJSON("/api/users/auth", function (data) {
+        $('#profile-email').append(`${data.email}`);
+    })
+</script>

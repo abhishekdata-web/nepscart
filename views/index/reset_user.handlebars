@@ -1,0 +1,83 @@
+<style>
+    .reset-section {
+        padding: 60px 0 30px 0;
+    }
+
+    .reset-wrapper {
+        width: 40%;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        padding: 50px 40px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .reset-section {
+            padding: 40px 0 0 0;
+        }
+
+        .reset-wrapper {
+            width: 100%;
+            box-shadow: none;
+            padding: 0;
+        }
+    }
+</style>
+
+<center>
+    <section class="reset-section">
+        <div class="container-fluid">
+            <div class="reset-wrapper">
+                <h3 style="font-size:19px;margin-bottom:14px;">Forgot Password ?</h3>
+                <p style="margin-bottom:70px;color:#555;font-size:14px;">We will send you a link to reset your password.
+                </p>
+                <form id="reset-form">
+                    <input type="email" class="form-control" placeholder="Email"
+                        style="font-size: 13px;border-radius:0;padding:21px 10px;margin-bottom:20px;" name="email"
+                        required>
+                    <div id="reset-error" style="text-align: left;color:red;font-size:13px;"></div>
+                    <div id="reset-success" style="text-align: left;color:green;font-size:13px;"></div>
+                    <button id="reset-btn" class="btn"
+                        style="font-size:14px;border-radius:0;margin-top:15px;width:100%;background:#FF4747;color:#fff;">SEND
+                        RESET
+                        LINK</button>
+                </form>
+                <div style="font-size: 13px;margin-top:20px;">
+                    <a href="/user-login" style="color: #FF4747;">Login!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</center>
+
+<script>
+    function processForm(e) {
+        e.preventDefault();
+
+        $('#reset-btn').empty().append(`<img src="/img/loader.svg">`)
+
+        $.ajax({
+            url: '/api/users/reset_user',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/x-www-form-urlencoded',
+            data: $(this).serialize(),
+            success: function (data, textStatus, jQxhr) {
+                console.log(data)
+
+                if (data.success === true) {
+                    $('#reset-btn').empty().append(`SEND RESET
+                        LINK`)
+                    $('#reset-success').empty().append(`Reset link has been sent your email`)
+                } else if (data.success === false) {
+                    $('#reset-btn').empty().append(`SEND RESET
+                        LINK`)
+                    $('#reset-error').empty().append(`${data.message}`)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#reset-form').submit(processForm);
+</script>

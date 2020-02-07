@@ -32,7 +32,42 @@ header{
     font-weight: bold;
 }
 
-/* shop ========================= */
+/* sidenav =============================================================================================== */
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #fff; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.3s; /* 0.5 second transition effect to slide in the sidenav */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    z-index: 1032;
+  }
+  
+  /* The navigation menu links */
+  .sidenav .sidenavlink a {
+    padding: 22px 0 0 22px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #000;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    font-size: 15px;
+    position: absolute;
+    top:33px;
+    right:8px;
+    color: #999;
+  }
+
+/* shop =============================================================================================== */
 .page-top{
     padding:4px 0;
 }
@@ -70,6 +105,12 @@ header{
     border-bottom: 1px solid #a9abb3;
     border-radius: 0;
     padding:50px 0 10px 0;
+}
+
+.cart-delivery-adress{
+    font-size:13px;
+    border: 1px solid #eaeaec;
+    padding: 10px;
 }
 
 /* footer============================= */
@@ -120,6 +161,11 @@ footer h6, footer strong{
         display: none;
     }
 
+    /* header================== */
+    header{
+        padding: 16px 0;
+    }
+
     /* shop============= */
     .product-searchbox{
         width: 100%;
@@ -132,6 +178,11 @@ footer h6, footer strong{
     .product-searchbox button{
         margin-left: -56px;
         padding: 6px 16px 8px 16px;
+    }
+
+    /* cart ====================== */
+    .cart-detail{
+        margin-bottom: 20px;
     }
 
     /* footer=========== */

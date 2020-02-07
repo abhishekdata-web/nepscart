@@ -1,0 +1,44 @@
+<section id="history-data" style="padding-top:2vh;font-size:14px;">
+    
+</section>
+
+{{!-- ====================Moment js=============== --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script>
+    $.getJSON("/api/users/auth", function (data) {
+        if (data.history.length > 0) {
+            $.each(data.history, function (i, history) {
+                $('#history-data').append(`<div class="container" style="margin-top:15px;">
+                    <strong style="margin-right: 5px;">Order No:</strong>
+                    <span>${history.porder}</span>
+                    <div style="font-size:13px;color:#999;margin-top:10px;">
+                        Placed on ${moment(history.dateOfPurchase).format("ddd, MMM DD, hh:mm A")} <br>
+                        Rs. ${history.price}
+                    </div>
+                    <div style="font-size:13px;margin-top:10px;padding-top:10px;border-top: 1px solid #eee;">
+                        <div style="margin-bottom: 10px;">
+                            <span>Quantity: <strong>${history.quantity} item</strong></span>
+                        <strong style="float:right;"><a href="/order-track/${history.porder}">Track</a></strong>
+                        </div>
+                        <a href="/shop-detail/${history.id}">
+                            <img src="/productUploads/${history.file}" style="width: 80px;">
+                        </a>
+                        <div style="margin-top:10px;">Want to cancel order?</div>
+                        <span style="color:#999;">You cannot cancel the order as the order has been shipped. You can return the items after delivery.</span> 
+                    </div>
+                </div>
+                <div style="background:#F5F5F6;height:12px;margin:15px 0 0 0;"></div>`);
+            })
+       } else {
+            $('#history-data').append(`<div style="padding-top:15vh;padding-bottom:25vh;font-size:15px;">
+                <center>
+                    <strong>NO ACTIVE ORDERS TO SHOW</strong> <br>
+                    <img src="/img/norders.png" style="margin-top:40px;">
+                    <div style="margin-top:40px;">
+                        <a href="/shop" style="border:1px solid #ddd;padding:10px 15px;font-size:13.5px;color:#526cd0;font-weight:bold;">START SHOPPING</a>
+                    </div>
+                </center>
+            </div>`)
+        }
+    })
+</script>

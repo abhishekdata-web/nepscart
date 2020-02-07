@@ -1,0 +1,89 @@
+<style>
+    .register-section {
+        padding: 50px 0 20px 0;
+    }
+
+    .register-wrapper {
+        width: 40%;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        padding: 20px 20px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .register-section {
+            padding: 30px 0 0 0;
+        }
+
+        .register-wrapper {
+            width: 100%;
+            box-shadow: none;
+            padding: 0;
+        }
+    }
+</style>
+
+<center>
+    <section class="register-section">
+        <div class="container-fluid">
+            <div class="register-wrapper">
+                <div style="margin-bottom:40px;">
+                    <img src="/img/register-offer.webp" style="width: 100%;">
+                </div>
+                <h3 style="font-size:17px;margin-bottom:20px;">SIGN UP <img src="/img/icon/login-img.svg"
+                        style="margin-left:4px;width: 17.5px;position:relative;top:-1px;"></h3>
+                <form id="register-form">
+                    <input type="text" class="form-control" placeholder="First Name"
+                        style="font-size: 13px;border-radius:0;padding:21px 10px;margin-bottom:15px;" name="firstname"
+                        required>
+                    <input type="text" class="form-control" placeholder="Last Name"
+                        style="font-size: 13px;border-radius:0;padding:21px 10px;margin-bottom:15px;" name="lastname"
+                        required>
+                    <input type="email" class="form-control" placeholder="Your Email Adress"
+                        style="font-size: 13px;border-radius:0;padding:21px 10px;margin-bottom:20px;" name="email"
+                        required>
+                    <input type="password" class="form-control" placeholder="Enter Password"
+                        style="font-size: 13px;border-radius:0;padding:21px 10px;margin-bottom:15px;" name="password"
+                        required>
+                    <div id="register-error" style="text-align: left;color:red;font-size:13px;"></div>
+                    <button id="register-btn" class="btn"
+                        style="border-radius:0;margin-top:15px;width:100%;background:#FF4747;color:#fff;">SIGN
+                        UP</button>
+                </form>
+                <div style="font-size: 13px;margin:20px 0;">
+                    <div>Have an Account? <a href="/user-login" style="color: #FF4747;">Log in</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</center>
+
+<script>
+    function processForm(e) {
+        e.preventDefault();
+
+        $('#register-btn').empty().append(`<img src="/img/loader.svg">`)
+
+        $.ajax({
+            url: '/api/users/register',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/x-www-form-urlencoded',
+            data: $(this).serialize(),
+            success: function (data, textStatus, jQxhr) {
+                console.log(data)
+
+                if (data.registerSuccess === true) {
+                    window.location.replace("/user-login");
+                } else if (data.registerSuccess === false) {
+                    $('#register-btn').empty().append(`SIGN UP`)
+                    $('#register-error').empty().append(`${data.message}`)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#register-form').submit(processForm);
+</script>

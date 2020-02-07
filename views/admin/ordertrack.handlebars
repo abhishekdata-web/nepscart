@@ -1,0 +1,121 @@
+<section style="padding-top:3vh;padding-bottom:3vh;font-size:14.5px;">
+    <div class="container">
+        <div style="margin-bottom:10px;">Order Status!</div>
+    </div>
+
+    <div class="container" id="order-track">
+
+    </div>
+
+    <div style="background: #F5F5F6;height:10px;"></div>
+
+    <div class="container" id="order-img" style="margin:20px 0;">
+        <div style="margin-bottom: 14px;">Your Orders</div>
+    </div>
+
+    <div style="background: #F5F5F6;height:10px;"></div>
+
+    <div class="container">
+        <div style="margin-top:20px;margin-bottom:10px;">Want to cancel this order?</div>
+        <div style="color:#999;">Note: You cannot cancel the order after the order has been shipped. You can return the
+            items
+            after delivery.</div>
+        <form id="cancel-form">
+
+        </form>
+    </div>
+</section>
+
+<script>
+    //porder from the url ===============================
+    var url = window.location.pathname;
+    var porder = url.substring(url.lastIndexOf('/') + 1);
+
+    //track order====================
+    const trackOrder = () => {
+        $.getJSON(`/api/order-track?porder=${porder}`, function (data) {
+            if (data.orders[0].status == "Cancelled") {
+                $('#cancel-form').empty();
+            } else {
+                $('#cancel-form').append(`<input type="hidden" name="status" value="Cancelled">
+                <button id="cancel-btn" style="color:#fff;background:rgb(220, 0, 78);border:none;margin-top:10px;padding:5px 8px;">Cancel
+                    Order</button>`);
+            }
+
+            data.orders[0].product.forEach(item => {
+                $('#order-img').append(`<img src="/productUploads/${item.file}" style="width:80px;margin-right:20px;">`);
+            })
+
+            if (data.orders[0].status == "Pending Acceptance") {
+                $('#order-track').empty().append(`<div>
+                <div style="margin-bottom:14px;">
+                    <img src="/img/icon/tick.svg" style="width: 14.5px;"> <span style="padding-left:20px;color:green;">Pending Acceptance</span>
+                </div>
+                <div style="margin-bottom:14px;">
+                    <span style="padding-left:39px;color:#888;">Order Verified</span>
+                </div>
+                <div style="margin-bottom:14px;">
+                    <span style="padding-left:39px;color:#888;">Sent for Delivery</span>
+                </div>
+                <div style="margin-bottom:20px;">
+                    <span style="padding-left:39px;color:#888;">Recieved by Customer</span>
+                </div>
+            </div>`)
+            } else if (data.orders[0].status == "Order Verified") {
+                $('#order-track').empty().append(`<div>
+                <div style="margin-bottom:14px;">
+                    <img src="/img/icon/tick.svg" style="width: 14.5px;"> <span style="padding-left:20px;color:green;">Pending Acceptance</span>
+                </div>
+                <div style="margin-bottom:14px;">
+                    <img src="/img/icon/tick.svg" style="width: 14.5px;"> <span style="padding-left:20px;color:green;">Order Verified</span>
+                </div>
+                <div style="margin-bottom:14px;">
+                    <span style="padding-left:39px;color:#888;">Sent for Delivery</span>
+                </div>
+                <div style="margin-bottom:20px;">
+                    <span style="padding-left:39px;color:#888;">Recieved by Customer</span>
+                </div>
+            </div>`)
+            } else if (data.orders[0].status == "Cancelled") {
+                $('#order-track').empty().append(`<div style="margin-bottom:14px;">
+                    <img src="/img/icon/sad.svg" style="width: 29px;"> <span style="padding-left:20px;color:red;">Your Order has been Cancelled</span>
+                </div>`)
+            }
+        })
+    }
+
+    trackOrder();
+
+
+
+    //cancel order
+    //edit products
+    function processForm(e) {
+        e.preventDefault();
+
+        $('#cancel-btn').empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById("cancel-form");
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: `/api/order-track/cancel_order?porder=${porder}`,
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                console.log(data)
+
+                $('#order-img').empty();
+                
+                trackOrder();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#cancel-form').submit(processForm);
+</script>

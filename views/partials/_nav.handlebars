@@ -1,16 +1,18 @@
 <header class="display-pc">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2"><a href="/" style="font-size:25px;color:#FF4747;font-weight:bold;">
+            <div class="col-md-2">
+                <a href="/" style="font-size:25px;color:#FF4747;font-weight:bold;">
                     <span>Nepscart</span> <img src="/img/logo.svg"
                         style="width: 24px;position:relative;top:-20px;left:-18px;">
-                </a></div>
+                </a>
+            </div>
             <div class="col-md-6">
                 <div class="nav">
                     <a href="/">Home</a>
                     <a href="/shop">Shop</a>
                     <a href="/">Blog</a>
-                    <a href="/">Contact</a>
+                    <a href="/contactus">Contact</a>
                     <a href="/">About</a>
                     <a href="/">Sell</a>
                 </div>
@@ -26,18 +28,50 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-7">
-                <a href=""><img src="/img/icon/menu.svg" style="width: 17px;margin-right:10px;"></a>
+                <svg viewBox="0 0 24 24" onclick="openNav()" style="width: 24px;margin-right:14px;">
+                    <path
+                        d="M3.444 5.422a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444zm0 7.111a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444zm0 7.111a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444z"
+                        fill="#3E4152" fillrule="evenodd"></path>
+                </svg>
                 <a href="/" style="font-size:21px;color:#FF4747;font-weight:bold;position:relative;top:2.5px;">
                     Nepscart
                     <img src="/img/logo.svg" style="width: 20px;position:relative;top:-17px;left:-16px;">
                 </a>
             </div>
-            <div id="nav-mobile" class="col-5" style="padding-top:6px;text-align:right;">
+            <div id="nav-mobile" class="col-5" style="padding-top:6px;text-align:right;padding-left:0;">
 
             </div>
         </div>
     </div>
 </header>
+
+{{!-- sidenav for mobile --}}
+<div id="mySidenav" class="sidenav">
+    <div style="background: #3f3947;padding: 22px 0 22px 22px;color:#fff;">
+        <div>
+            <button style="background: #fff;border:none;padding:7px 14px 12px 14px;border-radius:4px;">
+                <img src="/img/icon/user-sidenav.svg" style="width: 21px;">
+            </button>
+        </div>
+        <div id="sidenav-user-name" style="margin-top:14px;font-size:17px;font-weight:bold;">
+
+        </div>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="/img/back-arrow.svg"
+                style="width: 19px;"></a>
+    </div>
+    <div class="sidenavlink" style="font-weight: bold;" id="sidenav-auth">
+        <a href="/">Home</a>
+        <a href="/shop">Shop Now</a>
+    </div>
+
+    <div class="sidenavlink">
+        <hr style="margin-bottom: 0;">
+        <a href="/contactus">Contact Us</a>
+        <a href="/">FAQs</a>
+        <a href="/blogs">Articles</a>
+        <a href="/partners">Sell on Nepscart</a>
+    </div>
+</div>
 
 <script>
     //media queries == universal
@@ -45,12 +79,16 @@
 
     $.getJSON("/api/users/auth", function (data) {
         if (data.isAuth) {
+            $('#sidenav-user-name').append(`${data.firstname}`);
+            $('#sidenav-auth').append(`<a href="/my-account">My Account</a>
+                <a href="/my-orders">Orders</a>`);
+
             if (mq.matches) {
                 $('#nav-pc').append(`<a href="/cart" style="font-size: 14px;padding-right:20px;font-weight: bold;color:#444;">
                     <img src="/img/heart.svg" style="width: 18px;">
                     Cart
                 </a>
-                <a href="/user-login" style="font-size: 14px;padding-right:20px;font-weight: bold;color:#444;">
+                <a href="/my-account" style="font-size: 14px;padding-right:20px;font-weight: bold;color:#444;">
                     <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M17.5 6.5c0 3-2.5 5.5-5.5 5.5S6.5 9.5 6.5 6.5 9 1 12 1s5.5 2.5 5.5 5.5zm-3 0C14.5 5.1 13.4 4 12 4S9.5 5.1 9.5 6.5 10.6 9 12 9s2.5-1.1 2.5-2.5zM3 20c0-3.3 2.7-6 6-6h6c3.3 0 6 2.7 6 6v3h-3v-3c0-1.7-1.4-3-3-3H9c-1.6 0-3 1.3-3 3v3H3v-3z"
@@ -61,14 +99,20 @@
                 <a href="#" onClick="logoutHandler()" style="background: #FF4747;color:#fff;padding:8px 12px;font-size: 14px;">Log
                     out</a>`)
             } else {
-                $('#nav-mobile').append(`<a href="/shop" style="font-size: 14px;padding-right:20px;font-weight: bold;color:#444;">
+                $('#nav-mobile').append(`<a href="/shop" style="padding-right:17px;">
                     <img src="/img/icon/search-black.svg" style="width: 20px;">
                 </a>
-                <a href="/cart" style="font-size: 14px;font-weight: bold;color:#444;">
-                    <img src="/img/heart.svg" style="width: 21px;">
-                </a>`)
+                <a href="/cart" style="padding-right:17px;">
+                    <img src="/img/heart-mobile.svg" style="width: 21px;">
+                </a>
+                <a href="/my-account">
+                    <img src="/img/icon/profile-nav.svg" style="width: 19px;">
+                </a>
+                `)
             }
         } else {
+            $('#sidenav-user-name').append(`Please Login`);
+
             if (mq.matches) {
                 $('#nav-pc').append(`<a href="/user-login" style="font-size: 14px;padding-right:8px;font-weight: bold;color:#444;">
                     <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none">
@@ -78,13 +122,13 @@
                     </svg>
                     Log in
                 </a>
-                <a href="/admin-register" style="background: #FF4747;color:#fff;padding:8px 12px;font-size: 14px;">Sign
+                <a href="/user-register" style="background: #FF4747;color:#fff;padding:8px 12px;font-size: 14px;">Sign
                     up</a>`)
             } else {
-                $('#nav-mobile').append(`<a href="/user-login" style="font-size: 14px;padding-right:8px;font-weight: bold;color:#444;">
+                $('#nav-mobile').append(`<a href="/user-login" style="font-size: 14px;padding-right:4px;font-weight: bold;color:#444;">
                     Log in
                 </a>
-                <a href="/admin-register" style="background: #FF4747;color:#fff;padding:8px 12px;font-size: 14px;">Sign
+                <a href="/user-register" style="background: #FF4747;color:#fff;padding:7px 8px;font-size: 14px;">Sign
                     up</a>`)
             }
         }
@@ -98,5 +142,15 @@
                 window.location.replace("/user-login");
             }
         })
+    }
+
+    //side nav=======================
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
     }
 </script>
