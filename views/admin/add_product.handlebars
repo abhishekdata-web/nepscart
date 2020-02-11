@@ -26,7 +26,8 @@
                         style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
                     <input type="text" name="stock" placeholder="STOCK" class="form-control"
                         style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
-                    <textarea name="description" id="description" cols="30" rows="10">DESCRIPTION</textarea>
+                    <textarea class="form-control" name="description" id="description" rows="10"
+                        style="width: 100%;border-radius:0;font-size: 14px;">DESCRIPTION</textarea>
                     <div style="margin-top:30px;">
                         <div class="form-check-inline">
                             <input class="form-check-input" type="radio" name="shipping" value="true" checked>
@@ -78,16 +79,7 @@
     </div>
 </section>
 
-{{!-- Ckeditor --}}
-<script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace('description', {
-        format_tags: 'p;h1;h2;h3;h4;h5;h6;pre;address;div'
-    });
-
-
-
-
     $.getJSON("/api/product/categories", function (data) {
         $.each(data, function (i, category) {
             $('#category-select').append(`<option value="${category._id}">${category.name}</option>`)
@@ -146,7 +138,7 @@
                 } else if (data.success === false) {
                     $('#product-btn').empty().append(`ADD PRODUCT`);
                     $('#product-success').empty();
-                    $('#product-error').empty().append(`<div style="margin-top:30px;">${data.err.errmsg}</div>`);
+                    $('#product-error').empty().append(`<div style="margin-top:30px;">${data.message}</div>`);
                     console.log(data)
                 }
             },

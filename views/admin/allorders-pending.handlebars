@@ -1,0 +1,147 @@
+<style>
+    .nav-link {
+        font-size: 12.5px !important;
+        padding: 8px 0 !important;
+        background: #F5F5F6;
+        border-radius: 0 !important;
+    }
+
+    .nav-link.active {
+        background: #03A685 !important;
+        color: #fff;
+    }
+</style>
+
+<section>
+    <div class="container">
+        <ul class="nav nav-justified mb-3">
+            <li class="nav-item">
+                <a class="nav-link active" href="/admin/allorders/pending">PENDING</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/allorders/verified">VERIFIED</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">SENT</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">GOT</a>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <div id="pills-pending-content">
+
+        </div>
+        <div id="ajax-loadmore" class="container" style="padding-top:15px;padding-bottom:15px;">
+
+        </div>
+    </div>
+</section>
+
+{{!-- ====================Moment js=============== --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script>
+    //load more values
+    let limit = 1;
+    let skip = 0;
+
+    const loadOrders = () => {
+        $.getJSON(`/api/admin/allorders/pending?limit=${limit}&skip=${skip}`, function (data) {
+            console.log(data);
+
+            if (data.size >= limit) {
+                $('#ajax-loadmore').empty().append(`<button onclick="loadMoreOrders()" id="btn-loadmore"
+                    style="border:1px solid #666;background:none;color:#777;font-size:14px;padding:4px 12px;">LOAD
+                    MORE</button>`);
+            } else {
+                $("#ajax-loadmore").empty();
+            }
+
+            data.orders.forEach(item => {
+                item.product.forEach(prod => {
+                    $('#pills-pending-content').append(`<div class="container" style="margin-top:15px;">
+                        <strong style="margin-right: 5px;">Order No:</strong>
+                        <span>${prod.porder}</span>
+                        <div style="font-size:13px;color:#777;margin-top:10px;">
+                            Placed on ${moment(prod.dateOfPurchase).format("ddd, MMM DD, hh:mm A")} <br>
+                            Rs. ${prod.price}
+                        </div>
+                        <div style="font-size:13px;margin-top:10px;padding-top:10px;border-top: 1px solid #eee;">
+                            <div style="margin-bottom: 10px;">
+                                <span>Quantity: <strong>${prod.quantity} item</strong></span>
+                            </div>
+                            <a href="/shop-detail/${prod.id}">
+                                <img src="/productUploads/${prod.file}" style="width: 80px;">
+                            </a>
+                        </div>
+                    </div>`)
+                })
+                $('#pills-pending-content').append(`<div class="container" style="font-size:13px;">
+                    <div style="margin-top:10px;font-weight:bold;">Delivery details!</div>
+                    <div style="color:#777;">
+                        <div>${item.user[0].id}</div>
+                        <div>${item.user[0].name}</div>
+                        <div>${item.user[0].email}</div>
+                    </div>
+                    <div style="color:#777;margin-top:10px;">
+                        <div>${item.data[0].name}</div>
+                        <div>${item.data[0].mobile}</div>
+                        <div>${item.data[0].pincode}</div>
+                        <div>${item.data[0].address}</div>
+                        <div>${item.data[0].locality}</div>
+                        <div>${item.data[0].city}</div>
+                        <div>${item.data[0].porder}</div>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <form id="change-form-${item.data[0].porder}">
+                            <select name="status" style="padding:4px 0;" required>
+                                <option value="Order Verified">Order Verified</option>
+                                <option value="Cancelled">Order Cancelled</option>
+                            </select>
+                            <button type="button" onclick="processForm('${item.data[0].porder}')" id="change-btn-${item.data[0].porder}" style="background:#FF4747;color:#fff;border:2px solid #FF4747;">Change</button>
+                        </form>
+                    </div>
+                </div>`);
+                $('#pills-pending-content').append(`<div style="background:#F5F5F6;height:12px;margin:15px 0 0 0;"></div>`);
+            })
+        })
+    }
+
+    loadOrders();
+
+    //load more pending orders
+    const loadMoreOrders = () => {
+        $('#btn-loadmore').empty().append(`<img src="/img/loader.svg" style="width:18px;">`)
+
+        skip = skip + 1;
+        loadOrders();
+    }
+
+
+
+    //change status ===========================================================================
+    const processForm = (porder) => {
+        $(`#change-btn-${porder}`).empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById(`change-form-${porder}`);
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: `/api/order-track/change_status?porder=${porder}`,
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                console.log(data)
+
+                $(`#change-btn-${porder}`).empty().append(`Change`);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+</script>

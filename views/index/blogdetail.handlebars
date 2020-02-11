@@ -1,0 +1,77 @@
+<section style="padding-top:3vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8" id="ajax-blog-detail">
+                <div style="background:#ee5f73;color:#fff;font-weight:bold;padding:8px 13px;margin-bottom:20px;">
+                    DETAIL
+                    <div style="float: right;" id="edit-delete">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div style="background:#444546;color:#fff;font-weight:bold;padding:8px 13px;margin-bottom:28px;">
+                    MEDIA ROOM
+                </div>
+
+                <div>
+                    <div style="margin-bottom:28px;">
+                        <img src="https://blog.myntra.com/storage/2020/01/Mahesh-Babu-Myntra-Launch-Slider-1115-X-545.jpg"
+                            style="width: 100%;">
+                        <div style="font-size: 15px;margin-top:4px;font-weight:bold;">
+                            Myntra Extends Its Premium Watches Portfolio with Swiss Star Tissot
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:28px;">
+                        <img src="https://blog.myntra.com/storage/2020/02/slider-Image.jpg" style="width: 100%;">
+                        <div style="font-size: 15px;margin-top:4px;font-weight:bold;">
+                            Myntra Extends Its Premium Watches Portfolio with Swiss Star Tissot
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{!-- ====================Moment js=============== --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script>
+    //title from the url ===============================
+    var url = window.location.pathname;
+    var title = url.substring(url.lastIndexOf('/') + 1);
+
+    $.getJSON(`/api/blog/detail?title=${title}`, function (data) {
+        $('#ajax-blog-detail').append(`<div>
+            <h1 style="font-size: 22px;">${data.blog.title}</h1>
+            <div style="font-size: 14px;color:#777;">
+                BY <a href="/blogs" style="color: #fb56c1;">NEPSCART</a> / ${moment(data.blog.date).format("ddd, MMM DD, hh:mm A")}
+            </div>
+            <div style="margin: 20px 0;">
+                <img src="/blogUploads/${data.blog.file1}" style="width: 100%;">
+            </div>
+            <div style="margin-bottom:28px;">
+                ${data.blog.description}
+            </div>
+        </div>`)
+
+
+        $.getJSON("/api/users/auth", function (auth) {
+            if (auth.role === 1) {
+                $('#edit-delete').append(`<button onclick="deleteBlog()" style="background:none;border:none;"><img src="/img/icon/bin.svg" style="width:17px;"></button>
+                    <a href="/admin/edit_blog/${data.blog.title}"><img src="/img/icon/edit.svg" style="width:16px;margin-left:10px;"></a>`)
+            }
+        })
+    })
+
+
+
+
+    //delete blog
+     const deleteBlog = () => {
+        $.getJSON(`/api/blog/delete?title=${title}`, function (data) {
+            window.location.replace("/blogs");
+        })
+    }
+</script>

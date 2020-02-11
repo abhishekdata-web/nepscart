@@ -1,10 +1,11 @@
 <section id="history-data" style="padding-top:2vh;font-size:14px;">
-    
+
 </section>
 
 {{!-- ====================Moment js=============== --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script>
+    //history is limited with slice in the auth api
     $.getJSON("/api/users/auth", function (data) {
         if (data.history.length > 0) {
             $.each(data.history, function (i, history) {
@@ -29,13 +30,18 @@
                 </div>
                 <div style="background:#F5F5F6;height:12px;margin:15px 0 0 0;"></div>`);
             })
-       } else {
-            $('#history-data').append(`<div style="padding-top:15vh;padding-bottom:25vh;font-size:15px;">
+        } else {
+            $('#history-data').append(`<div style="padding-top:13vh;padding-bottom:25vh;font-size:15px;">
                 <center>
-                    <strong>NO ACTIVE ORDERS TO SHOW</strong> <br>
-                    <img src="/img/norders.png" style="margin-top:40px;">
-                    <div style="margin-top:40px;">
-                        <a href="/shop" style="border:1px solid #ddd;padding:10px 15px;font-size:13.5px;color:#526cd0;font-weight:bold;">START SHOPPING</a>
+                    <img src="/img/norders.png" style="margin-top:40px;width:190px;">
+                    <div style="font-size: 29px;margin-top:30px;">
+                       No active orders to show here
+                    </div>
+                    <div style="font-size: 14px;margin-top:20px;color:#888;">
+                        Please order something first, click below
+                    </div>
+                     <div style="font-size: 20px;margin-top:20px;">
+                        <a href="/shop">Shop Now</a>
                     </div>
                 </center>
             </div>`)

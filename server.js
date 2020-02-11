@@ -52,6 +52,7 @@ const { Subcategory } = require('./models/subcategory');
 const { Size } = require('./models/size');
 const { Product } = require('./models/product');
 const { Order } = require('./models/order');
+const { Blog } = require('./models/blog');
 
 //Middlewares
 const { auth } = require('./middleware/auth');
@@ -108,7 +109,7 @@ app.get('/api/users/auth', auth, (req, res) => {
         lastname: req.user.lastname,
         role: req.user.role,
         cart: req.user.cart,
-        history: req.user.history
+        history: req.user.history.slice(0, 16)
     })
 })
 
@@ -421,69 +422,76 @@ app.get('/api/product/delete', (req, res) => {
 })
 
 app.post('/api/product/article', (req, res) => {
-    let file = req.files.file;
-    let filename = Date.now() + '-' + file.name;
+    Product.findOne({ 'name': req.body.name })
+        .then(product => {
+            if (product) {
+                return res.json({ success: false, message: 'Product title already exist' })
+            } else {
+                let file = req.files.file;
+                let filename = Date.now() + '-' + file.name;
 
-    file.mv("./public/productUploads/" + filename, (err) => {
-        if (err) throw err;
-    })
-    // ==============
-    let file1 = req.files.file1;
-    let filename1 = Date.now() + '-' + file1.name;
+                file.mv("./public/productUploads/" + filename, (err) => {
+                    if (err) throw err;
+                })
+                // ==============
+                let file1 = req.files.file1;
+                let filename1 = Date.now() + '-' + file1.name;
 
-    file1.mv("./public/productUploads/" + filename1, (err) => {
-        if (err) throw err;
-    })
-    // ==============
-    let file2 = req.files.file2;
-    let filename2 = Date.now() + '-' + file2.name;
+                file1.mv("./public/productUploads/" + filename1, (err) => {
+                    if (err) throw err;
+                })
+                // ==============
+                let file2 = req.files.file2;
+                let filename2 = Date.now() + '-' + file2.name;
 
-    file2.mv("./public/productUploads/" + filename2, (err) => {
-        if (err) throw err;
-    })
-    // ==============
-    let file3 = req.files.file3;
-    let filename3 = Date.now() + '-' + file3.name;
+                file2.mv("./public/productUploads/" + filename2, (err) => {
+                    if (err) throw err;
+                })
+                // ==============
+                let file3 = req.files.file3;
+                let filename3 = Date.now() + '-' + file3.name;
 
-    file3.mv("./public/productUploads/" + filename3, (err) => {
-        if (err) throw err;
-    })
-    // ==============
-    let file4 = req.files.file4;
-    let filename4 = Date.now() + '-' + file4.name;
+                file3.mv("./public/productUploads/" + filename3, (err) => {
+                    if (err) throw err;
+                })
+                // ==============
+                let file4 = req.files.file4;
+                let filename4 = Date.now() + '-' + file4.name;
 
-    file4.mv("./public/productUploads/" + filename4, (err) => {
-        if (err) throw err;
-    })
-    // ==============
+                file4.mv("./public/productUploads/" + filename4, (err) => {
+                    if (err) throw err;
+                })
+                // ==============
 
-    const product = new Product({
-        name: req.body.name,
-        price: req.body.price,
-        cutoffprice: req.body.cutoffprice,
-        stock: req.body.stock,
-        description: req.body.description,
-        category: req.body.category,
-        subcategory: req.body.subcategory,
-        color: req.body.color,
-        size: req.body.size,
-        seller: req.body.seller,
-        shipping: req.body.shipping,
-        available: req.body.available,
-        file: filename,
-        file1: filename1,
-        file2: filename2,
-        file3: filename3,
-        file4: filename4
-    });
+                const newProduct = new Product({
+                    name: req.body.name,
+                    price: req.body.price,
+                    cutoffprice: req.body.cutoffprice,
+                    stock: req.body.stock,
+                    description: req.body.description,
+                    category: req.body.category,
+                    subcategory: req.body.subcategory,
+                    color: req.body.color,
+                    size: req.body.size,
+                    seller: req.body.seller,
+                    shipping: req.body.shipping,
+                    available: req.body.available,
+                    file: filename,
+                    file1: filename1,
+                    file2: filename2,
+                    file3: filename3,
+                    file4: filename4
+                });
 
-    product.save((err, doc) => {
-        if (err) return res.json({ success: false, err });
-        res.status(200).json({
-            success: true,
-            article: doc
+                newProduct.save((err, doc) => {
+                    if (err) return res.json({ success: false, err });
+                    res.status(200).json({
+                        success: true,
+                        article: doc
+                    })
+                })
+            }
         })
-    })
 })
 
 app.post('/api/product/shop', (req, res) => {
@@ -573,10 +581,10 @@ app.get('/api/product/articles', (req, res) => {
     let limit = req.query.limit ? parseInt(req.query.limit) : 6;
 
     let findArgs = {};
-    if(req.query.category){
+    if (req.query.category) {
         findArgs['category'] = req.query.category;
     }
-    if(req.query.subcategory){
+    if (req.query.subcategory) {
         findArgs['subcategory'] = req.query.subcategory;
     }
     findArgs['available'] = true;
@@ -595,6 +603,126 @@ app.get('/api/product/articles', (req, res) => {
         })
 })
 
+// api all orders=====
+app.get('/api/admin/allorders/pending', (req, res) => {
+    let limit = req.query.limit ? parseInt(req.query.limit) : 100;
+    let skip = parseInt(req.query.skip);
+
+    Order.find({ status: "Pending Acceptance" }).skip(skip).limit(limit).exec((err, orders) => {
+        if (err) return res.status(400).send(err);
+
+        res.status(200).json({
+            orders,
+            size: orders.length,
+        })
+    })
+})
+
+app.get('/api/admin/allorders/verified', (req, res) => {
+    let limit = req.query.limit ? parseInt(req.query.limit) : 100;
+    let skip = parseInt(req.query.skip);
+
+    Order.find({ status: "Order Verified" }).skip(skip).limit(limit).exec((err, orders) => {
+        if (err) return res.status(400).send(err);
+
+        res.status(200).json({
+            orders,
+            size: orders.length,
+        })
+    })
+})
+
+// blog api=====
+app.post('/api/add-blog', (req, res) => {
+    Blog.findOne({ 'title': req.body.title })
+        .then(blog => {
+            if (blog) {
+                return res.json({ success: false, message: 'Blog title already exist' })
+            } else {
+                let file = req.files.file;
+                let filename = Date.now() + '-' + file.name;
+
+                file.mv("./public/blogUploads/" + filename, (err) => {
+                    if (err) throw err;
+                })
+                // ==============
+                let file1 = req.files.file1;
+                let filename1 = Date.now() + '-' + file1.name;
+
+                file1.mv("./public/blogUploads/" + filename1, (err) => {
+                    if (err) throw err;
+                })
+
+                const newBlog = new Blog({
+                    title: req.body.title,
+                    description: req.body.description,
+                    file: filename,
+                    file1: filename1
+                });
+
+                newBlog.save((err, doc) => {
+                    if (err) return res.json({ success: false, err });
+                    res.status(200).json({
+                        success: true
+                    })
+                })
+            }
+        }).catch(err => console.log(err));
+})
+
+app.get('/api/blogs', (req, res) => {
+    let limit = req.query.limit ? parseInt(req.query.limit) : 100;
+    let skip = parseInt(req.query.skip);
+
+    Blog.find().skip(skip).limit(limit).exec((err, blogs) => {
+        if (err) return res.status(400).send(err);
+
+        res.status(200).json({
+            blogs,
+            size: blogs.length,
+        })
+    })
+})
+
+app.get('/api/blog/detail', (req, res) => {
+    Blog.findOne({ "title": req.query.title })
+        .then(blog => {
+            res.status(200).json({
+                blog
+            })
+        }).catch(err => console.log(err))
+})
+
+app.post('/api/blog/edit_blog', auth, (req, res) => {
+    Blog.findOneAndUpdate(
+        { title: req.query.title },
+        {
+            "$set": req.body
+        },
+        { new: true },
+        (err, doc) => {
+            if (err) return res.json({ success: false, err });
+
+            return res.status(200).send({
+                success: true
+            })
+        }
+    )
+})
+
+app.get('/api/blog/delete', (req, res) => {
+    Blog.findOne({ title: req.query.title })
+        .then(blog => {
+            fs.unlink("./public/blogUploads/" + blog.file, (err) => {
+                fs.unlink("./public/blogUploads/" + blog.file1, (err) => {
+                    blog.remove();
+
+                    res.send({ message: "Blog deleted successfully!" });
+                })
+            })
+        }).catch(err => console.log(err))
+})
+
 //============================frontend routes=======================================
 app.get('/', (req, res) => {
     res.render('index/index');
@@ -602,6 +730,30 @@ app.get('/', (req, res) => {
 
 app.get('/contactus', (req, res) => {
     res.render('index/contactus');
+})
+
+app.get('/faq', (req, res) => {
+    res.render('index/faq');
+})
+
+app.get('/privacypolicy', (req, res) => {
+    res.render('index/privacypolicy');
+})
+
+app.get('/add-blog', (req, res) => {
+    res.render('admin/add-blog');
+})
+
+app.get('/admin/edit_blog/:title', (req, res) => {
+    res.render('admin/edit-blog');
+})
+
+app.get('/blogs', (req, res) => {
+    res.render('index/blogs');
+})
+
+app.get('/blog/detail/:title', (req, res) => {
+    res.render('index/blogdetail');
 })
 
 app.get('/partners', (req, res) => {
@@ -709,7 +861,7 @@ app.get('/order-track/:porder', (req, res) => {
     res.render('admin/ordertrack');
 })
 
-app.post('/api/order-track/cancel_order', auth, (req, res) => {
+app.post('/api/order-track/change_status', auth, (req, res) => {
     Order.findOneAndUpdate(
         { "data": { "$elemMatch": { "porder": { "$regex": req.query['porder'], "$options": "i" } } } },
         {
@@ -725,6 +877,19 @@ app.post('/api/order-track/cancel_order', auth, (req, res) => {
         }
     )
 })
+
+app.get('/admin/allorders/pending', (req, res) => {
+    res.render('admin/allorders-pending');
+})
+
+app.get('/admin/allorders/verified', (req, res) => {
+    res.render('admin/allorders-verified');
+})
+
+// 404 Page
+app.get('*', function (req, res) {
+    res.render('index/404');
+});
 
 const PORT = (process.env.PORT || 3000);
 

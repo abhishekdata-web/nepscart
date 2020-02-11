@@ -1,0 +1,74 @@
+<section>
+    <div class="container-fluid" style="padding-top: 3vh;">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+                <center>
+                    <h5 style="font-size:18px;margin-bottom: 40px;background:#03A685;color:#fff;padding:10px 0;">EDIT POST</h5>
+                </center>
+                <form id="blog-form">
+                    <input type="text" id="title" name="title" placeholder="TITLE" class="form-control"
+                        style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
+                    <textarea class="form-control" name="description" id="description" rows="10"
+                        style="width: 100%;border-radius:0;font-size: 14px;" required></textarea>
+                    <div id="blog-error" style="color:red;font-size:13px;"></div>
+                    <div id="blog-success" style="color:green;font-size:13px;"></div>
+                    <button id="blog-btn"
+                        style="margin-top:30px;width:100%;background:#FF4747;color:#fff;border:none;padding:10px 0;">EDIT
+                        POST</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    //title from the url ===============================
+    var url = window.location.pathname;
+    var title = url.substring(url.lastIndexOf('/') + 1);
+
+
+
+    //add products
+    function processForm(e) {
+        e.preventDefault();
+
+        $('#blog-btn').empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById("blog-form");
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: `/api/blog/edit_blog?title=${title}`,
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data.success === true) {
+                    $('#blog-btn').empty().append(`EDIT POST`);
+                    $('#blog-error').empty();
+                    $('#blog-success').empty().append(`<div style="margin-top:30px;">Blog Edited Successfully</div>`);
+                } else if (data.success === false) {
+                    $('#blog-btn').empty().append(`EDIT POST`);
+                    $('#blog-success').empty();
+                    $('#blog-error').empty().append(`<div style="margin-top:30px;">${data.err.errmsg}</div>`);
+                    console.log(data)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#blog-form').submit(processForm);
+
+
+
+
+    $.getJSON(`/api/blog/detail?title=${title}`, function (data) {
+        document.getElementById('title').value = data.blog.title;
+        document.getElementById('description').value = data.blog.description;
+    })
+</script>

@@ -1,0 +1,103 @@
+<style>
+    a{
+        color: #000;
+    }
+
+    .blog-content {
+        padding-top: 28px;
+        width: 48%
+    }
+
+    @media only screen and (max-width: 600px) {
+        .blog-content {
+            width: 100%
+        }
+    }
+</style>
+
+<section style="padding-top: 3vh;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div style="background:#ee5f73;color:#fff;font-weight:bold;padding:8px 13px;">
+                    STYLE TIPS
+                </div>
+
+                <div id="ajax-blog"
+                    style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
+
+                </div>
+
+                <div style="padding:28px 0;" id="ajax-loadmore">
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div style="background:#444546;color:#fff;font-weight:bold;padding:8px 13px;margin-bottom:28px;">
+                    MEDIA ROOM
+                </div>
+
+                <div>
+                    <div style="margin-bottom:28px;">
+                        <img src="https://blog.myntra.com/storage/2020/01/Mahesh-Babu-Myntra-Launch-Slider-1115-X-545.jpg"
+                            style="width: 100%;">
+                        <div style="font-size: 15px;margin-top:4px;font-weight:bold;">
+                            Myntra Extends Its Premium Watches Portfolio with Swiss Star Tissot
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:28px;">
+                        <img src="https://blog.myntra.com/storage/2020/02/slider-Image.jpg" style="width: 100%;">
+                        <div style="font-size: 15px;margin-top:4px;font-weight:bold;">
+                            Myntra Extends Its Premium Watches Portfolio with Swiss Star Tissot
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    //load more values
+    let limit = 2;
+    let skip = 0;
+
+    const loadBlog = () => {
+        $.getJSON(`/api/blogs?limit=${limit}&skip=${skip}`, function (data) {
+            console.log(data);
+
+            if (data.size >= limit) {
+                $('#ajax-loadmore').empty().append(`<button onclick="loadMore()" id="btn-loadmore"
+                    style="width: 100%;background:none;border:1px solid #555;color:#777;font-size:14px;padding:9px 0;">LOAD
+                    MORE</button>`);
+            } else {
+                $("#ajax-loadmore").empty();
+            }
+
+            data.blogs.forEach(item => {
+                $('#ajax-blog').append(`<div class="blog-content">
+                    <a href="/blog/detail/${item.title}">
+                        <img src="/blogUploads/${item.file}"
+                            style="width: 100%;">
+                        <div style="font-size: 15px;margin-top:4px;font-weight:bold;">
+                            ${item.title}
+                        </div>
+                    </a>
+                </div>`)
+            })
+        })
+    }
+
+    loadBlog();
+
+
+    //load more pending orders
+    const loadMore = () => {
+        $('#btn-loadmore').empty().append(`<img src="/img/loader.svg" style="width:18px;">`)
+
+        skip = skip + 2;
+        loadBlog();
+    }
+</script>
