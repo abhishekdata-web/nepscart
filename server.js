@@ -740,6 +740,14 @@ app.get('/privacypolicy', (req, res) => {
     res.render('index/privacypolicy');
 })
 
+app.get('/termsofuse', (req, res) => {
+    res.render('index/termsofuse');
+})
+
+app.get('/aboutus', (req, res) => {
+    res.render('index/aboutus');
+})
+
 app.get('/add-blog', (req, res) => {
     res.render('admin/add-blog');
 })

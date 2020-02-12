@@ -4,44 +4,137 @@
     </div>
 </section>
 
-<section class="container-fluid display-pc" style="margin-top: 50px;">
-    <div style="display: flex;flex-direction:row;justify-content:space-between;">
-        <div style="width: 23%;">
-            <img src="/img/index.jfif" style="width: 100%;">
-        </div>
-        <div style="width: 23%;">
-            <img src="/img/index2.jfif" style="width: 100%;">
-        </div>
-        <div style="width: 23%;">
-            <img src="/img/index3.jpg" style="width: 100%;">
-        </div>
-        <div style="width: 23%;">
-            <img src="/img/index4.jpg" style="width: 100%;">
-        </div>
-    </div>
-</section>
-
 <section class="display-mobile" style="margin-top: 25px;">
     <a href="/shop"><img style="width: 100%;" src="https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/banners/2019/3/28/eab733d9-b18c-468c-9491-6e49bea594c41553771845058-aquisition.jpg"></a>
 </section>
 
-<section class="display-mobile container-fluid" style="margin-top: 50px;">
-    <div style="margin-bottom: 15px;font-size:14.5px;color:#444;">
-        <strong>SHOPPING GUIDE</strong>
-        <span style="float: right;color:#526cd0;">see more</span>
-    </div>
-    <div style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
-        <div style="width: 49%;">
-            <img src="https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/2020/2/4/ef9879c8-12bc-4bb9-9d27-92ac72abef3c1580798075127-Theme-store-women.jpg" style="width: 100%;">
-        </div>
-        <div style="width: 49%;">
-            <img src="https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/banners/2019/12/12/0d9acf3c-df31-425d-a1d5-447b4b70c0041576150875410-party-store-women.jpg" style="width: 100%;">
-        </div>
-        <div style="width: 49%;">
-            <img src="https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/banners/2019/7/29/e93a6bf2-287b-4e00-8a87-09d88c0603961564393576488-Korean-Beauty.jpg" style="width: 100%;">
-        </div>
-        <div style="width: 49%;">
-            <img src="https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/banners/2019/7/29/9ea8d21d-eb1c-4d75-a8a6-a78db09370241564394433573-Workwear-Women.jpg" style="width: 100%;">
+<style>
+    a{
+        color: #000;
+    }
+
+    .blog-content {
+        padding-top: 28px;
+        width: 48%
+    }
+
+    @media only screen and (max-width: 600px) {
+        .blog-content {
+            width: 100%
+        }
+    }
+</style>
+
+<section style="padding-top: 3vh;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div style="background:#ee5f73;color:#fff;font-weight:bold;padding:8px 13px;">
+                    STYLE TIPS
+                    <a href="/blogs" style="float: right;"><img src="/img/icon/arrow-white.svg" style="width: 10.5px;"></a>
+                </div>
+
+                <div id="ajax-blog"
+                    style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
+
+                </div>
+
+                <div style="padding:28px 0;" id="ajax-loadmore">
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div style="background:#444546;color:#fff;font-weight:bold;padding:8px 13px;margin-bottom:28px;">
+                    BEST SELLING
+                    <a href="/shop" style="float: right;"><img src="/img/icon/arrow-white.svg" style="width: 10.5px;"></a>
+                </div>
+
+                <div id="ajax-similar-pc"
+                    style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
+
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+<section>
+    <div id="ajax-similar" style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
+
+    </div>
+</section>
+
+<script>
+    //load more values
+    let limit = 2;
+    let skip = 0;
+
+    const loadBlog = () => {
+        $.getJSON(`/api/blogs?limit=${limit}&skip=${skip}`, function (data) {
+            console.log(data);
+
+            if (data.size >= limit) {
+                $('#ajax-loadmore').empty().append(`<button onclick="loadMore()" id="btn-loadmore"
+                    style="width: 100%;background:none;border:1px solid #555;color:#777;font-size:14px;padding:9px 0;">LOAD
+                    MORE</button>`);
+            } else {
+                $("#ajax-loadmore").empty();
+            }
+
+            data.blogs.forEach(item => {
+                $('#ajax-blog').append(`<div class="blog-content">
+                    <a href="/blog/detail/${item.title}">
+                        <img src="/blogUploads/${item.file}"
+                            style="width: 100%;">
+                        <div style="font-size: 15px;margin-top:4px;font-weight:bold;">
+                            ${item.title}
+                        </div>
+                    </a>
+                </div>`)
+            })
+        })
+    }
+
+    loadBlog();
+
+
+    //load more blogs
+    const loadMore = () => {
+        $('#btn-loadmore').empty().append(`<img src="/img/loader.svg" style="width:18px;">`)
+
+        skip = skip + 2;
+        loadBlog();
+    }
+
+    //show similar products
+    $.getJSON(`/api/product/articles?sortBy=sold&order=desc&limit=4`, function (similarData) {
+        $.each(similarData, function (i, article) {
+            if (mq.matches) {
+                $('#ajax-similar-pc').append(`<div style="width: 48%;margin-bottom:19px;">
+                        <a href="/shop-detail/${article._id}" style="color:#000;">
+                            <img src="/productUploads/${article.file}" style="width: 100%;">
+                            <div style="font-size:13.5px;padding:12px 8px;">
+                                <strong>Ives</strong> <br>
+                                <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
+                                <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #FF4747;text-decoration:line-through;">Rs.
+                                    ${article.cutoffprice}</span>
+                            </div>
+                        </a>
+                    </div>`)
+            } else {
+                $('#ajax-similar').append(`<div style="width: 50%;">
+                    <a href="/shop-detail/${article._id}" style="color:#000;">
+                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;">
+                        <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
+                            <strong>Ives</strong> <br>
+                            <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
+                            <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #FF4747;text-decoration:line-through;">Rs.
+                                ${article.cutoffprice}</span>
+                        </div>
+                        </a>
+                </div>`)
+            }
+        })
+    })
+</script>

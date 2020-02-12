@@ -11,27 +11,22 @@
             </div>
             <div class="col-md-4">
                 <div style="background:#444546;color:#fff;font-weight:bold;padding:8px 13px;margin-bottom:28px;">
-                    MEDIA ROOM
+                    BEST SELLING
+                    <a href="/shop" style="float: right;"><img src="/img/icon/arrow-white.svg" style="width: 10.5px;"></a>
                 </div>
 
-                <div>
-                    <div style="margin-bottom:28px;">
-                        <img src="https://blog.myntra.com/storage/2020/01/Mahesh-Babu-Myntra-Launch-Slider-1115-X-545.jpg"
-                            style="width: 100%;">
-                        <div style="font-size: 15px;margin-top:4px;font-weight:bold;">
-                            Myntra Extends Its Premium Watches Portfolio with Swiss Star Tissot
-                        </div>
-                    </div>
+                <div id="ajax-similar-pc"
+                    style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
 
-                    <div style="margin-bottom:28px;">
-                        <img src="https://blog.myntra.com/storage/2020/02/slider-Image.jpg" style="width: 100%;">
-                        <div style="font-size: 15px;margin-top:4px;font-weight:bold;">
-                            Myntra Extends Its Premium Watches Portfolio with Swiss Star Tissot
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<section>
+    <div id="ajax-similar" style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
+
     </div>
 </section>
 
@@ -69,9 +64,41 @@
 
 
     //delete blog
-     const deleteBlog = () => {
+    const deleteBlog = () => {
         $.getJSON(`/api/blog/delete?title=${title}`, function (data) {
             window.location.replace("/blogs");
         })
     }
+
+
+    //show similar products
+    $.getJSON(`/api/product/articles?sortBy=sold&order=desc&limit=4`, function (similarData) {
+        $.each(similarData, function (i, article) {
+            if (mq.matches) {
+                $('#ajax-similar-pc').append(`<div style="width: 48%;margin-bottom:19px;">
+                        <a href="/shop-detail/${article._id}" style="color:#000;">
+                            <img src="/productUploads/${article.file}" style="width: 100%;">
+                            <div style="font-size:13.5px;padding:12px 8px;">
+                                <strong>Ives</strong> <br>
+                                <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
+                                <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #FF4747;text-decoration:line-through;">Rs.
+                                    ${article.cutoffprice}</span>
+                            </div>
+                        </a>
+                    </div>`)
+            } else {
+                $('#ajax-similar').append(`<div style="width: 50%;">
+                    <a href="/shop-detail/${article._id}" style="color:#000;">
+                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;">
+                        <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
+                            <strong>Ives</strong> <br>
+                            <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
+                            <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #FF4747;text-decoration:line-through;">Rs.
+                                ${article.cutoffprice}</span>
+                        </div>
+                        </a>
+                </div>`)
+            }
+        })
+    })
 </script>

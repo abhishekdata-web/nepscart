@@ -164,6 +164,7 @@ footer h6, footer strong{
     /* header================== */
     header{
         padding: 16px 0;
+        box-shadow: 0 1px 2px 0 rgba(148,150,159,.3)
     }
 
     /* shop============= */

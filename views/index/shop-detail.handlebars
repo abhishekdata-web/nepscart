@@ -99,7 +99,13 @@
                     <img src="/productUploads/${cartDetail.file3}" style="width: 49%;margin-bottom:14px;">
                     <img src="/productUploads/${cartDetail.file4}" style="width: 49%;margin-bottom:14px;">`)
             :
-            $('#ajax-cartDetail-img-mobile').append(`<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="margin-bottom:14px;">
+            $('#ajax-cartDetail-img-mobile').append(`<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-bottom:14px;">
+                 <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="/productUploads/${cartDetail.file1}" class="d-block w-100">
@@ -114,25 +120,17 @@
                         <img src="/productUploads/${cartDetail.file4}" class="d-block w-100">
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
             </div>`)
 
         //product details
         mq.matches ? 
         $('#ajax-cartDetail-detail').append(`<div>
-                <strong style="font-size: 20px;">Ives</strong>
+                <strong style="font-size: 18px;">Bhat Bhateni Presents</strong>
                 <div style="float:right;" id="edit-delete">
                     
                 </div>
                 <div
-                    style="font-size: 18px;color:#7e808c;border-bottom:1px solid #D4D5D9;padding-bottom:9px;margin-bottom:9px;">
+                    style="font-size: 20px;color:#7e808c;margin-bottom:21px;">
                     ${cartDetail.name}</div>
                 <strong style="font-size: 20px;">Rs. ${cartDetail.price}</strong>
                 <span style="font-size: 20px;color:#FF4747;text-decoration:line-through;padding-left:10px;">Rs.
@@ -141,15 +139,15 @@
                 <button
                     id="addtocartbtn"
                     onclick="addToCart()"
-                    style="font-size:15px;font-weight:bold;margin:25px 15px 0 0;width:50%;background:#FF4747;color:#fff;border:none;padding:13px 0;border-radius:4px;">
+                    style="font-size:15px;font-weight:bold;margin:29px 15px 0 0;width:50%;background:#FF4747;color:#fff;border:none;padding:13px 0;border-radius:4px;">
                     <img src="/img/icon/shopping-bag.svg"
                         style="width: 17px;margin-right:10px;position:relative;top:-2px;"> ADD TO BAG
                 </button>
-                <button
-                    style="font-size:15px;font-weight:bold;background:none;margin-top:25px;width:40%;border: solid 1px #D4D5D9;padding:13px 0;border-radius:4px;">
+                <a href="/contactus" class="btn"
+                    style="font-size:15px;font-weight:bold;background:none;width:40%;border: solid 1px #D4D5D9;padding:13px 0;border-radius:4px;">
                     <img src="/img/icon/help.svg" style="width: 18px;margin-right:10px;position:relative;top:-2px;">
                     GET HELP
-                </button>
+                </a>
                 <div style="margin-top:32px;">
                     <strong style="font-size:15px;">PRODUCT DETAILS</strong> <img src="/img/icon/list.svg" style="width: 17px;margin-left:10px;position:relative;top:-1.5px;">
                     <div style="font-size: 14px;color:#444;margin-top:8px;">${cartDetail.description}</div>
@@ -182,20 +180,22 @@
         :
         $('#ajax-cartDetail-detail-mobile').append(`<div>
             <div class="container">
-                <strong style="font-size: 20px;">Ives</strong>
+                <strong style="font-size: 15px;color:#FF4747;">Bhat Bhateni Presents</strong>
                 <div style="float:right;" id="edit-delete">
                     
                 </div>
                 <div
-                style="font-size: 18px;color:#7e808c;">
+                style="font-size: 15px;color:#444;padding-top:4px;">
                 ${cartDetail.name}</div>
+                <div style="padding-top:4px;">
+                    <strong style="font-size: 17px;">Rs. ${cartDetail.price}</strong>
+                    <span style="font-size: 17px;color:#FF4747;text-decoration:line-through;padding-left:10px;">Rs.
+                    ${cartDetail.cutoffprice}</span>
+                </div>
+                <div style="color:#03A685;font-size:15px;font-weight:bold;padding-top:4px;">inclusive of all taxes</div>
             </div>
             <div style="background:#F5F5F6;height:12px;margin:15px 0;"></div>
             <div class="container">
-                <strong style="font-size: 20px;">Rs. ${cartDetail.price}</strong>
-                <span style="font-size: 20px;color:#FF4747;text-decoration:line-through;padding-left:10px;">Rs.
-                ${cartDetail.cutoffprice}</span>
-                <div style="color:#03A685;font-size:14px;font-weight:bold;padding-top:4px;">inclusive of all taxes</div>
                 <div class="fixed-bottom" style="background: #fff;">
                     <div class="container">
                         <div class="row"
@@ -219,7 +219,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-top:32px;">
+                <div>
                     <strong style="font-size:15px;">PRODUCT DETAILS</strong> <img src="/img/icon/list.svg" style="width: 17px;margin-left:10px;position:relative;top:-1.5px;">
                     <div style="font-size: 14px;color:#444;margin-top:8px;">${cartDetail.description}</div>
                 </div>
@@ -234,12 +234,12 @@
                     <div id="pincoderesult" style="font-size: 13px;color:#444;">Please enter PIN code to check delivery time & Cash/Card
                         on Delivery Availability</div>
                     <div style="font-size: 14px;margin-top:22px;color:#444;">
-                        <strong style="font-size: 14.5px;">Expected Delivery Time</strong>
-                        <p style="margin-bottom: 7px;color:#888;font-size:13px;">6 days; Actual time may vary depending on other items in your order</p>
-                        <strong style="font-size: 14.5px;">Easy 30 days returns and exchanges</strong>
-                        <p style="margin-bottom: 7px;color:#888;font-size:13px;">Choose to return or exchange for a different size (if available) within 30 days.</p>
-                        <strong style="font-size: 14.5px;">Cash/Card on delivery available</strong>
-                        <p style="margin-bottom: 27px;color:#888;font-size:13px;">Available for orders between Rs. 299- Rs. 20,000</p>
+                        <strong style="font-size: 15px;">Expected Delivery Time</strong>
+                        <p style="margin-bottom: 7px;color:#888;font-size:14px;">6 days; Actual time may vary depending on other items in your order</p>
+                        <strong style="font-size: 15px;">Easy 30 days returns and exchanges</strong>
+                        <p style="margin-bottom: 7px;color:#888;font-size:14px;">Choose to return or exchange for a different size (if available) within 30 days.</p>
+                        <strong style="font-size: 15px;">Cash/Card on delivery available</strong>
+                        <p style="margin-bottom: 27px;color:#888;font-size:14px;">Available for orders between Rs. 299- Rs. 20,000</p>
                         <p style="margin-bottom: 7px;">100% Original Products</p>
                         <p style="margin-bottom: 7px;">Free Delivery on order above Rs. 700</p>
                         <p style="margin-bottom: 7px;">Cash on delivery is available</p>
@@ -252,8 +252,8 @@
 
         $.getJSON("/api/users/auth", function (data) {
             if (data.role === 1) {
-                $('#edit-delete').append(`<button onclick="deleteProduct()" style="background:none;border:none;"><img src="/img/icon/bin.svg" style="width:17px;"></button>
-                    <a href="/admin/edit_product/${cartDetailId}"><img src="/img/icon/edit.svg" style="width:16px;margin-left:10px;"></a>`)
+                $('#edit-delete').append(`<button onclick="deleteProduct()" style="background:none;border:none;"><img src="/img/icon/bin.svg" style="width:16px;"></button>
+                    <a href="/admin/edit_product/${cartDetailId}"><img src="/img/icon/edit.svg" style="width:15px;margin-left:10px;"></a>`)
             }
         })
     })
