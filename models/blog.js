@@ -9,6 +9,9 @@ const blogSchema = mongoose.Schema({
     description: {
         type: String
     },
+    related:{
+        type: String
+    },
     file: {
         type: String
     },

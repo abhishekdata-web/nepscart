@@ -1,7 +1,6 @@
 <div class="page-top display-pc">
-    <div class="container-fluid" style="margin-bottom: 15px;margin-top: 15px;">
-        <a href="/" style="font-size:13px;">Home</a> / <a href="/shop" style="font-size:13px;">Shop</a> / <a
-            href="/shop-detail" style="font-weight: bold;color:#000;font-size:13px;">More By Ives</a>
+    <div class="container-fluid" style="margin-top: 5px;margin-bottom: 20px;">
+        <a href="/" style="font-size:13px;">Home</a> / <a href="/blogs" style="font-size:13px;">Blog</a> / <a href="/shop" style="font-weight: bold;color:#000;font-size:13px;">Shop</a>
     </div>
 </div>
 
@@ -138,10 +137,10 @@
                 <div style="color:#03A685;font-size:14px;font-weight:bold;padding-top:4px;">inclusive of all taxes</div>
                 <button
                     id="addtocartbtn"
-                    onclick="addToCart()"
+                    onclick="${cartDetail.stock - cartDetail.sold <= 0 ? '' : 'addToCart()'}"
                     style="font-size:15px;font-weight:bold;margin:29px 15px 0 0;width:50%;background:#FF4747;color:#fff;border:none;padding:13px 0;border-radius:4px;">
                     <img src="/img/icon/shopping-bag.svg"
-                        style="width: 17px;margin-right:10px;position:relative;top:-2px;"> ADD TO BAG
+                        style="width: 17px;margin-right:10px;position:relative;top:-2px;"> ${cartDetail.stock - cartDetail.sold <= 0 ? 'OUT OF STOCK' : 'ADD TO BAG'}
                 </button>
                 <a href="/contactus" class="btn"
                     style="font-size:15px;font-weight:bold;background:none;width:40%;border: solid 1px #D4D5D9;padding:13px 0;border-radius:4px;">
@@ -210,10 +209,10 @@
                             <div class="col-7" style="padding-left:0;">
                                 <button
                                     id="addtocartbtn"
-                                    onclick="addToCart()"
+                                    onclick="${cartDetail.stock - cartDetail.sold <= 0 ? '' : 'addToCart()'}"
                                     style="width:100%;font-size:12px;font-weight:bold;background:#FF4747;color:#fff;border:none;padding:13px 15px;border-radius:4px;">
                                     <img src="/img/icon/shopping-bag.svg"
-                                        style="width: 14px;margin-right:4px;position:relative;top:-2px;"> ADD TO BAG
+                                        style="width: 14px;margin-right:4px;position:relative;top:-2px;"> ${cartDetail.stock - cartDetail.sold <= 0 ? 'OUT OF STOCK' : 'ADD TO BAG'}
                                 </button>
                             </div>
                         </div>
@@ -268,9 +267,12 @@
             type: 'post',
             contentType: 'application/x-www-form-urlencoded',
             success: function (data, textStatus, jQxhr) {
-                $('#addtocartbtn').empty().append(`ADD TO BAG`);
-
                 console.log(data);
+                
+                $('#addtocartbtn').empty().append(`ADD TO BAG`);
+                //change cart value in the navbar
+                $('#nav-cart').empty().append(data.length);
+
                 if (data.isAuth == false) {
                     $('#myModal').modal('show');
                 }

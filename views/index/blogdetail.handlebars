@@ -12,7 +12,8 @@
             <div class="col-md-4">
                 <div style="background:#444546;color:#fff;font-weight:bold;padding:8px 13px;margin-bottom:28px;">
                     BEST SELLING
-                    <a href="/shop" style="float: right;"><img src="/img/icon/arrow-white.svg" style="width: 10.5px;"></a>
+                    <a href="/shop" style="float: right;"><img src="/img/icon/arrow-white.svg"
+                            style="width: 10.5px;"></a>
                 </div>
 
                 <div id="ajax-similar-pc"
@@ -58,6 +59,37 @@
                     <a href="/admin/edit_blog/${data.blog.title}"><img src="/img/icon/edit.svg" style="width:16px;margin-left:10px;"></a>`)
             }
         })
+
+        //show similar products
+        $.getJSON(`/api/product/articles?sortBy=sold&order=desc&limit=4&related=${data.blog.related}`, function (similarData) {
+            $.each(similarData, function (i, article) {
+                if (mq.matches) {
+                    $('#ajax-similar-pc').append(`<div style="width: 48%;margin-bottom:19px;">
+                        <a href="/shop-detail/${article._id}" style="color:#000;">
+                            <img src="/productUploads/${article.file}" style="width: 100%;">
+                            <div style="font-size:13.5px;padding:12px 8px;">
+                                <strong>Ives</strong> <br>
+                                <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
+                                <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #FF4747;text-decoration:line-through;">Rs.
+                                    ${article.cutoffprice}</span>
+                            </div>
+                        </a>
+                    </div>`)
+                } else {
+                    $('#ajax-similar').append(`<div style="width: 50%;">
+                    <a href="/shop-detail/${article._id}" style="color:#000;">
+                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;">
+                        <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
+                            <strong>Ives</strong> <br>
+                            <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
+                            <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #FF4747;text-decoration:line-through;">Rs.
+                                ${article.cutoffprice}</span>
+                        </div>
+                        </a>
+                </div>`)
+                }
+            })
+        })
     })
 
 
@@ -69,36 +101,4 @@
             window.location.replace("/blogs");
         })
     }
-
-
-    //show similar products
-    $.getJSON(`/api/product/articles?sortBy=sold&order=desc&limit=4`, function (similarData) {
-        $.each(similarData, function (i, article) {
-            if (mq.matches) {
-                $('#ajax-similar-pc').append(`<div style="width: 48%;margin-bottom:19px;">
-                        <a href="/shop-detail/${article._id}" style="color:#000;">
-                            <img src="/productUploads/${article.file}" style="width: 100%;">
-                            <div style="font-size:13.5px;padding:12px 8px;">
-                                <strong>Ives</strong> <br>
-                                <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
-                                <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #FF4747;text-decoration:line-through;">Rs.
-                                    ${article.cutoffprice}</span>
-                            </div>
-                        </a>
-                    </div>`)
-            } else {
-                $('#ajax-similar').append(`<div style="width: 50%;">
-                    <a href="/shop-detail/${article._id}" style="color:#000;">
-                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;">
-                        <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
-                            <strong>Ives</strong> <br>
-                            <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
-                            <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #FF4747;text-decoration:line-through;">Rs.
-                                ${article.cutoffprice}</span>
-                        </div>
-                        </a>
-                </div>`)
-            }
-        })
-    })
 </script>

@@ -109,7 +109,8 @@ app.get('/api/users/auth', auth, (req, res) => {
         lastname: req.user.lastname,
         role: req.user.role,
         cart: req.user.cart,
-        history: req.user.history.slice(0, 16)
+        history: req.user.history.slice(0, 16),
+        point: req.user.point
     })
 })
 
@@ -179,23 +180,10 @@ app.get('/api/users/removeFromCart', auth, (req, res) => {
         { new: true },
         (err, doc) => {
             let cart = doc.cart;
-            let array = cart.map(item => {
-                return mongoose.Types.ObjectId(item.id)
-            })
 
-            Product
-                .find({ '_id': { $in: array } })
-                .populate('category')
-                .populate('subcategory')
-                .populate('color')
-                .populate('size')
-                .populate('seller')
-                .exec((err, cartDetail) => {
-                    return res.status(200).json({
-                        cartDetail,
-                        cart
-                    })
-                })
+            return res.status(200).json({
+                cart
+            })
         }
     )
 })
@@ -241,7 +229,7 @@ app.post('/api/users/addorder', auth, (req, res) => {
 
     User.findOneAndUpdate(
         { _id: req.user._id },
-        { $push: { history: { $each: history, $position: 0 } }, $set: { cart: [] } },
+        { $push: { history: { $each: history, $position: 0 } }, $set: { cart: [] }, $inc: { "point": 1 } },
         { new: true },
         (err, user) => {
             if (err) return res.json({ success: false, err });
@@ -272,10 +260,7 @@ app.post('/api/users/addorder', auth, (req, res) => {
                     if (err) return res.json({ success: false, err });
 
                     res.status(200).json({
-                        success: true,
-                        order: doc,
-                        cart: user.cart,
-                        cartDetail: []
+                        success: true
                     })
                 })
             })
@@ -574,7 +559,7 @@ app.get('/api/product/articles_by_id', (req, res) => {
         })
 })
 
-// get products by best selling or recent arrival or similar products from cat and sub-cat
+// get products by best selling or recent arrival or similar products from cat and sub-cat and related
 app.get('/api/product/articles', (req, res) => {
     let order = req.query.order ? req.query.order : 'asc';
     let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
@@ -586,6 +571,9 @@ app.get('/api/product/articles', (req, res) => {
     }
     if (req.query.subcategory) {
         findArgs['subcategory'] = req.query.subcategory;
+    }
+    if (req.query.related) {
+        findArgs['name'] = { "$regex": req.query.related, "$options": "i" };
     }
     findArgs['available'] = true;
 
@@ -623,6 +611,34 @@ app.get('/api/admin/allorders/verified', (req, res) => {
     let skip = parseInt(req.query.skip);
 
     Order.find({ status: "Order Verified" }).skip(skip).limit(limit).exec((err, orders) => {
+        if (err) return res.status(400).send(err);
+
+        res.status(200).json({
+            orders,
+            size: orders.length,
+        })
+    })
+})
+
+app.get('/api/admin/allorders/sent', (req, res) => {
+    let limit = req.query.limit ? parseInt(req.query.limit) : 100;
+    let skip = parseInt(req.query.skip);
+
+    Order.find({ status: "Sent" }).skip(skip).limit(limit).exec((err, orders) => {
+        if (err) return res.status(400).send(err);
+
+        res.status(200).json({
+            orders,
+            size: orders.length,
+        })
+    })
+})
+
+app.get('/api/admin/allorders/got', (req, res) => {
+    let limit = req.query.limit ? parseInt(req.query.limit) : 100;
+    let skip = parseInt(req.query.skip);
+
+    Order.find({ status: "Got" }).skip(skip).limit(limit).exec((err, orders) => {
         if (err) return res.status(400).send(err);
 
         res.status(200).json({
@@ -768,6 +784,10 @@ app.get('/partners', (req, res) => {
     res.render('index/partner');
 })
 
+app.get('/nepscartpoints', (req, res) => {
+    res.render('index/nepscartpoints');
+})
+
 app.get('/user-login', (req, res) => {
     res.render('index/login');
 })
@@ -892,6 +912,14 @@ app.get('/admin/allorders/pending', (req, res) => {
 
 app.get('/admin/allorders/verified', (req, res) => {
     res.render('admin/allorders-verified');
+})
+
+app.get('/admin/allorders/sent', (req, res) => {
+    res.render('admin/allorders-sent');
+})
+
+app.get('/admin/allorders/got', (req, res) => {
+    res.render('admin/allorders-got');
 })
 
 // 404 Page

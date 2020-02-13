@@ -1,49 +1,53 @@
-<header class="display-pc">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
-                <a href="/" style="font-size:25px;color:#444;font-weight:bold;">
-                    <span>Nepscart</span> <img src="/img/logo.svg"
-                        style="width: 24px;position:relative;top:-20px;left:-18px;">
-                </a>
-            </div>
-            <div class="col-md-6">
-                <div class="nav">
-                    <a href="/">Home</a>
-                    <a href="/shop">Shop</a>
-                    <a href="/blogs">Blog</a>
-                    <a href="/contactus">Contact</a>
-                    <a href="/aboutus">About</a>
-                    <a href="/partners">Partner</a>
+<section class="display-pc" style="padding-bottom:73px;">
+    <header class="fixed-top" style="background: #fff;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="/" style="font-size:25px;color:#444;font-weight:bold;">
+                        <span>Nepscart</span> <img src="/img/logo.svg"
+                            style="width: 24px;position:relative;top:-20px;left:-18px;">
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <div class="nav">
+                        <a href="/">Home</a>
+                        <a href="/shop">Shop</a>
+                        <a href="/blogs">Blog</a>
+                        <a href="/contactus">Contact</a>
+                        <a href="/aboutus">About</a>
+                        <a href="/partners">Partner</a>
+                    </div>
+                </div>
+                <div id="nav-pc" class="col-md-4" style="text-align:right;padding-top:6px;">
+
                 </div>
             </div>
-            <div id="nav-pc" class="col-md-4" style="text-align:right;padding-top:6px;">
+        </div>
+    </header>
+</section>
 
+<section class="display-mobile" style="padding-bottom:60.5px;">
+    <header class="fixed-top" style="background: #fff;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-7">
+                    <svg viewBox="0 0 24 24" onclick="openNav()" style="width: 24px;margin-right:14px;">
+                        <path
+                            d="M3.444 5.422a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444zm0 7.111a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444zm0 7.111a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444z"
+                            fill="#3E4152" fillrule="evenodd"></path>
+                    </svg>
+                    <a href="/" style="font-size:19px;color:#444;font-weight:bold;position:relative;top:3px;">
+                        Nepscart
+                        <img src="/img/logo.svg" style="width: 20px;position:relative;top:-17px;left:-16px;">
+                    </a>
+                </div>
+                <div id="nav-mobile" class="col-5" style="padding-top:4px;text-align:right;padding-left:0;">
+
+                </div>
             </div>
         </div>
-    </div>
-</header>
-
-<header class="display-mobile">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-7">
-                <svg viewBox="0 0 24 24" onclick="openNav()" style="width: 24px;margin-right:14px;">
-                    <path
-                        d="M3.444 5.422a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444zm0 7.111a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444zm0 7.111a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444z"
-                        fill="#3E4152" fillrule="evenodd"></path>
-                </svg>
-                <a href="/" style="font-size:19px;color:#444;font-weight:bold;position:relative;top:3px;">
-                    Nepscart
-                    <img src="/img/logo.svg" style="width: 20px;position:relative;top:-17px;left:-16px;">
-                </a>
-            </div>
-            <div id="nav-mobile" class="col-5" style="padding-top:4px;text-align:right;padding-left:0;">
-
-            </div>
-        </div>
-    </div>
-</header>
+    </header>
+</section>
 
 {{!-- sidenav for mobile --}}
 <div id="mySidenav" class="sidenav">
@@ -87,6 +91,9 @@
                 $('#nav-pc').append(`<a href="/cart" style="font-size: 14px;padding-right:20px;font-weight: bold;color:#444;">
                     <img src="/img/heart.svg" style="width: 18px;">
                     Cart
+                    <span id="nav-cart" style="font-size:11.5px;background:#FF4747;color:#fff;border-radius:50%;padding:0 5px;position:absolute;top:-5px;right:230px;">
+                        ${data.cart.length}
+                    </span>
                 </a>
                 <a href="/my-account" style="font-size: 14px;padding-right:20px;font-weight: bold;color:#444;">
                     <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none">
@@ -104,6 +111,9 @@
                 </a>
                 <a href="/cart" style="padding-right:17px;">
                     <img src="/img/heart.svg" style="width: 21px;">
+                    <span id="nav-cart" style="font-size:11.5px;background:#FF4747;color:#fff;border-radius:50%;padding:0 5px;position:absolute;top:-5px;right:42px;">
+                        ${data.cart.length}
+                    </span>
                 </a>
                 <a href="/my-account">
                     <img src="/img/icon/profile-nav.svg" style="width: 19px;">

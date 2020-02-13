@@ -9,6 +9,8 @@
                 <form id="blog-form">
                     <input type="text" id="title" name="title" placeholder="TITLE" class="form-control"
                         style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
+                    <input type="text" id="related" name="related" placeholder="RELATED PRODUCTS" class="form-control"
+                        style="font-size: 14px;border-radius:0;padding:24px 10px;margin-bottom:30px;" required>
                     <textarea class="form-control" name="description" id="description" rows="10"
                         style="width: 100%;border-radius:0;font-size: 14px;" required></textarea>
                     <div id="blog-error" style="color:red;font-size:13px;"></div>
@@ -70,5 +72,6 @@
     $.getJSON(`/api/blog/detail?title=${title}`, function (data) {
         document.getElementById('title').value = data.blog.title;
         document.getElementById('description').value = data.blog.description;
+        document.getElementById('related').value = data.blog.related;
     })
 </script>
