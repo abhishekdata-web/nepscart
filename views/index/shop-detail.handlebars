@@ -20,6 +20,8 @@
         </div>
     </div>
 
+    <center id="content-loading"><img src="/img/loading.svg" style="width:50px;margin:80px 0;"></center>
+
     <div>
         <div id="ajax-cartDetail-img-mobile">
 
@@ -45,6 +47,8 @@
         </div>
     </div>
 
+    <center id="content2-loading"><img src="/img/loading.svg" style="width:50px;margin:80px 0;"></center>
+
     <div id="ajax-similar" style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
 
     </div>
@@ -58,10 +62,14 @@
 
 
     $.getJSON(`/api/product/articles_by_id?id=${cartDetailId}&type=single`, function (data) {
+        $('#content-loading').empty();
+
         let cartDetail = data[0];
 
         //show similar products
         $.getJSON(`/api/product/articles?sortBy=sold&order=desc&limit=6&category=${cartDetail.category._id}&subcategory=${cartDetail.subcategory._id}`, function (similarData) {
+            $('#content2-loading').empty();
+            
             $.each(similarData, function (i, article) {
                 if (mq.matches) {
                     $('#ajax-similar-pc').append(`<div style="width: 15%;margin-bottom:19px;">

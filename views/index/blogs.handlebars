@@ -23,6 +23,8 @@
                     STYLE TIPS
                 </div>
 
+                <center id="content-loading"><img src="/img/loading.svg" style="width:50px;margin:80px 0;"></center>
+
                 <div id="ajax-blog"
                     style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
 
@@ -38,6 +40,8 @@
                     BEST SELLING
                     <a href="/shop" style="float: right;"><img src="/img/icon/arrow-white.svg" style="width: 10.5px;"></a>
                 </div>
+
+                <center id="content2-loading"><img src="/img/loading.svg" style="width:50px;margin:80px 0;"></center>
 
                 <div id="ajax-similar-pc"
                     style="display: flex;flex-wrap: wrap;flex-direction:row;justify-content:space-between;">
@@ -61,6 +65,8 @@
 
     const loadBlog = () => {
         $.getJSON(`/api/blogs?limit=${limit}&skip=${skip}`, function (data) {
+            $('#content-loading').empty();
+
             console.log(data);
 
             if (data.size >= limit) {
@@ -100,6 +106,8 @@
 
     //show similar products
     $.getJSON(`/api/product/articles?sortBy=sold&order=desc&limit=4`, function (similarData) {
+        $('#content2-loading').empty();
+        
         $.each(similarData, function (i, article) {
             if (mq.matches) {
                 $('#ajax-similar-pc').append(`<div style="width: 48%;margin-bottom:19px;">

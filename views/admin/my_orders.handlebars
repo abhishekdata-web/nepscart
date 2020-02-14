@@ -1,5 +1,5 @@
 <section id="history-data" style="padding-top:2vh;font-size:14px;">
-
+    <center id="content-loading"><img src="/img/loading.svg" style="width:50px;margin:80px 0;"></center>
 </section>
 
 {{!-- ====================Moment js=============== --}}
@@ -7,6 +7,8 @@
 <script>
     //history is limited with slice in the auth api
     $.getJSON("/api/users/auth", function (data) {
+        $('#content-loading').empty();
+        
         if (data.history.length > 0) {
             $.each(data.history, function (i, history) {
                 $('#history-data').append(`<div class="container" style="margin-top:15px;">

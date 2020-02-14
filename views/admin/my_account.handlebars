@@ -42,7 +42,7 @@
         </div>
 
         <div id="admin-section" style="background: #fff;margin-top:14px;">
-
+            <center id="content-loading"><img src="/img/loading.svg" style="width:50px;margin:80px 0;"></center>
         </div>
 
 
@@ -55,6 +55,8 @@
 
 <script>
     $.getJSON("/api/users/auth", function (data) {
+        $('#content-loading').empty();
+        
         $('#profile-email').append(`${data.email}`);
 
         if (data.isAdmin) {

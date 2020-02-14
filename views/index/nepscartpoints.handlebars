@@ -2,11 +2,12 @@
     <center>
         <div class="container">
             <div style="color: #14cda8;font-weight:bold;font-size:13px;margin-bottom:10px;">TOTAL AVAILABLE NEPSCART POINTS</div>
-            <div style="font-size: 33px;font-weight:bold;color:#333;" id="ajax-point"></div>
+            <div style="font-size: 33px;font-weight:bold;color:#333;" id="ajax-point">
+                <center id="content-loading"><img src="/img/loading.svg" style="width:30px;"></center>
+            </div>
             <div style="font-size:13px;color:#333;margin:7px 0 20px 0;">Your total points are worth Rs <span id="point-value"></span></div>
             <div style="font-size:13px;color:#787878;">
-                You can pay upto 10% (may vary during the sale & promotion events) of your order value through Nepscart
-                Points. Use them on the Payments page during checkout.
+                Collect Nepscart Points on every order and get exiting gifts and offers (like free recharge, gifts, surprises and holidays). Or just request withdrawal and get Nepscart Points as real momey to your bank acount. <br>
             </div>
         </div>
     </center>
@@ -28,7 +29,9 @@
 
 <script>
     $.getJSON("/api/users/auth", function (data) {
+        $('#content-loading').empty();
+        
         $('#ajax-point').append(`${data.point}`);
-        $('#point-value').append(`${data.point * 10}`);
+        $('#point-value').append(`${data.point * 6.78}`);
     })
 </script>

@@ -32,7 +32,7 @@
 
     <div>
         <div id="pills-pending-content">
-
+            <center id="content-loading"><img src="/img/loading.svg" style="width:50px;margin:80px 0;"></center>
         </div>
         <div id="ajax-loadmore" class="container" style="padding-top:15px;padding-bottom:15px;">
 
@@ -49,6 +49,8 @@
 
     const loadOrders = () => {
         $.getJSON(`/api/admin/allorders/got?limit=${limit}&skip=${skip}`, function (data) {
+            $('#content-loading').empty();
+            
             console.log(data);
 
             if (data.size >= limit) {

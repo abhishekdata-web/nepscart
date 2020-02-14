@@ -756,8 +756,12 @@ app.get('/privacypolicy', (req, res) => {
     res.render('index/privacypolicy');
 })
 
-app.get('/termsofuse', (req, res) => {
-    res.render('index/termsofuse');
+app.get('/termsofservice', (req, res) => {
+    res.render('index/termsofservice');
+})
+
+app.get('/returnpolicy', (req, res) => {
+    res.render('index/returnpolicy');
 })
 
 app.get('/aboutus', (req, res) => {
