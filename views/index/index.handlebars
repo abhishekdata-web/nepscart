@@ -92,7 +92,7 @@
                 $('#ajax-blog').append(`<div class="blog-content">
                     <a href="/blog/detail/${item.title}">
                         <img src="/blogUploads/${item.file}"
-                            style="width: 100%;">
+                            style="width: 100%;min-height:80px;background: rgb(255, 237, 243);">
                         <div style="font-size: 15px;margin-top:4px;font-weight:bold;">
                             ${item.title}
                         </div>
@@ -133,7 +133,7 @@
             } else {
                 $('#ajax-similar').append(`<div style="width: 50%;">
                     <a href="/shop-detail/${article._id}" style="color:#000;">
-                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;">
+                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;min-height:150px;background: rgb(244, 255, 249);">
                         <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
                             <strong>Ives</strong> <br>
                             <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>

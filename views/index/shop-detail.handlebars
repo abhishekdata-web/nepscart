@@ -101,10 +101,10 @@
 
         //product image
         mq.matches ?
-            $('#ajax-cartDetail-img').append(`<img src="/productUploads/${cartDetail.file1}" style="width: 49%;margin-bottom:14px;">
-                    <img src="/productUploads/${cartDetail.file2}" style="width: 49%;margin-bottom:14px;">
-                    <img src="/productUploads/${cartDetail.file3}" style="width: 49%;margin-bottom:14px;">
-                    <img src="/productUploads/${cartDetail.file4}" style="width: 49%;margin-bottom:14px;">`)
+            $('#ajax-cartDetail-img').append(`<img src="/productUploads/${cartDetail.file1}" style="width: 49%;margin-bottom:14px;min-height:337px;background: rgb(255, 237, 243);">
+                    <img src="/productUploads/${cartDetail.file2}" style="width: 49%;margin-bottom:14px;min-height:337px;background: rgb(255, 237, 243);">
+                    <img src="/productUploads/${cartDetail.file3}" style="width: 49%;margin-bottom:14px;min-height:337px;background: rgb(255, 237, 243);">
+                    <img src="/productUploads/${cartDetail.file4}" style="width: 49%;margin-bottom:14px;min-height:337px;background: rgb(255, 237, 243);">`)
             :
             $('#ajax-cartDetail-img-mobile').append(`<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-bottom:14px;">
                  <ol class="carousel-indicators">
@@ -115,7 +115,7 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="/productUploads/${cartDetail.file1}" class="d-block w-100">
+                        <img src="/productUploads/${cartDetail.file1}" class="d-block w-100" style="min-height:337px;background: rgb(255, 237, 243);">
                     </div>
                     <div class="carousel-item">
                         <img src="/productUploads/${cartDetail.file2}" class="d-block w-100">

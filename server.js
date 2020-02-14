@@ -577,18 +577,26 @@ app.get('/api/product/articles', (req, res) => {
     }
     findArgs['available'] = true;
 
-    Product.find(findArgs)
-        .populate('category')
-        .populate('subcategory')
-        .populate('color')
-        .populate('size')
-        .populate('seller')
-        .sort([[sortBy, order]])
-        .limit(limit)
-        .exec((err, articles) => {
-            if (err) return res.status(400).send(err);
-            res.send(articles);
-        })
+    Product.countDocuments(findArgs).exec((err, count) => {
+        let random = Math.floor(Math.random() * (count - limit + 1));
+        if(random < 0){
+            random = 0;
+        }
+
+        Product.find(findArgs)
+            .populate('category')
+            .populate('subcategory')
+            .populate('color')
+            .populate('size')
+            .populate('seller')
+            .sort([[sortBy, order]])
+            .skip(random)
+            .limit(limit)
+            .exec((err, articles) => {
+                if (err) return res.status(400).send(err);
+                res.send(articles);
+            })
+    })
 })
 
 // api all orders=====
