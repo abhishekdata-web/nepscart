@@ -51,7 +51,7 @@
                 BY <a href="/blogs" style="color: #fb56c1;">NEPSCART</a> / ${moment(data.blog.date).format("ddd, MMM DD, hh:mm A")}
             </div>
             <div style="margin: 20px 0;">
-                <img src="/blogUploads/${data.blog.file1}" style="width: 100%;">
+                <img src="/blogUploads/${data.blog.file1}" style="width: 100%;min-height:80px;background: rgb(255, 237, 243);">
             </div>
             <div style="margin-bottom:28px;">
                 ${data.blog.description}
@@ -86,7 +86,7 @@
                 } else {
                     $('#ajax-similar').append(`<div style="width: 50%;">
                     <a href="/shop-detail/${article._id}" style="color:#000;">
-                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;">
+                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;min-height:150px;background: rgb(244, 255, 249);">
                         <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
                             <strong>Ives</strong> <br>
                             <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
