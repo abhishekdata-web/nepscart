@@ -752,12 +752,12 @@ app.get('/', (req, res) => {
     res.render('index/index');
 })
 
-app.get('/contactus', (req, res) => {
-    res.render('index/contactus');
+app.get('/offline', (req, res) => {
+    res.render('index/offline');
 })
 
-app.get('/faq', (req, res) => {
-    res.render('index/faq');
+app.get('/helpcentre', (req, res) => {
+    res.render('index/helpcentre');
 })
 
 app.get('/privacypolicy', (req, res) => {
