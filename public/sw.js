@@ -1,12 +1,33 @@
-const cacheName = 'v10';
+const cacheName = 'v1';
 
 const cacheAssets = [
     '/',
     '/offline',
     '/shop',
+    '/user-login',
 
     '/css/style.css',
-    'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
+    'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css',
+    'https://code.jquery.com/jquery-3.4.1.min.js',
+    'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js',
+
+    '/img/static/banner-mob.jpg',
+    '/img/static/men.jpg',
+    '/img/static/women.jpg',
+    '/img/static/beauty.jpg',
+    '/img/static/jwellery.jpg',
+    '/img/register-offer.webp',
+
+    '/img/icon/search-black.svg',
+    '/img/heart.svg',
+    '/img/icon/profile-nav.svg',
+    '/img/logo.svg',
+    '/img/icon/arrow-white.svg',
+    '/img/loader.svg',
+    '/img/loading.svg',
+    '/img/icon/filter.svg',
+    '/img/icon/shopping-bag.svg',
+    '/img/icon/help.svg'
 ]
 
 // Call install event

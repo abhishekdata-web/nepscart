@@ -1,6 +1,6 @@
 <div class="page-top display-pc">
     <div class="container-fluid" style="margin-top: 5px;margin-bottom: 20px;">
-        <a href="/" style="font-size:13px;">Home</a> / <a href="/blogs" style="font-size:13px;">Blog</a> / <a href="/shop" style="font-weight: bold;color:#000;font-size:13px;">Shop</a>
+        <a href="/" style="font-size:13px;">Home</a> / <a href="/blogs" style="font-size:13px;">Blog</a> / <a href="/shop/all" style="font-weight: bold;color:#000;font-size:13px;">Shop</a>
     </div>
 </div>
 
@@ -86,7 +86,7 @@
                 } else {
                     $('#ajax-similar').append(`<div style="width: 50%;">
                     <a href="/shop-detail/${article._id}" style="color:#000;">
-                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;">
+                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;min-height:150px;background: rgb(244, 255, 249);">
                         <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
                             <strong>Ives</strong> <br>
                             <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
@@ -295,7 +295,7 @@
 
     const deleteProduct = () => {
         $.getJSON(`/api/product/delete?_id=${cartDetailId}`, function (data) {
-            window.location.replace("/shop");
+            window.location.replace("/shop/all");
         })
     }
 

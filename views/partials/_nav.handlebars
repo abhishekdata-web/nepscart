@@ -11,7 +11,7 @@
                 <div class="col-md-6">
                     <div class="nav">
                         <a href="/">Home</a>
-                        <a href="/shop">Shop</a>
+                        <a href="/shop/all">Shop</a>
                         <a href="/nepscartpoints">My Points</a>
                         <a href="/blogs">Blog</a>
                         <a href="/helpcentre">Contact</a>
@@ -63,16 +63,22 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="/img/back-arrow.svg"
                 style="width: 19px;"></a>
     </div>
-    <div class="sidenavlink" style="font-weight: bold;" id="sidenav-auth">
-        <a href="/">Home</a>
-        <a href="/shop">Shop Now</a>
+    <div class="sidenavlink" style="font-weight: bold;color:#343434;">
+        <a href="/shop/all">All Categories <img src="/img/icon/arrow.svg" style="width: 9.5px;float:right;margin:7px 20px 0 0;"></a>
+        <a href="/shop/5e20950e883a3751f8d2ac9c">Men <img src="/img/icon/arrow.svg" style="width: 9.5px;float:right;margin:7px 20px 0 0;"></a>
+        <a href="/shop/5e209529883a3751f8d2ac9e">Women <img src="/img/icon/arrow.svg" style="width: 9.5px;float:right;margin:7px 20px 0 0;"></a>
+        <a href="/shop/5e209529883a3751f8d2ac9e">Health and Beauty <img src="/img/icon/arrow.svg" style="width: 9.5px;float:right;margin:7px 20px 0 0;"></a>
+        <a href="/shop/5e209529883a3751f8d2ac9e">Jwellery <img src="/img/icon/arrow.svg" style="width: 9.5px;float:right;margin:7px 20px 0 0;"></a>
     </div>
 
     <div class="sidenavlink">
-        <hr style="margin-bottom: 0;">
+        <hr style="margin:28px 0 0 0;">
+        <div id="sidenav-auth">
+
+        </div>
         <a href="/helpcentre">Contact Us</a>
         <a href="/blogs">Blog</a>
-        <a href="/partners">Sell on Nepscart</a>
+        <a href="/partners" style="padding-bottom:28px;">Sell on Nepscart</a>
     </div>
 </div>
 
@@ -105,7 +111,7 @@
                 <a href="#" onClick="logoutHandler()" style="background: #FF4747;color:#fff;padding:8px 12px;font-size: 14px;">Log
                     out</a>`)
             } else {
-                $('#nav-mobile').append(`<a href="/shop" style="padding-right:17px;">
+                $('#nav-mobile').append(`<a href="/shop/all" style="padding-right:17px;">
                     <img src="/img/icon/search-black.svg" style="width: 20px;">
                 </a>
                 <a href="/cart" style="padding-right:17px;">

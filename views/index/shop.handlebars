@@ -4,7 +4,8 @@
 
 <div class="page-top display-pc">
     <div class="container-fluid">
-        <a href="/" style="font-size:13px;">Home</a> / <a href="/blogs" style="font-size:13px;">Blog</a> / <a href="/shop" style="font-weight: bold;color:#000;font-size:13px;">Shop</a>
+        <a href="/" style="font-size:13px;">Home</a> / <a href="/blogs" style="font-size:13px;">Blog</a> / <a
+            href="/shop/all" style="font-weight: bold;color:#000;font-size:13px;">Shop</a>
     </div>
 </div>
 
@@ -165,6 +166,15 @@
     let size = [];
     let seller = [];
 
+    //category id from the url ===============================
+    var url = window.location.pathname;
+    var categoryId = url.substring(url.lastIndexOf('/') + 1);
+    if (categoryId == "all") {
+        console.log("all");
+    } else {
+        category.push(categoryId);
+    }
+
     const loadShop = () => {
         $.ajax({
             url: '/api/product/shop?sortBy=sold',
@@ -245,7 +255,11 @@
     //load filters===================
     $.getJSON("/api/product/categories", function (data) {
         $.each(data, function (i, category) {
-            $('#ajax-category').append(`<div style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleCategory('${category._id}')"> ${category.name}</div>`)
+            $('#ajax-category').append(`<div style="font-size: 13px;"><input id="${category._id}" type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleCategory('${category._id}')"> ${category.name}</div>`)
+
+            if (categoryId == category._id) {
+                document.getElementById(category._id).checked = true;
+            }
         })
     })
 

@@ -808,7 +808,7 @@ app.get('/user-register', (req, res) => {
     res.render('index/register');
 })
 
-app.get('/shop', (req, res) => {
+app.get('/shop/:categoryId', (req, res) => {
     res.render('index/shop');
 })
 
