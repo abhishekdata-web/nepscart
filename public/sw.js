@@ -1,9 +1,9 @@
-const cacheName = 'v1';
+const cacheName = 'v2';
 
 const cacheAssets = [
     '/',
     '/offline',
-    '/shop',
+    '/shop/all',
     '/user-login',
 
     '/css/style.css',
