@@ -1,0 +1,238 @@
+<section>
+    <center>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" style="padding-top: 45px;">
+                    <h5 style="font-size:18px;margin-bottom: 20px;background:#03A685;color:#fff;padding:10px 0;">
+                        CATEGORIES</h5>
+                    <form id="category-form">
+                        <input type="text" name="name" placeholder="NAME" class="form-control"
+                            style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
+                        <div id="category-error" style="color:red;font-size:13px;"></div>
+                        <div id="category-success" style="color:green;font-size:13px;"></div>
+                        <button id="category-btn"
+                            style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
+                    </form>
+
+                    <div id="category-list" style="text-align: left;margin:30px 0 0 0;">
+
+                    </div>
+
+                    <div style="background:#ddd;height:12px;margin:30px 0 0 0;"></div>
+                </div>
+
+                <div class="col-md-6" style="padding-top: 45px;">
+                    <h5 style="font-size:18px;margin-bottom: 20px;background:#ff3e6c;color:#fff;padding:10px 0;">
+                        SUB CATEGORIES</h5>
+                    <form id="subcategory-form">
+                        <input type="text" name="name" placeholder="NAME" class="form-control"
+                            style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
+                        <div id="subcategory-error" style="color:red;font-size:13px;"></div>
+                        <div id="subcategory-success" style="color:green;font-size:13px;"></div>
+                        <button id="subcategory-btn"
+                            style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
+                    </form>
+
+                    <div id="subcategory-list" style="text-align: left;margin:30px 0 0 0;">
+
+                    </div>
+
+                    <div style="background:#ddd;height:12px;margin:30px 0 0 0;"></div>
+                </div>
+
+                <div class="col-md-6" style="padding-top: 45px;">
+                    <h5 style="font-size:18px;margin-bottom: 20px;background:#FF4747;color:#fff;padding:10px 0;">
+                        COLORS</h5>
+                    <form>
+                        <input type="text" name="name" placeholder="NAME" class="form-control"
+                            style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
+                        <div id="product-error" style="color:red;font-size:13px;"></div>
+                        <div id="product-success" style="color:green;font-size:13px;"></div>
+                        <button id="product-btn"
+                            style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
+                    </form>
+
+                    <div id="color-list" style="text-align: left;margin:30px 0 0 0;">
+
+                    </div>
+
+                    <div style="background:#ddd;height:12px;margin:30px 0 0 0;"></div>
+                </div>
+
+                <div class="col-md-6" style="padding-top: 45px;">
+                    <h5 style="font-size:18px;margin-bottom: 20px;background:#03A685;color:#fff;padding:10px 0;">
+                        SIZES</h5>
+                    <form>
+                        <input type="text" name="name" placeholder="NAME" class="form-control"
+                            style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
+                        <div id="product-error" style="color:red;font-size:13px;"></div>
+                        <div id="product-success" style="color:green;font-size:13px;"></div>
+                        <button id="product-btn"
+                            style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
+                    </form>
+
+                    <div id="size-list" style="text-align: left;margin:30px 0 0 0;">
+
+                    </div>
+
+                    <div style="background:#ddd;height:12px;margin:30px 0 0 0;"></div>
+                </div>
+
+                <div class="col-md-6" style="padding-top: 45px;margin-bottom:45px;">
+                    <h5 style="font-size:18px;margin-bottom: 20px;background:#ff3e6c;color:#fff;padding:10px 0;">
+                        SELLERS</h5>
+                    <form>
+                        <input type="text" name="name" placeholder="NAME" class="form-control"
+                            style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
+                        <div id="product-error" style="color:red;font-size:13px;"></div>
+                        <div id="product-success" style="color:green;font-size:13px;"></div>
+                        <button id="product-btn"
+                            style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
+                    </form>
+
+                    <div id="seller-list" style="text-align: left;margin:30px 0 0 0;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+</section>
+
+<script>
+    const getCategories = () => {
+        $.getJSON(`/api/product/categories`, function (data) {
+            data.forEach((category => {
+                $('#category-list').append(`<div>
+                    <form>
+                        <input type="text" name="name" value="${category.name}" placeholder="${category.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
+                    </form>
+                </div>`)
+            }))
+        })
+    }
+    getCategories();
+
+    const getSubCategories = () => {
+        $.getJSON(`/api/product/subcategories`, function (data) {
+            data.forEach((subcategory => {
+                $('#subcategory-list').append(`<div>
+                    <form>
+                        <input type="text" name="name" value="${subcategory.name}" placeholder="${subcategory.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
+                    </form>
+                </div>`)
+            }))
+        })
+    }
+    getSubCategories();
+
+    $.getJSON(`/api/product/colors`, function (data) {
+        data.forEach((color => {
+            $('#color-list').append(`<div>
+                    <form>
+                        <input type="text" name="name" value="${color.name}" placeholder="${color.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
+                    </form>
+                </div>`)
+        }))
+    })
+
+    $.getJSON(`/api/product/sizes`, function (data) {
+        data.forEach((size => {
+            $('#size-list').append(`<div>
+                    <form>
+                        <input type="text" name="name" value="${size.name}" placeholder="${size.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
+                    </form>
+                </div>`)
+        }))
+    })
+
+    $.getJSON(`/api/product/sellers`, function (data) {
+        data.forEach((seller => {
+            $('#seller-list').append(`<div>
+                    <form>
+                        <input type="text" name="name" value="${seller.name}" placeholder="${seller.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
+                    </form>
+                </div>`)
+        }))
+    })
+
+
+
+
+    //create category filter
+    function processForm(e) {
+        e.preventDefault();
+
+        $('#category-btn').empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById("category-form");
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: '/api/product/category',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data.success === true) {
+                    $('#category-btn').empty().append(`CREATE`);
+                    $('#category-error').empty();
+                    $('#category-success').empty().append(`<div style="margin-top:10px;">Filter Added Successfully</div>`);
+
+                    $('#category-list').empty();
+                    getCategories();
+                } else if (data.success === false) {
+                    $('#category-btn').empty().append(`CREATE`);
+                    $('#category-success').empty();
+                    $('#category-error').empty().append(`<div style="margin-top:10px;">${data.err.errmsg}</div>`);
+                    console.log(data)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#category-form').submit(processForm);
+
+
+    //create subcategory filter
+    function processForm2(e) {
+        e.preventDefault();
+
+        $('#subcategory-btn').empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById("subcategory-form");
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: '/api/product/subcategory',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data.success === true) {
+                    $('#subcategory-btn').empty().append(`CREATE`);
+                    $('#subcategory-error').empty();
+                    $('#subcategory-success').empty().append(`<div style="margin-top:10px;">Filter Added Successfully</div>`);
+
+                    $('#subcategory-list').empty();
+                    getSubCategories();
+                } else if (data.success === false) {
+                    $('#subcategory-btn').empty().append(`CREATE`);
+                    $('#subcategory-success').empty();
+                    $('#subcategory-error').empty().append(`<div style="margin-top:10px;">${data.err.errmsg}</div>`);
+                    console.log(data)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#subcategory-form').submit(processForm2);
+</script>

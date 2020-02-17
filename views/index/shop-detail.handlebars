@@ -132,7 +132,7 @@
         //product details
         mq.matches ? 
         $('#ajax-cartDetail-detail').append(`<div>
-                <strong style="font-size: 18px;">Bhat Bhateni Presents</strong>
+                <strong style="font-size: 18px;">${cartDetail.stock-cartDetail.sold <= 0 ? "0" : cartDetail.stock-cartDetail.sold} remaining in stock</strong>
                 <div style="float:right;" id="edit-delete">
                     
                 </div>
@@ -187,7 +187,7 @@
         :
         $('#ajax-cartDetail-detail-mobile').append(`<div>
             <div class="container">
-                <strong style="font-size: 15px;color:#FF4747;">Bhat Bhateni Presents</strong>
+                <strong style="font-size: 15px;color:#FF4747;">${cartDetail.stock-cartDetail.sold <= 0 ? "0" : cartDetail.stock-cartDetail.sold} remaining in stock</strong>
                 <div style="float:right;" id="edit-delete">
                     
                 </div>

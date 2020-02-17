@@ -934,6 +934,10 @@ app.get('/admin/allorders/got', (req, res) => {
     res.render('admin/allorders-got');
 })
 
+app.get('/admin/manage_filters', (req, res) => {
+    res.render('admin/manage_filters');
+})
+
 // 404 Page
 app.get('*', function (req, res) {
     res.render('index/404');
