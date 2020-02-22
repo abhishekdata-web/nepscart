@@ -46,6 +46,14 @@
                         style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
                         <option value="">SUBCATEGORY</option>
                     </select>
+                    <select id="womensubcategory-select" class="form-control" name="womensubcategory"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">WOMEN SUBCATEGORY</option>
+                    </select>
+                    <select id="accessoriessubcategory-select" class="form-control" name="accessoriessubcategory"
+                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
+                        <option value="">ACCESSORIES SUBCATEGORY</option>
+                    </select>
                     <select id="color-select" class="form-control" name="color"
                         style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
                         <option value="">COLOR</option>
@@ -89,6 +97,18 @@
     $.getJSON("/api/product/subcategories", function (data) {
         $.each(data, function (i, subcategory) {
             $('#subcategory-select').append(`<option value="${subcategory._id}">${subcategory.name}</option>`)
+        })
+    })
+
+    $.getJSON("/api/product/womensubcategories", function (data) {
+        $.each(data, function (i, womensubcategory) {
+            $('#womensubcategory-select').append(`<option value="${womensubcategory._id}">${womensubcategory.name}</option>`)
+        })
+    })
+
+    $.getJSON("/api/product/accessoriessubcategories", function (data) {
+        $.each(data, function (i, accessoriessubcategory) {
+            $('#accessoriessubcategory-select').append(`<option value="${accessoriessubcategory._id}">${accessoriessubcategory.name}</option>`)
         })
     })
 

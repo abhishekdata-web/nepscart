@@ -28,6 +28,16 @@ const productSchema = mongoose.Schema({
         ref: 'Subcategory',
         required: true
     },
+    womensubcategory: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'WomenSubcategory',
+        required: true
+    },
+    accessoriessubcategory: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'AccessoriesSubcategory',
+        required: true
+    },
     color: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Color',

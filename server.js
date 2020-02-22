@@ -49,6 +49,8 @@ const { Category } = require('./models/category');
 const { Color } = require('./models/color');
 const { Seller } = require('./models/seller');
 const { Subcategory } = require('./models/subcategory');
+const { WomenSubcategory } = require('./models/womensubcategory');
+const { AccessoriesSubcategory } = require('./models/accessoriessubcategory');
 const { Size } = require('./models/size');
 const { Product } = require('./models/product');
 const { Order } = require('./models/order');
@@ -309,6 +311,46 @@ app.get('/api/product/subcategories', (req, res) => {
     })
 })
 
+app.post('/api/product/womensubcategory', (req, res) => {
+    const womensubcategory = new WomenSubcategory(req.body);
+
+    womensubcategory.save((err, doc) => {
+        if (err) return res.json({ success: false, err });
+        res.status(200).json({
+            success: true,
+            womensubcategory: doc
+        })
+    })
+})
+
+app.get('/api/product/womensubcategories', (req, res) => {
+    WomenSubcategory.find({}, (err, womensubcategories) => {
+        if (err) return res.status(400).send(err);
+
+        res.status(200).send(womensubcategories);
+    })
+})
+
+app.post('/api/product/accessoriessubcategory', (req, res) => {
+    const accessoriessubcategory = new AccessoriesSubcategory(req.body);
+
+    accessoriessubcategory.save((err, doc) => {
+        if (err) return res.json({ success: false, err });
+        res.status(200).json({
+            success: true,
+            accessoriessubcategory: doc
+        })
+    })
+})
+
+app.get('/api/product/accessoriessubcategories', (req, res) => {
+    AccessoriesSubcategory.find({}, (err, accessoriessubcategories) => {
+        if (err) return res.status(400).send(err);
+
+        res.status(200).send(accessoriessubcategories);
+    })
+})
+
 app.post('/api/product/color', (req, res) => {
     const color = new Color(req.body);
 
@@ -456,6 +498,8 @@ app.post('/api/product/article', (req, res) => {
                     description: req.body.description,
                     category: req.body.category,
                     subcategory: req.body.subcategory,
+                    womensubcategory: req.body.womensubcategory,
+                    accessoriessubcategory: req.body.accessoriessubcategory,
                     color: req.body.color,
                     size: req.body.size,
                     seller: req.body.seller,
@@ -496,6 +540,16 @@ app.post('/api/product/shop', (req, res) => {
             findArgs['subcategory'] = req.body.subcategory;
         }
     }
+    if (req.body.womensubcategory) {
+        if (req.body.womensubcategory.length > 0) {
+            findArgs['womensubcategory'] = req.body.womensubcategory;
+        }
+    }
+    if (req.body.accessoriessubcategory) {
+        if (req.body.accessoriessubcategory.length > 0) {
+            findArgs['accessoriessubcategory'] = req.body.accessoriessubcategory;
+        }
+    }
     if (req.body.color) {
         if (req.body.color.length > 0) {
             findArgs['color'] = req.body.color;
@@ -517,6 +571,8 @@ app.post('/api/product/shop', (req, res) => {
 
     Product.
         find(findArgs).
+        populate('accessoriessubcategory').
+        populate('womensubcategory').
         populate('subcategory').
         populate('category').
         populate('color').
@@ -551,6 +607,8 @@ app.get('/api/product/articles_by_id', (req, res) => {
         .find({ '_id': { $in: items } })
         .populate('category')
         .populate('subcategory')
+        .populate('womensubcategory')
+        .populate('accessoriessubcategory')
         .populate('color')
         .populate('size')
         .populate('seller')
@@ -572,6 +630,12 @@ app.get('/api/product/articles', (req, res) => {
     if (req.query.subcategory) {
         findArgs['subcategory'] = req.query.subcategory;
     }
+    if (req.query.womensubcategory) {
+        findArgs['womensubcategory'] = req.query.womensubcategory;
+    }
+    if (req.query.accessoriessubcategory) {
+        findArgs['accessoriessubcategory'] = req.query.accessoriessubcategory;
+    }
     if (req.query.related) {
         findArgs['name'] = { "$regex": req.query.related, "$options": "i" };
     }
@@ -586,6 +650,8 @@ app.get('/api/product/articles', (req, res) => {
         Product.find(findArgs)
             .populate('category')
             .populate('subcategory')
+            .populate('womensubcategory')
+            .populate('accessoriessubcategory')
             .populate('color')
             .populate('size')
             .populate('seller')
@@ -808,8 +874,20 @@ app.get('/user-register', (req, res) => {
     res.render('index/register');
 })
 
-app.get('/shop/:categoryId', (req, res) => {
+app.get('/shop/all', (req, res) => {
     res.render('index/shop');
+})
+
+app.get('/shop/men/:subcategoryId', (req, res) => {
+    res.render('shop/men');
+})
+
+app.get('/shop/women/:subcategoryId', (req, res) => {
+    res.render('shop/women');
+})
+
+app.get('/shop/accessories/:subcategoryId', (req, res) => {
+    res.render('shop/accessories');
 })
 
 app.get('/shop-detail/:_id', (req, res) => {

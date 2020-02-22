@@ -42,6 +42,44 @@
 
                 <div class="col-md-6" style="padding-top: 45px;">
                     <h5 style="font-size:18px;margin-bottom: 20px;background:#FF4747;color:#fff;padding:10px 0;">
+                        WOMEN SUB CATEGORIES</h5>
+                    <form id="womensubcategory-form">
+                        <input type="text" name="name" placeholder="NAME" class="form-control"
+                            style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
+                        <div id="womensubcategory-error" style="color:red;font-size:13px;"></div>
+                        <div id="womensubcategory-success" style="color:green;font-size:13px;"></div>
+                        <button id="womensubcategory-btn"
+                            style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
+                    </form>
+
+                    <div id="womensubcategory-list" style="text-align: left;margin:30px 0 0 0;">
+
+                    </div>
+
+                    <div style="background:#ddd;height:12px;margin:30px 0 0 0;"></div>
+                </div>
+
+                <div class="col-md-6" style="padding-top: 45px;">
+                    <h5 style="font-size:18px;margin-bottom: 20px;background:#ff3e6c;color:#fff;padding:10px 0;">
+                        ACCESSORIES SUB CATEGORIES</h5>
+                    <form id="accessoriessubcategory-form">
+                        <input type="text" name="name" placeholder="NAME" class="form-control"
+                            style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
+                        <div id="accessoriessubcategory-error" style="color:red;font-size:13px;"></div>
+                        <div id="accessoriessubcategory-success" style="color:green;font-size:13px;"></div>
+                        <button id="accessoriessubcategory-btn"
+                            style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
+                    </form>
+
+                    <div id="accessoriessubcategory-list" style="text-align: left;margin:30px 0 0 0;">
+
+                    </div>
+
+                    <div style="background:#ddd;height:12px;margin:30px 0 0 0;"></div>
+                </div>
+
+                <div class="col-md-6" style="padding-top: 45px;">
+                    <h5 style="font-size:18px;margin-bottom: 20px;background:#FF4747;color:#fff;padding:10px 0;">
                         COLORS</h5>
                     <form>
                         <input type="text" name="name" placeholder="NAME" class="form-control"
@@ -126,6 +164,32 @@
     }
     getSubCategories();
 
+    const getWomenSubCategories = () => {
+        $.getJSON(`/api/product/womensubcategories`, function (data) {
+            data.forEach((womensubcategory => {
+                $('#womensubcategory-list').append(`<div>
+                    <form>
+                        <input type="text" name="name" value="${womensubcategory.name}" placeholder="${womensubcategory.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
+                    </form>
+                </div>`)
+            }))
+        })
+    }
+    getWomenSubCategories();
+
+    const getAccessoriesSubCategories = () => {
+        $.getJSON(`/api/product/accessoriessubcategories`, function (data) {
+            data.forEach((accessoriessubcategory => {
+                $('#accessoriessubcategory-list').append(`<div>
+                    <form>
+                        <input type="text" name="name" value="${accessoriessubcategory.name}" placeholder="${accessoriessubcategory.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
+                    </form>
+                </div>`)
+            }))
+        })
+    }
+    getAccessoriesSubCategories();
+
     $.getJSON(`/api/product/colors`, function (data) {
         data.forEach((color => {
             $('#color-list').append(`<div>
@@ -198,8 +262,10 @@
     $('#category-form').submit(processForm);
 
 
+
+
     //create subcategory filter
-    function processForm2(e) {
+    function processForm1(e) {
         e.preventDefault();
 
         $('#subcategory-btn').empty().append(`<img src="/img/loader.svg">`);
@@ -234,5 +300,87 @@
         });
     }
 
-    $('#subcategory-form').submit(processForm2);
+    $('#subcategory-form').submit(processForm1);
+
+
+
+
+    //create womensubcategory filter
+    function processForm2(e) {
+        e.preventDefault();
+
+        $('#womensubcategory-btn').empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById("womensubcategory-form");
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: '/api/product/womensubcategory',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data.success === true) {
+                    $('#womensubcategory-btn').empty().append(`CREATE`);
+                    $('#womensubcategory-error').empty();
+                    $('#womensubcategory-success').empty().append(`<div style="margin-top:10px;">Filter Added Successfully</div>`);
+
+                    $('#womensubcategory-list').empty();
+                    getWomenSubCategories();
+                } else if (data.success === false) {
+                    $('#womensubcategory-btn').empty().append(`CREATE`);
+                    $('#womensubcategory-success').empty();
+                    $('#womensubcategory-error').empty().append(`<div style="margin-top:10px;">${data.err.errmsg}</div>`);
+                    console.log(data)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#womensubcategory-form').submit(processForm2);
+
+
+
+
+    //create accessoriessubcategory filter
+    function processForm3(e) {
+        e.preventDefault();
+
+        $('#accessoriessubcategory-btn').empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById("accessoriessubcategory-form");
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: '/api/product/accessoriessubcategory',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data.success === true) {
+                    $('#accessoriessubcategory-btn').empty().append(`CREATE`);
+                    $('#accessoriessubcategory-error').empty();
+                    $('#accessoriessubcategory-success').empty().append(`<div style="margin-top:10px;">Filter Added Successfully</div>`);
+
+                    $('#accessoriessubcategory-list').empty();
+                    getAccessoriesSubCategories();
+                } else if (data.success === false) {
+                    $('#accessoriessubcategory-btn').empty().append(`CREATE`);
+                    $('#accessoriessubcategory-success').empty();
+                    $('#accessoriessubcategory-error').empty().append(`<div style="margin-top:10px;">${data.err.errmsg}</div>`);
+                    console.log(data)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#accessoriessubcategory-form').submit(processForm3);
 </script>

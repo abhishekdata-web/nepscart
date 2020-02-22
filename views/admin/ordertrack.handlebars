@@ -34,6 +34,7 @@
     //track order====================
     const trackOrder = () => {
         $.getJSON(`/api/order-track?porder=${porder}`, function (data) {
+            console.log(data)
             if (data.orders[0].status == "Cancelled") {
                 $('#cancel-form').empty();
             } else {
