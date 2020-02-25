@@ -5,7 +5,7 @@
 <div class="page-top display-pc">
     <div class="container-fluid">
         <a href="/" style="font-size:13px;">Home</a> / <a href="/blogs" style="font-size:13px;">Blog</a> / <a
-            href="/shop/accessories/all" style="font-weight: bold;color:#000;font-size:13px;">Accessories</a>
+            href="/shop/accessories/all" style="font-weight: bold;color:#000;font-size:13px;">Tech Accessories</a>
     </div>
 </div>
 
@@ -24,8 +24,7 @@
         </div>
         <div class="row">
             <div class="col-md-2" style="padding-right: 0;">
-                <div id="ajax-subcategory"
-                    style="border: 1px solid #ddd;padding:20px 0;border-left:none;">
+                <div id="ajax-subcategory" style="border: 1px solid #ddd;padding:20px 0;border-left:none;">
                     <h6 style="font-weight: bold;font-size:14.5px;">SUB-CATEGORIES</h6>
                 </div>
                 <div id="ajax-color" style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;">
@@ -103,20 +102,26 @@
                     </button>
                 </div>
                 <div class="modal-body" style="background:#fff;font-size:13.5px;padding-top:0;padding-bottom:0;">
-                    <div id="ajax-subcategory"
-                        style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;border-right:none;">
-                        <h6 style="font-weight: bold;font-size:14.5px;">SUB-CATEGORIES</h6>
+                    <div style="padding:28px 0;">
+                        <h6 style="font-weight: bold;font-size:14.5px;">SUB CATEGORIES</h6>
+                        <div id="ajax-subcategory" class="row"></div>
                     </div>
-                    <div id="ajax-color"
-                        style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;border-right:none;">
+                    <div style="background:#F5F5F6;height:12px;position:relative;left:-16px;width: 100vw;"></div>
+                    <div style="padding:28px 0;">
                         <h6 style="font-weight: bold;font-size:14.5px;">COLORS</h6>
+                        <div id="ajax-color" class="row"></div>
                     </div>
-                    <div id="ajax-size"
-                        style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;border-right:none;">
-                        <h6 style="font-weight: bold;font-size:14.5px;">SIZES</h6>
+                    <div style="background:#F5F5F6;height:12px;position:relative;left:-16px;width: 100vw;"></div>
+                    <div style="padding:28px 0;">
+                        <h6 style="font-weight: bold;font-size:14.5px;">
+                            SIZES <a href="/sizeguide" style="margin-left:5px;">(SIZE GUIDE)</a>
+                        </h6>
+                        <div id="ajax-size" class="row"></div>
                     </div>
-                    <div id="ajax-seller" style="border-top: 1px solid #ddd;padding:20px 0;">
+                    <div style="background:#F5F5F6;height:12px;position:relative;left:-16px;width: 100vw;"></div>
+                    <div style="padding:28px 0;">
                         <h6 style="font-weight: bold;font-size:14.5px;">SELLERS</h6>
+                        <div id="ajax-seller" class="row"></div>
                     </div>
                 </div>
             </div>
@@ -255,7 +260,11 @@
 
     $.getJSON("/api/product/accessoriessubcategories", function (data) {
         $.each(data, function (i, accessoriessubcategory) {
-            $('#ajax-subcategory').append(`<div style="font-size: 13px;"><input id="${accessoriessubcategory._id}" type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSubcategory('${accessoriessubcategory._id}')"> ${accessoriessubcategory.name}</div>`)
+            if (i != 0) {
+                $('#ajax-subcategory').append(`<div class="col-6 col-md-12 shop-checkbox" style="font-size: 13px;"><input id="${accessoriessubcategory._id}" type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSubcategory('${accessoriessubcategory._id}')"> 
+                    <span tyle="margin-left:4px;">${accessoriessubcategory.name}</span>
+                </div>`)
+            }
 
             if (subcategoryId == accessoriessubcategory._id) {
                 document.getElementById(accessoriessubcategory._id).checked = true;
@@ -265,19 +274,25 @@
 
     $.getJSON("/api/product/colors", function (data) {
         $.each(data, function (i, color) {
-            $('#ajax-color').append(`<div style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleColor('${color._id}')"> ${color.name}</div>`)
+            $('#ajax-color').append(`<div class="col-6 col-md-12 shop-checkbox" style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleColor('${color._id}')"> 
+                <span class="shop-dot" style="background-color: ${color.name};"></span> ${color.name}
+            </div>`)
         })
     })
 
     $.getJSON("/api/product/sellers", function (data) {
         $.each(data, function (i, seller) {
-            $('#ajax-seller').append(`<div style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSeller('${seller._id}')"> ${seller.name}</div>`)
+            $('#ajax-seller').append(`<div class="col-6 col-md-12 shop-checkbox" style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSeller('${seller._id}')"> 
+                <span style="margin-left:4px;">${seller.name}</span>
+            </div>`)
         })
     })
 
     $.getJSON("/api/product/sizes", function (data) {
         $.each(data, function (i, size) {
-            $('#ajax-size').append(`<div style="font-size: 13px;"><input type="checkbox" style="margin-top:10px;" onclick="handleToggleSize('${size._id}')"> ${size.name}</div>`)
+            $('#ajax-size').append(`<div class="col-6 col-md-12 shop-checkbox" style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSize('${size._id}')"> 
+                <span style="margin-left:4px;">${size.name}</span>
+            </div>`)
         })
     })
 

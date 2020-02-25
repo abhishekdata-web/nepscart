@@ -81,12 +81,12 @@
                 <div class="col-md-6" style="padding-top: 45px;">
                     <h5 style="font-size:18px;margin-bottom: 20px;background:#FF4747;color:#fff;padding:10px 0;">
                         COLORS</h5>
-                    <form>
+                    <form id="color-form">
                         <input type="text" name="name" placeholder="NAME" class="form-control"
                             style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
-                        <div id="product-error" style="color:red;font-size:13px;"></div>
-                        <div id="product-success" style="color:green;font-size:13px;"></div>
-                        <button id="product-btn"
+                        <div id="color-error" style="color:red;font-size:13px;"></div>
+                        <div id="color-success" style="color:green;font-size:13px;"></div>
+                        <button id="color-btn"
                             style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
                     </form>
 
@@ -100,12 +100,12 @@
                 <div class="col-md-6" style="padding-top: 45px;">
                     <h5 style="font-size:18px;margin-bottom: 20px;background:#03A685;color:#fff;padding:10px 0;">
                         SIZES</h5>
-                    <form>
+                    <form id="size-form">
                         <input type="text" name="name" placeholder="NAME" class="form-control"
                             style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
-                        <div id="product-error" style="color:red;font-size:13px;"></div>
-                        <div id="product-success" style="color:green;font-size:13px;"></div>
-                        <button id="product-btn"
+                        <div id="size-error" style="color:red;font-size:13px;"></div>
+                        <div id="size-success" style="color:green;font-size:13px;"></div>
+                        <button id="size-btn"
                             style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
                     </form>
 
@@ -119,12 +119,12 @@
                 <div class="col-md-6" style="padding-top: 45px;margin-bottom:45px;">
                     <h5 style="font-size:18px;margin-bottom: 20px;background:#ff3e6c;color:#fff;padding:10px 0;">
                         SELLERS</h5>
-                    <form>
+                    <form id="seller-form">
                         <input type="text" name="name" placeholder="NAME" class="form-control"
                             style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
-                        <div id="product-error" style="color:red;font-size:13px;"></div>
-                        <div id="product-success" style="color:green;font-size:13px;"></div>
-                        <button id="product-btn"
+                        <div id="seller-error" style="color:red;font-size:13px;"></div>
+                        <div id="seller-success" style="color:green;font-size:13px;"></div>
+                        <button id="seller-btn"
                             style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
                     </form>
 
@@ -190,35 +190,44 @@
     }
     getAccessoriesSubCategories();
 
-    $.getJSON(`/api/product/colors`, function (data) {
-        data.forEach((color => {
-            $('#color-list').append(`<div>
+    const getColors = () => {
+        $.getJSON(`/api/product/colors`, function (data) {
+            data.forEach((color => {
+                $('#color-list').append(`<div>
                     <form>
                         <input type="text" name="name" value="${color.name}" placeholder="${color.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
                     </form>
                 </div>`)
-        }))
-    })
+            }))
+        })
+    }
+    getColors();
 
-    $.getJSON(`/api/product/sizes`, function (data) {
-        data.forEach((size => {
-            $('#size-list').append(`<div>
+    const getSizes = () => {
+        $.getJSON(`/api/product/sizes`, function (data) {
+            data.forEach((size => {
+                $('#size-list').append(`<div>
                     <form>
                         <input type="text" name="name" value="${size.name}" placeholder="${size.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
                     </form>
                 </div>`)
-        }))
-    })
+            }))
+        })
+    }
+    getSizes();
 
-    $.getJSON(`/api/product/sellers`, function (data) {
-        data.forEach((seller => {
-            $('#seller-list').append(`<div>
+    const getSellers = () => {
+        $.getJSON(`/api/product/sellers`, function (data) {
+            data.forEach((seller => {
+                $('#seller-list').append(`<div>
                     <form>
                         <input type="text" name="name" value="${seller.name}" placeholder="${seller.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
                     </form>
                 </div>`)
-        }))
-    })
+            }))
+        })
+    }
+    getSellers();
 
 
 
@@ -383,4 +392,127 @@
     }
 
     $('#accessoriessubcategory-form').submit(processForm3);
+
+
+
+
+    //create color filter
+    function processForm4(e) {
+        e.preventDefault();
+
+        $('#color-btn').empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById("color-form");
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: '/api/product/color',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data.success === true) {
+                    $('#color-btn').empty().append(`CREATE`);
+                    $('#color-error').empty();
+                    $('#color-success').empty().append(`<div style="margin-top:10px;">Filter Added Successfully</div>`);
+
+                    $('#color-list').empty();
+                    getColors();
+                } else if (data.success === false) {
+                    $('#color-btn').empty().append(`CREATE`);
+                    $('#color-success').empty();
+                    $('#color-error').empty().append(`<div style="margin-top:10px;">${data.err.errmsg}</div>`);
+                    console.log(data)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#color-form').submit(processForm4);
+
+
+
+
+    //create size filter
+    function processForm5(e) {
+        e.preventDefault();
+
+        $('#size-btn').empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById("size-form");
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: '/api/product/size',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data.success === true) {
+                    $('#size-btn').empty().append(`CREATE`);
+                    $('#size-error').empty();
+                    $('#size-success').empty().append(`<div style="margin-top:10px;">Filter Added Successfully</div>`);
+
+                    $('#size-list').empty();
+                    getSizes();
+                } else if (data.success === false) {
+                    $('#size-btn').empty().append(`CREATE`);
+                    $('#size-success').empty();
+                    $('#size-error').empty().append(`<div style="margin-top:10px;">${data.err.errmsg}</div>`);
+                    console.log(data)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#size-form').submit(processForm5);
+
+
+
+
+    //create seller filter
+    function processForm6(e) {
+        e.preventDefault();
+
+        $('#seller-btn').empty().append(`<img src="/img/loader.svg">`);
+
+        var myform = document.getElementById("seller-form");
+        let formData = new FormData(myform);
+
+        $.ajax({
+            url: '/api/product/seller',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data, textStatus, jQxhr) {
+                if (data.success === true) {
+                    $('#seller-btn').empty().append(`CREATE`);
+                    $('#seller-error').empty();
+                    $('#seller-success').empty().append(`<div style="margin-top:10px;">Filter Added Successfully</div>`);
+
+                    $('#seller-list').empty();
+                    getSellers();
+                } else if (data.success === false) {
+                    $('#seller-btn').empty().append(`CREATE`);
+                    $('#seller-success').empty();
+                    $('#seller-error').empty().append(`<div style="margin-top:10px;">${data.err.errmsg}</div>`);
+                    console.log(data)
+                }
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    $('#seller-form').submit(processForm6);
 </script>

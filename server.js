@@ -874,10 +874,6 @@ app.get('/user-register', (req, res) => {
     res.render('index/register');
 })
 
-app.get('/shop/all', (req, res) => {
-    res.render('index/shop');
-})
-
 app.get('/shop/men/:subcategoryId', (req, res) => {
     res.render('shop/men');
 })

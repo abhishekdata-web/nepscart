@@ -1,13 +1,16 @@
 <section style="padding: 5vh 0;border-bottom:1px solid #ddd;">
     <center>
         <div class="container">
-            <div style="color: #14cda8;font-weight:bold;font-size:13px;margin-bottom:10px;">TOTAL AVAILABLE NEPSCART POINTS</div>
+            <div style="color: #14cda8;font-weight:bold;font-size:13px;margin-bottom:10px;">TOTAL AVAILABLE NEPSCART
+                POINTS</div>
             <div style="font-size: 33px;font-weight:bold;color:#333;" id="ajax-point">
                 <center id="content-loading"><img src="/img/loading.svg" style="width:30px;"></center>
             </div>
-            <div style="font-size:13px;color:#333;margin:7px 0 20px 0;">Your total points are worth Rs <span id="point-value"></span></div>
+            <div style="font-size:13px;color:#333;margin:7px 0 20px 0;">Your total points are worth Rs <span
+                    id="point-value"></span></div>
             <div style="font-size:13px;color:#787878;">
-                Collect Nepscart Points on every order and get exiting gifts and offers (like free recharge, gifts, surprises and holidays). Or just request withdrawal and get Nepscart Points as real momey to your bank acount. <br>
+                Collect Nepscart Points on every order and get exiting Cashback. You can just request withdrawal and get Nepscart Points as real momey to your bank
+                acount or esewa or khalti. <br>
             </div>
         </div>
     </center>
@@ -17,12 +20,17 @@
     <div class="container">
         <div style="font-size:13px;margin:5vh 0 10px 0;font-weight:bold;">GENERAL TERMS AND CONDITIONS</div>
         <ul style="font-size:13px;color:#787878;">
-            <li>Each member is responsible for remaining knowledgeable about the Nepscart Program Terms and Conditions and the number of points in his or her account.</li>
+            <li>Each member is responsible for remaining knowledgeable about the Nepscart Program Terms and Conditions
+                and the number of points in his or her account.</li>
             <li>Nepscart will not be liable or responsible for correspondence lost or delayed in the mail/e-mail.</li>
-            <li>Nepscart reserves the right to refuse, amend, vary or cancel membership of any Member without assigning any reason and without prior notification.</li>
-            <li>Nepscart reserves the right to add,modify,delete or otherwise change the Terms and Conditions without any approval, prior notice or reference to the Member.</li>
-            <li>In the event of dispute in connection with Nepscart Program and the interpretation of Terms and Conditions, Nepscart's decision shall be final and binding.</li>
-            <li>This Policy and these terms shall be read in conjunction with the standard legal policies of Nepscart, including its Privacy policy.</li>
+            <li>Nepscart reserves the right to refuse, amend, vary or cancel membership of any Member without assigning
+                any reason and without prior notification.</li>
+            <li>Nepscart reserves the right to add,modify,delete or otherwise change the Terms and Conditions without
+                any approval, prior notice or reference to the Member.</li>
+            <li>In the event of dispute in connection with Nepscart Program and the interpretation of Terms and
+                Conditions, Nepscart's decision shall be final and binding.</li>
+            <li>This Policy and these terms shall be read in conjunction with the standard legal policies of Nepscart,
+                including its Privacy policy.</li>
         </ul>
     </div>
 </section>
@@ -30,8 +38,13 @@
 <script>
     $.getJSON("/api/users/auth", function (data) {
         $('#content-loading').empty();
-        
-        $('#ajax-point').append(`${data.point}`);
-        $('#point-value').append(`${data.point * 6.78}`);
+
+        if (data.isAuth == false) {
+            $('#ajax-point').append(`0`);
+            $('#point-value').append(`0`);
+        } else {
+            $('#ajax-point').append(`${data.point}`);
+            $('#point-value').append(`${data.point * 6.78}`);
+        }
     })
 </script>

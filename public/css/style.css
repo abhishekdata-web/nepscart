@@ -98,6 +98,19 @@ header{
     color: #fff;
 }
 
+.shop-checkbox{
+    margin-top: 2px;
+}
+
+.shop-dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin:0 4px;
+    border: 1px solid #666;
+  }
+
 /* cart ============================== */
 .cart-orderform input{
     font-size: 13px;
@@ -183,6 +196,10 @@ footer h6, footer strong{
 
     .shop-not-found{
         padding: 8px 0 0 16px;
+    }
+
+    .shop-checkbox{
+        margin-top: 6px;
     }
 
     /* cart ====================== */
