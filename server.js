@@ -449,7 +449,7 @@ app.get('/api/product/delete', (req, res) => {
 })
 
 app.post('/api/product/article', (req, res) => {
-    Product.findOne({ 'name': req.body.name })
+    Product.findOne({ name: req.body.name })
         .then(product => {
             if (product) {
                 return res.json({ success: false, message: 'Product title already exist' })
@@ -520,7 +520,7 @@ app.post('/api/product/article', (req, res) => {
                     })
                 })
             }
-        })
+        }).catch(err => console.log(err))
 })
 
 app.post('/api/product/shop', (req, res) => {
@@ -643,7 +643,7 @@ app.get('/api/product/articles', (req, res) => {
 
     Product.countDocuments(findArgs).exec((err, count) => {
         let random = Math.floor(Math.random() * (count - limit + 1));
-        if(random < 0){
+        if (random < 0) {
             random = 0;
         }
 

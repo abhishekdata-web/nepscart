@@ -1,14 +1,14 @@
-const cacheName = 'v3';
+const cacheName = 'v2';
 
 const cacheAssets = [
-    '/',
+    // '/',
     '/offline',
-    '/shop/men/all',
-    '/shop/women/all',
-    '/shop/accessories/all',
-    '/user-login',
+    // '/shop/men/all',
+    // '/shop/women/all',
+    // '/shop/accessories/all',
+    // '/user-login',
 
-    '/css/style.css',
+    // '/css/style.css',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css',
     'https://code.jquery.com/jquery-3.4.1.min.js',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js',
