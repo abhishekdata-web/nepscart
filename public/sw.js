@@ -1,4 +1,4 @@
-const cacheName = 'v15';
+const cacheName = 'v10';
 
 const cacheAssets = [
     '/',
@@ -49,7 +49,9 @@ const cacheAssets = [
     '/img/icon/filter.svg',
     '/img/icon/shopping-bag.svg',
     '/img/icon/help.svg',
-    '/img/icon/search-black.svg'
+    '/img/icon/search-black.svg',
+    '/img/back-arrow.svg',
+    '/img/icon/user-sidenav.svg'
 ]
 
 // Call install event
