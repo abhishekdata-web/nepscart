@@ -5,32 +5,32 @@
                 HELP TOPICS
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center"
-                style="border-radius: 0;padding:17px 20px;" data-toggle="modal" data-target="#paymentrefundmodal">
+                style="border-radius: 0;padding:17px 20px;" data-toggle="modal" data-target="#ordermodal">
                 Order
                 <span><img src="/img/icon/arrow.svg" style="width: 10.5px;"></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center"
-                style="border-radius: 0;padding:17px 20px;">
+                style="border-radius: 0;padding:17px 20px;" data-toggle="modal" data-target="#paymentrefundmodal">
                 Payments and Refunds
                 <span><img src="/img/icon/arrow.svg" style="width: 10.5px;"></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center"
-                style="border-radius: 0;padding:17px 20px;">
+                style="border-radius: 0;padding:17px 20px;" data-toggle="modal" data-target="#shoppingmodal">
                 Shopping
                 <span><img src="/img/icon/arrow.svg" style="width: 10.5px;"></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center"
-                style="border-radius: 0;padding:17px 20px;">
+                style="border-radius: 0;padding:17px 20px;" data-toggle="modal" data-target="#deliverymodal">
                 Delivery
                 <span><img src="/img/icon/arrow.svg" style="width: 10.5px;"></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center"
-                style="border-radius: 0;padding:17px 20px;">
-                Others
+                style="border-radius: 0;padding:17px 20px;" data-toggle="modal" data-target="#cashbackmodal">
+                Nepscart Points/ Cashback
                 <span><img src="/img/icon/arrow.svg" style="width: 10.5px;"></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center"
-                style="border-radius: 0;padding:17px 20px;">
+                style="border-radius: 0;padding:17px 20px;" data-toggle="modal" data-target="#contactinfomodal">
                 Contact Information
                 <span><img src="/img/icon/arrow.svg" style="width: 10.5px;"></span>
             </li>
@@ -41,8 +41,8 @@
 
     <div class="container" style="font-size:13px;" id="seller-section">
         <div style="margin-bottom:12px;font-weight:bold;">INTRESTED IN SELLING WITH NEPSCART?</div>
-        <div style="margin-bottom:8px;">Visit <a href="/partners">Partners page</a> for more info</div>
-        <div style="margin-bottom:8px;"><span style="color: #526cd0;">+977
+        <div style="margin-bottom:4px;">Visit <a href="/partners">Partners page</a> for more info</div>
+        <div style="margin-bottom:4px;"><span style="color: #526cd0;">+977
                 9824533413</span> / <span style="color: #03A685;">nepscart@gmail.com</span></div>
         <div style="color: #FF4747;margin-bottom:80px;">OR CHAT WITH US.</div>
     </div>
@@ -68,36 +68,238 @@
 
 
 
-{{!-- Modal --}}
+{{!-- Modal Order --}}
+<div class="modal fade" id="ordermodal" tabindex="-1">
+    <div class="modal-dialog" role="document" style="margin:0;">
+        <div class="modal-content" style="border-radius:0;border:none;min-height:100vh;">
+            <div class="modal-header fixed-top"
+                style="background:#fff;font-size:14px;padding-top:23px;font-weight:bold;color:#3E4152;">
+                <div class="modal-title">ORDER</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1;">
+                    <img src="/img/logo.svg" style="width: 19px;">
+                </button>
+            </div>
+            <div class="modal-body" style="color:#3E4152;font-size:13.5px;margin-top:65px;">
+                <div>
+                    <strong># How do I know my order has been confirmed?</strong> <br>
+                    <p>You can track your orders from the 'My Orders' section on your Nepscart account.</p>
+                </div>
+                <div style="background:#ddd;height:1px;margin:30px 0;"></div>
+                <div>
+                    <strong># I missed the delivery of my order today. What should I do?</strong> <br>
+                    <p>The courier service delivering your order usually tries to deliver on the next business day in
+                        case you miss a delivery.</p>
+                    <p>You can inform us or the delivery service for more details on when the courier service will try
+                        to deliver again.
+                    </p>
+                </div>
+                <div style="background:#ddd;height:1px;margin:30px 0;"></div>
+                <div>
+                    <strong># The delivery of my order is delayed. What should I do?</strong> <br>
+                    <p>On the rare occasion that your order is delayed, please check your email & messages for updates.
+                    </p>
+                    <p>You can chat with us and you can also track its status by visiting
+                        My Orders.</p>
+                </div>
+                <div style="background:#ddd;height:1px;margin:30px 0;"></div>
+                <div style="margin-bottom: 50px;">
+                    <strong># Can I take the shipment after opening and checking the contents inside?</strong> <br>
+                    <p>As per company policy, a shipment can't be opened before delivery, but you can accept the
+                        shipment and get in touch with us later in case you have any concerns.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Modal Payment Refund --}}
 <div class="modal fade" id="paymentrefundmodal" tabindex="-1">
     <div class="modal-dialog" role="document" style="margin:0;">
         <div class="modal-content" style="border-radius:0;border:none;min-height:100vh;">
-            <div class="modal-header" style="font-size:14px;padding-top:23px;font-weight:bold;color:#3E4152;">
+            <div class="modal-header fixed-top"
+                style="background:#fff;font-size:14px;padding-top:23px;font-weight:bold;color:#3E4152;">
                 <div class="modal-title">PAYMENT/REFUND</div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1;">
                     <img src="/img/logo.svg" style="width: 19px;">
                 </button>
             </div>
-            <div class="modal-body" style="color:#3E4152;font-size:13.5px;">
+            <div class="modal-body" style="color:#3E4152;font-size:13.5px;margin-top:65px;">
                 <div>
+                    <strong># Which products are not eligible for returns?</strong>
+                    <p>The following table contains a list of products that are not eligible for returns as per the
+                        seller’s Returns Policy:</p>
+                    <table class="table table-bordered table-dark">
+                        <thead>
+                            <tr class="bg-success">
+                                <th>Category</th>
+                                <th>Products that can’t be returned</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Computer Accessories</td>
+                                <td>Blank/Educational Media, CDs/DVDs, Ink Toners, Music, Movies and Software</td>
+                            </tr>
+                            <tr>
+                                <td>Fashion</td>
+                                <td>Baby Dolls, Clothing Freebies, Lingerie Wash-bags, Shapewear, Socks, Stockings and
+                                    Swimsuits</td>
+                            </tr>
+                            <tr>
+                                <td>Innerwear</td>
+                                <td>Bra Accessories, Briefs, Boxers, Lingerie Sets, Panty, Garter, Trunks and Vests</td>
+                            </tr>
+                            <tr>
+                                <td>Gift Cards</td>
+                                <td>Any kind of Gift cards</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background:#ddd;height:1px;margin:30px 0;"></div>
+                <div>
+                    <strong># Can items be returned after the time period mentioned in the seller's Returns
+                        Policy?</strong> <br>
+                    <p>No, sellers will not be able to accept returns after the time period mentioned in the seller's
+                        Returns Policy.</p>
+                </div>
+                <div style="background:#ddd;height:1px;margin:30px 0;"></div>
+                <div style="margin-bottom: 65px;">
                     <strong># My return was picked up but i haven't recieved my refund yet</strong> <br>
                     <p>Refund will be initiated after we recieve the item and it passes the quality check.
                         Refund time depends upon the mode of refund.</p>
-                    <strong>Bank Account:</strong> <br>
+                    <div>Bank Account:</div>
                     <p>Time the item takes to reach us + 1 to 3 business days.</p>
-                    <strong>Esewa Wallet:</strong> <br>
+                    <div>Esewa Wallet:</div>
                     Time the item takes to reach us + 1 business days.
                 </div>
-                <div style="background:#ddd;height:12px;margin:30px 0;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Modal Contact Info --}}
+<div class="modal fade" id="contactinfomodal" tabindex="-1">
+    <div class="modal-dialog" role="document" style="margin:0;">
+        <div class="modal-content" style="border-radius:0;border:none;min-height:100vh;">
+            <div class="modal-header" style="font-size:14px;padding-top:23px;font-weight:bold;color:#3E4152;">
+                <div class="modal-title">CONTACT INFORMATION</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1;">
+                    <img src="/img/logo.svg" style="width: 19px;">
+                </button>
+            </div>
+            <div class="modal-body" style="color:#3E4152;font-size:13.5px;">
+                <div style="font-size:13px;" id="seller-section">
+                    <div style="margin-bottom:12px;font-weight:bold;">WANNA REACH US THE OLD FASHIONED WAY?</div>
+                    <div style="margin-bottom:4px;">Nepalgunj, Pasang Lhamu road, Banke</div>
+                    <div style="margin-bottom:4px;"><span style="color: #526cd0;">+977
+                            9824533413</span> / <span style="color: #03A685;">nepscart@gmail.com</span></div>
+                    <div style="color: #FF4747;margin-bottom:80px;">OR YOU CAN ALWAYS CHAT WITH US.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Modal Shopping --}}
+<div class="modal fade" id="shoppingmodal" tabindex="-1">
+    <div class="modal-dialog" role="document" style="margin:0;">
+        <div class="modal-content" style="border-radius:0;border:none;min-height:100vh;">
+            <div class="modal-header fixed-top"
+                style="background:#fff;font-size:14px;padding-top:23px;font-weight:bold;color:#3E4152;">
+                <div class="modal-title">SHOPPING</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1;">
+                    <img src="/img/logo.svg" style="width: 19px;">
+                </button>
+            </div>
+            <div class="modal-body" style="color:#3E4152;font-size:13.5px;margin-top:65px;">
                 <div>
-                    <strong># I self shipped my return but havent recieved my refund yet</strong> <br>
-                    <p>Refund will be initiated after we recieve the item at out warehouse and it passes the quality
-                        check.
-                        Refund time depends upon the mode of refund.</p>
-                    <strong>Bank Account:</strong> <br>
-                    <p>Time the item takes to reach us + 1 to 3 business days.</p>
-                    <strong>Esewa Wallet:</strong> <br>
-                    Time the item takes to reach us + 1 business days.
+                    <strong># Why do I see different prices for the same product?</strong> <br>
+                    <p>You could see different prices for the same product, as it could be listed by many Sellers.</p>
+                </div>
+                <div style="background:#ddd;height:1px;margin:30px 0;"></div>
+                <div>
+                    <strong># What does 'Out of Stock' mean?</strong> <br>
+                    <p>An item is marked as 'Out of stock' when it is not available with any sellers at the moment; you
+                        won't be able to buy it now. </p>
+                </div>
+                <div style="background:#ddd;height:1px;margin:30px 0;"></div>
+                <div style="margin-bottom: 69px;">
+                    <strong># Are there any hidden charges when I shop on Nepscart?</strong> <br>
+                    <p>There are NO hidden charges when you shop on Nepscart. The price you see on the product page is
+                        final and it's exactly what you pay.
+                    </p>
+                    <p>Note: >Orders with items that are worth Rs. 999 or more will qualify for free delivery, else, a
+                        delivery charge of Rs. 40 will be applicable.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{!-- Modal Delivery --}}
+<div class="modal fade" id="deliverymodal" tabindex="-1">
+    <div class="modal-dialog" role="document" style="margin:0;">
+        <div class="modal-content" style="border-radius:0;border:none;min-height:100vh;">
+            <div class="modal-header fixed-top"
+                style="background:#fff;font-size:14px;padding-top:23px;font-weight:bold;color:#3E4152;">
+                <div class="modal-title">DELIVERY</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1;">
+                    <img src="/img/logo.svg" style="width: 19px;">
+                </button>
+            </div>
+            <div class="modal-body" style="color:#3E4152;font-size:13.5px;margin-top:65px;">
+                <div>
+                    <strong># Why can't I get some items shipped to my location?</strong> <br>
+                    <p>Some sellers prefer not to ship to certain locations due to the cost involved and this is
+                        entirely at their discretion. You can check with your pincode on the product page to see any
+                        other sellers ship to your location.</p>
+                </div>
+                <div style="background:#ddd;height:1px;margin:30px 0;"></div>
+                <div>
+                    <strong># What are the standard shipping speeds and delivery charges?</strong> <br>
+                    <p>Orders with items that are worth Rs. 999 or more will qualify for free delivery, else, a delivery
+                        charge of Rs. 40 will be applicable.</p>
+                    <p>Delivery time can take upto 1-2 business days inside Kathmandu and 3-6 business days outside
+                        Kathmandu.</p>
+                </div>
+                <div style="background:#ddd;height:1px;margin:30px 0;"></div>
+                <div style="margin-bottom: 60px;">
+                    <strong># Why didn't my order qualify for free delivery?</strong> <br>
+                    <p>Your order qualifies for free delivery if you order products worth Rs. 999 and above. If your
+                        order value for products is less than Rs. 999, a delivery fee of Rs. 40 will be charged.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Modal Nepscart Points/ Cashback --}}
+<div class="modal fade" id="cashbackmodal" tabindex="-1">
+    <div class="modal-dialog" role="document" style="margin:0;">
+        <div class="modal-content" style="border-radius:0;border:none;min-height:100vh;">
+            <div class="modal-header fixed-top"
+                style="background:#fff;font-size:14px;padding-top:23px;font-weight:bold;color:#3E4152;">
+                <div class="modal-title">NEPSCART POINTS/ CASHBACK</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 1;">
+                    <img src="/img/logo.svg" style="width: 19px;">
+                </button>
+            </div>
+            <div class="modal-body" style="color:#3E4152;font-size:13.5px;margin-top:65px;">
+                <div>
+                    <strong># What are Nepscart Points?</strong> <br>
+                    <p>Nepscart Point is a reward you get on every order you complete with Nepscart. You can the Nepscart Points as real money directly in youbank account/ esewa wallet / khalti wallet.</p>
+                    <p>No minimum points required.</p>
+                </div>
+                <div style="background:#ddd;height:1px;margin:30px 0;"></div>
+                <div style="margin-bottom: 60px;">
+                    <strong># How can i use Nepscart Points on checkout?</strong> <br>
+                    <p>You can request Nepscart Points as real money on your bank account/ esewa wallet / khalti wallet.
+                        Just ask for withdraw in the Chat icon on the bottom.
+                    </p>
+                    <p>No minimum points required.</p>
                 </div>
             </div>
         </div>

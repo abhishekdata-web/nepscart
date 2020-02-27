@@ -1,14 +1,24 @@
-const cacheName = 'v2';
+const cacheName = 'v8';
 
 const cacheAssets = [
-    // '/',
+    '/',
     '/offline',
-    // '/shop/men/all',
-    // '/shop/women/all',
-    // '/shop/accessories/all',
-    // '/user-login',
+    '/shop/men/all',
+    '/shop/women/all',
+    '/shop/women/5e4cce34d2e7a13e040f4daf',
+    '/shop/accessories/all',
+    '/user-login',
 
-    // '/css/style.css',
+    '/cart',
+    '/my-account',
+    '/nepscartpoints',
+    '/my-orders',
+    '/partners',
+    '/helpcentre',
+    '/blogs',
+
+
+    '/css/style.css',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css',
     'https://code.jquery.com/jquery-3.4.1.min.js',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js',
@@ -16,11 +26,16 @@ const cacheAssets = [
     '/img/static/banner-mob.jpg',
     '/img/static/men.jpg',
     '/img/static/women.jpg',
-    '/img/static/beauty.jpg',
-    '/img/static/jwellery.jpg',
+    '/img/static/accessories.jpg',
     '/img/register-offer.webp',
+    '/img/static/women-tshirt.jpg',
+    '/img/static/women-footwear.jpg',
+    'img/static/women-jeans.jpg',
+    '/img/static/women-lingerie.jpg',
+    '/img/static/women-handbags.jpg',
+    '/img/static/women-onepiece.jpg',
 
-    '/img/icon/search-black.svg',
+    '/img/icon/points.svg',
     '/img/heart.svg',
     '/img/icon/profile-nav.svg',
     '/img/logo.svg',
