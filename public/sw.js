@@ -1,4 +1,4 @@
-const cacheName = 'v10';
+const cacheName = 'v15';
 
 const cacheAssets = [
     '/',
@@ -22,6 +22,10 @@ const cacheAssets = [
     'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css',
     'https://code.jquery.com/jquery-3.4.1.min.js',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js',
+    '/css/owl.carousel.min.css',
+    '/css/owl.theme.default.min.css',
+    '/js/owl.carousel.min.js',
+    'https://cdn.jsdelivr.net/npm/vanilla-lazyload@12.5.0/dist/lazyload.min.js',
 
     '/img/static/banner-mob.jpg',
     '/img/static/men.jpg',
