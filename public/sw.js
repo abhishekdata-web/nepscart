@@ -1,12 +1,12 @@
-const cacheName = 'v10';
+const cacheName = 'v1';
 
 const cacheAssets = [
-    '/',
+    // '/',
     '/offline',
-    '/shop/men/all',
-    '/shop/women/all',
-    '/shop/women/5e4cce34d2e7a13e040f4daf',
-    '/shop/accessories/all',
+    // '/shop/men/all',
+    // '/shop/women/all',
+    // '/shop/women/5e4cce34d2e7a13e040f4daf',
+    // '/shop/accessories/all',
     '/user-login',
 
     '/cart',
@@ -15,7 +15,7 @@ const cacheAssets = [
     '/my-orders',
     '/partners',
     '/helpcentre',
-    '/blogs',
+    // '/blogs',
 
 
     '/css/style.css',
@@ -51,7 +51,8 @@ const cacheAssets = [
     '/img/icon/help.svg',
     '/img/icon/search-black.svg',
     '/img/back-arrow.svg',
-    '/img/icon/user-sidenav.svg'
+    '/img/icon/user-sidenav.svg',
+    '/img/icon/arrow.svg'
 ]
 
 // Call install event

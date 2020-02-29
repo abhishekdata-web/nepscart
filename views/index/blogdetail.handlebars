@@ -72,9 +72,9 @@
             
             $.each(similarData, function (i, article) {
                 if (mq.matches) {
-                    $('#ajax-similar-pc').append(`<div style="width: 48%;margin-bottom:19px;">
+                    $('#ajax-similar-pc').append(`<div style="width: 48%;margin-bottom:19px;border: 1px solid #ddd;">
                         <a href="/shop-detail/${article._id}" style="color:#000;">
-                            <img src="/productUploads/${article.file}" style="width: 100%;">
+                            <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;">
                             <div style="font-size:13.5px;padding:12px 8px;">
                                 <strong>Ives</strong> <br>
                                 <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>

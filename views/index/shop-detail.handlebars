@@ -28,8 +28,10 @@
     <center id="content-loading"><img src="/img/loading.svg" style="width:50px;margin:80px 0;"></center>
 
     <div>
-        <div id="ajax-cartDetail-img-mobile">
+        <div class="container">
+            <div id="ajax-cartDetail-img-mobile">
 
+            </div>
         </div>
 
         <div id="ajax-cartDetail-detail-mobile">
@@ -78,9 +80,9 @@
 
             $.each(similarData, function (i, article) {
                 if (mq.matches) {
-                    $('#ajax-similar-pc').append(`<div style="width: 15%;margin-bottom:19px;">
+                    $('#ajax-similar-pc').append(`<div style="width: 15%;margin-bottom:19px;border: 1px solid #ddd;">
                         <a href="/shop-detail/${article._id}" style="color:#000;">
-                            <img src="/productUploads/${article.file}" style="width: 100%;">
+                            <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;">
                             <div style="font-size:13.5px;padding:12px 8px;">
                                 <strong>Ives</strong> <br>
                                 <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
@@ -111,10 +113,10 @@
 
         //product image
         if (mq.matches) {
-            $('#ajax-cartDetail-img').append(`<img src="/productUploads/${cartDetail.file1}" style="width: 49%;margin-bottom:14px;min-height:337px;background: rgb(255, 237, 243);">
-                    <img src="/productUploads/${cartDetail.file2}" style="width: 49%;margin-bottom:14px;min-height:337px;background: rgb(255, 237, 243);">
-                    <img src="/productUploads/${cartDetail.file3}" style="width: 49%;margin-bottom:14px;min-height:337px;background: rgb(255, 237, 243);">
-                    <img src="/productUploads/${cartDetail.file4}" style="width: 49%;margin-bottom:14px;min-height:337px;background: rgb(255, 237, 243);">`)
+            $('#ajax-cartDetail-img').append(`<img src="/productUploads/${cartDetail.file1}" style="width: 49%;margin-bottom:14px;min-height:150px;background: rgb(255, 237, 243);border: 1px solid #f5f5f6;">
+                    <img src="/productUploads/${cartDetail.file2}" style="width: 49%;margin-bottom:14px;min-height:150px;background: rgb(255, 237, 243);border: 1px solid #f5f5f6;">
+                    <img src="/productUploads/${cartDetail.file3}" style="width: 49%;margin-bottom:14px;min-height:150px;background: rgb(255, 237, 243);border: 1px solid #f5f5f6;">
+                    <img src="/productUploads/${cartDetail.file4}" style="width: 49%;margin-bottom:14px;min-height:150px;background: rgb(255, 237, 243);border: 1px solid #f5f5f6;">`)
         } else {
             $('#ajax-cartDetail-img-mobile').append(`
                 <div class="owl-carousel owl-theme">
