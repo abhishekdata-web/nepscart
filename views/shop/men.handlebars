@@ -143,8 +143,16 @@
 </section>
 
 
-
+{{!-- verlok lazyload --}}
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@12.5.0/dist/lazyload.min.js"></script>
 <script>
+    //lazyload initialize
+    var lazyLoadInstance = new LazyLoad({
+        elements_selector: ".verlok-lazy",
+        threshold: 100
+    });
+
+
     //media queries from nav.handlebars
     if (mq.matches) {
         //make the mobile-version div empty
@@ -219,7 +227,7 @@
                         } else {
                             $('#ajax-shop').append(`<div style="width: 50%;">
                                 <a href="/shop-detail/${article._id}" style="color:#000;">
-                                    <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;min-height:190px;background: rgb(255, 237, 243);">
+                                    <img class="verlok-lazy" data-src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;min-height:190px;background: rgb(255, 237, 243);">
                                     <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
                                         <strong>Ives</strong> <br>
                                         <div style="font-size:12.5px;color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
@@ -230,6 +238,9 @@
                                     </div>
                                  </a>
                             </div>`)
+
+                            //lazyload reinitialize
+                            lazyLoadInstance.update();
                         }
                     })
                 } else {
