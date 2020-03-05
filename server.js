@@ -724,7 +724,7 @@ app.get('/api/admin/allorders/got', (req, res) => {
 
 // blog api=====
 app.post('/api/add-blog', (req, res) => {
-    Blog.findOne({ 'title': req.body.title })
+    Blog.findOne({ title: req.body.title })
         .then(blog => {
             if (blog) {
                 return res.json({ success: false, message: 'Blog title already exist' })
@@ -745,6 +745,7 @@ app.post('/api/add-blog', (req, res) => {
 
                 const newBlog = new Blog({
                     title: req.body.title,
+                    related: req.body.related,
                     description: req.body.description,
                     file: filename,
                     file1: filename1
@@ -775,7 +776,7 @@ app.get('/api/blogs', (req, res) => {
 })
 
 app.get('/api/blog/detail', (req, res) => {
-    Blog.findOne({ "title": req.query.title })
+    Blog.findOne({ "_id": req.query._id })
         .then(blog => {
             res.status(200).json({
                 blog
@@ -785,7 +786,7 @@ app.get('/api/blog/detail', (req, res) => {
 
 app.post('/api/blog/edit_blog', auth, (req, res) => {
     Blog.findOneAndUpdate(
-        { title: req.query.title },
+        { _id: req.query._id },
         {
             "$set": req.body
         },
@@ -801,7 +802,7 @@ app.post('/api/blog/edit_blog', auth, (req, res) => {
 })
 
 app.get('/api/blog/delete', (req, res) => {
-    Blog.findOne({ title: req.query.title })
+    Blog.findOne({ _id: req.query._id })
         .then(blog => {
             fs.unlink("./public/blogUploads/" + blog.file, (err) => {
                 fs.unlink("./public/blogUploads/" + blog.file1, (err) => {
@@ -846,7 +847,7 @@ app.get('/add-blog', (req, res) => {
     res.render('admin/add-blog');
 })
 
-app.get('/admin/edit_blog/:title', (req, res) => {
+app.get('/admin/edit_blog/:_id', (req, res) => {
     res.render('admin/edit-blog');
 })
 
@@ -854,7 +855,7 @@ app.get('/blogs', (req, res) => {
     res.render('index/blogs');
 })
 
-app.get('/blog/detail/:title', (req, res) => {
+app.get('/blog/detail/:_id', (req, res) => {
     res.render('index/blogdetail');
 })
 

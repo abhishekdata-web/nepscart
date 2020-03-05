@@ -27,7 +27,7 @@
 <script>
     //title from the url ===============================
     var url = window.location.pathname;
-    var title = url.substring(url.lastIndexOf('/') + 1);
+    var _id = url.substring(url.lastIndexOf('/') + 1);
 
 
 
@@ -41,7 +41,7 @@
         let formData = new FormData(myform);
 
         $.ajax({
-            url: `/api/blog/edit_blog?title=${title}`,
+            url: `/api/blog/edit_blog?_id=${_id}`,
             type: 'post',
             data: formData,
             processData: false,
@@ -69,7 +69,7 @@
 
 
 
-    $.getJSON(`/api/blog/detail?title=${title}`, function (data) {
+    $.getJSON(`/api/blog/detail?_id=${_id}`, function (data) {
         document.getElementById('title').value = data.blog.title;
         document.getElementById('description').value = data.blog.description;
         document.getElementById('related').value = data.blog.related;

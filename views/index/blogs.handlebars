@@ -79,9 +79,9 @@
 
             data.blogs.forEach(item => {
                 $('#ajax-blog').append(`<div class="blog-content">
-                    <a href="/blog/detail/${item.title}">
+                    <a href="/blog/detail/${item._id}">
                         <img src="/blogUploads/${item.file}"
-                            style="width: 100%;min-height:80px;background: rgb(255, 237, 243);">
+                            style="width: 100%;height:150px;object-fit:cover;background: rgb(255, 237, 243);">
                         <div style="font-size: 14px;margin-top:4px;font-weight:bold;">
                             ${item.title}
                         </div>
@@ -112,7 +112,7 @@
             if (mq.matches) {
                 $('#ajax-similar-pc').append(`<div style="width: 48%;margin-bottom:19px;border: 1px solid #ddd;">
                         <a href="/shop-detail/${article._id}" style="color:#000;">
-                            <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;">
+                            <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;min-height:160px;background: rgb(255, 237, 243);">
                             <div style="font-size:13.5px;padding:12px 8px;">
                                 <strong>Ives</strong> <br>
                                 <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
@@ -126,7 +126,7 @@
             } else {
                 $('#ajax-similar').append(`<div style="width: 50%;">
                     <a href="/shop-detail/${article._id}" style="color:#000;">
-                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;min-height:190px;background: rgb(244, 255, 249);">
+                        <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;min-height:160px;background: rgb(244, 255, 249);">
                         <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
                             <strong>Ives</strong> <br>
                             <div style="font-size:12.5px;color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>

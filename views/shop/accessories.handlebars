@@ -30,9 +30,6 @@
                 <div id="ajax-color" style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;">
                     <h6 style="font-weight: bold;font-size:14.5px;">COLORS</h6>
                 </div>
-                <div id="ajax-size" style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;">
-                    <h6 style="font-weight: bold;font-size:14.5px;">SIZES</h6>
-                </div>
                 <div id="ajax-seller" style="border: 1px solid #ddd;padding:20px 0;border-left:none;border-top:none;">
                     <h6 style="font-weight: bold;font-size:14.5px;">SELLERS</h6>
                 </div>
@@ -113,13 +110,6 @@
                     </div>
                     <div style="background:#F5F5F6;height:12px;position:relative;left:-16px;width: 100vw;"></div>
                     <div style="padding:28px 0;">
-                        <h6 style="font-weight: bold;font-size:14.5px;">
-                            SIZES
-                        </h6>
-                        <div id="ajax-size" class="row"></div>
-                    </div>
-                    <div style="background:#F5F5F6;height:12px;position:relative;left:-16px;width: 100vw;"></div>
-                    <div style="padding:28px 0;">
                         <h6 style="font-weight: bold;font-size:14.5px;">SELLERS</h6>
                         <div id="ajax-seller" class="row"></div>
                     </div>
@@ -170,7 +160,6 @@
     let category = ["5e4a270784f2b93b4815b924"];
     let accessoriessubcategory = [];
     let color = [];
-    let size = [];
     let seller = [];
 
     //category id from the url ===============================
@@ -195,7 +184,6 @@
                 category: category,
                 accessoriessubcategory: accessoriessubcategory,
                 color: color,
-                size: size,
                 seller: seller
             },
             success: function (data, textStatus, jQxhr) {
@@ -213,7 +201,7 @@
                         if (mq.matches) {
                             $('#ajax-shop').append(`<div style="width: 18%;margin-bottom:19px;border: 1px solid #ddd;">
                                 <a href="/shop-detail/${article._id}" style="color:#000;">
-                                    <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;">
+                                    <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;min-height:160px;background: rgb(255, 237, 243);">
                                     <div style="font-size:13.5px;padding:12px 8px;">
                                         <strong>Ives</strong> <br>
                                         <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
@@ -227,7 +215,7 @@
                         } else {
                             $('#ajax-shop').append(`<div style="width: 50%;">
                                 <a href="/shop-detail/${article._id}" style="color:#000;">
-                                    <img class="verlok-lazy" data-src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;min-height:190px;background: rgb(255, 237, 243);">
+                                    <img class="verlok-lazy" data-src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;min-height:160px;background: rgb(255, 237, 243);">
                                     <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
                                         <strong>Ives</strong> <br>
                                         <div style="font-size:12.5px;color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
@@ -299,14 +287,6 @@
         })
     })
 
-    $.getJSON("/api/product/sizes", function (data) {
-        $.each(data, function (i, size) {
-            $('#ajax-size').append(`<div class="col-6 col-md-12 shop-checkbox" style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSize('${size._id}')"> 
-                <span style="margin-left:4px;">${size.name}</span>
-            </div>`)
-        })
-    })
-
 
 
 
@@ -347,26 +327,6 @@
         }
 
         color = newValue;
-
-        loadShop();
-    }
-    //handletoggle size
-    const handleToggleSize = (value) => {
-        $('#ajax-shop').empty();
-        document.getElementById('ajax-loading').style.display = 'block';
-
-        skip = 0;
-
-        const currentIndex = size.indexOf(value);
-        const newValue = [...size];
-
-        if (currentIndex === -1) {
-            newValue.push(value)
-        } else {
-            newValue.splice(currentIndex, 1)
-        }
-
-        size = newValue;
 
         loadShop();
     }
