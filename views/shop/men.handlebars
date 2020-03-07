@@ -89,7 +89,7 @@
 
     <div class="modal fade" id="filter-modal" tabindex="-1">
         <div class="modal-dialog" role="document" style="margin:0;">
-            <div class="modal-content" style="border-radius:0;border:none;">
+            <div class="modal-content" style="border-radius:0;border:none;min-height:100vh;">
                 <div class="modal-header" style="padding:20px 16px;">
                     <div style="font-size:14.5px;font-weight:bold;position:relative;top:6px;">
                         <img src="/img/icon/filter.svg"
@@ -301,9 +301,11 @@
 
     $.getJSON("/api/product/sizes", function (data) {
         $.each(data, function (i, size) {
-            $('#ajax-size').append(`<div class="col-6 col-md-12 shop-checkbox" style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSize('${size._id}')"> 
+            if (i != 5) {
+                $('#ajax-size').append(`<div class="col-6 col-md-12 shop-checkbox" style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSize('${size._id}')"> 
                 <span style="margin-left:4px;">${size.name}</span>
             </div>`)
+            }
         })
     })
 

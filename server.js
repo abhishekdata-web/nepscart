@@ -566,7 +566,7 @@ app.post('/api/product/shop', (req, res) => {
         }
     }
 
-    findArgs['name'] = { "$regex": req.body.search ? req.body.search : '', "$options": "i" };
+    findArgs['description'] = { "$regex": req.body.search ? req.body.search : '', "$options": "i" };
     findArgs['available'] = true;
 
     Product.
@@ -637,7 +637,7 @@ app.get('/api/product/articles', (req, res) => {
         findArgs['accessoriessubcategory'] = req.query.accessoriessubcategory;
     }
     if (req.query.related) {
-        findArgs['name'] = { "$regex": req.query.related, "$options": "i" };
+        findArgs['description'] = { "$regex": req.query.related, "$options": "i" };
     }
     findArgs['available'] = true;
 
@@ -825,6 +825,10 @@ app.get('/offline', (req, res) => {
 
 app.get('/helpcentre', (req, res) => {
     res.render('index/helpcentre');
+})
+
+app.get('/share/netflix', (req, res) => {
+    res.render('index/netflix-share');
 })
 
 app.get('/privacypolicy', (req, res) => {

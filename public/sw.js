@@ -11,9 +11,9 @@ const cacheAssets = [
 
     '/cart',
     '/my-account',
-    '/nepscartpoints',
+    // '/nepscartpoints',
     '/my-orders',
-    '/partners',
+    // '/partners',
     '/helpcentre',
     // '/blogs',
 
