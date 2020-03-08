@@ -827,8 +827,8 @@ app.get('/helpcentre', (req, res) => {
     res.render('index/helpcentre');
 })
 
-app.get('/share/netflix', (req, res) => {
-    res.render('index/netflix-share');
+app.get('/snooker-cafe', (req, res) => {
+    res.render('index/snooker');
 })
 
 app.get('/privacypolicy', (req, res) => {
