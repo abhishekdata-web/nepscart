@@ -61,6 +61,14 @@ const productSchema = mongoose.Schema({
         required: true,
         type: Boolean
     },
+    cod: {
+        required: true,
+        type: Boolean
+    },
+    return: {
+        required: true,
+        type: Boolean
+    },
     sold: {
         type: Number,
         default: 0

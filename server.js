@@ -505,6 +505,8 @@ app.post('/api/product/article', (req, res) => {
                     seller: req.body.seller,
                     shipping: req.body.shipping,
                     available: req.body.available,
+                    cod: req.body.cod,
+                    return: req.body.return,
                     file: filename,
                     file1: filename1,
                     file2: filename2,
@@ -825,10 +827,6 @@ app.get('/offline', (req, res) => {
 
 app.get('/helpcentre', (req, res) => {
     res.render('index/helpcentre');
-})
-
-app.get('/snooker-cafe', (req, res) => {
-    res.render('index/snooker');
 })
 
 app.get('/privacypolicy', (req, res) => {

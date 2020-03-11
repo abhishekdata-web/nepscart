@@ -68,6 +68,26 @@
                             <label class="form-check-label">AVAILABLE-NO</label>
                         </div>
                     </div>
+                    <div style="margin-top:30px;">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="cod" id="cod-yes" value="true" required>
+                            <label class="form-check-label">COD-YES</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="cod" id="cod-no" value="false">
+                            <label class="form-check-label">COD-NO</label>
+                        </div>
+                    </div>
+                    <div style="margin-top:30px;">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="return" id="return-yes" value="true" required>
+                            <label class="form-check-label">RETURN-YES</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="return" id="return-no" value="false">
+                            <label class="form-check-label">RETURN-NO</label>
+                        </div>
+                    </div>
                     <div id="product-error" style="color:red;font-size:13px;"></div>
                     <div id="product-success" style="color:green;font-size:13px;"></div>
                     <button id="product-btn"
@@ -194,6 +214,16 @@
             document.getElementById("shipping-yes").checked = true;
         }else{
             document.getElementById("shipping-no").checked = true;
+        }
+        if(productDetail.return){
+            document.getElementById("return-yes").checked = true;
+        }else{
+            document.getElementById("return-no").checked = true;
+        }
+        if(productDetail.cod){
+            document.getElementById("cod-yes").checked = true;
+        }else{
+            document.getElementById("cod-no").checked = true;
         }
     })
 </script>

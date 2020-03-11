@@ -1,21 +1,21 @@
-const cacheName = 'v5';
+const cacheName = 'v2';
 
 const cacheAssets = [
-    '/',
+    // '/',
     '/offline',
-    '/shop/men/all',
-    '/shop/women/all',
-    '/shop/women/5e4cce34d2e7a13e040f4daf',
-    '/shop/accessories/all',
+    // '/shop/men/all',
+    // '/shop/women/all',
+    // '/shop/women/5e4cce34d2e7a13e040f4daf',
+    // '/shop/accessories/all',
     '/user-login',
 
     '/cart',
     '/my-account',
-    '/nepscartpoints',
+    // '/nepscartpoints',
     '/my-orders',
-    '/partners',
+    // '/partners',
     '/helpcentre',
-    '/blogs',
+    // '/blogs',
 
 
     '/css/style.css',

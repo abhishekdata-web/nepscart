@@ -171,19 +171,14 @@
                         style="border:1px solid #D4D5D9;padding:8px 66px 8px 10px;margin:15px 0 6px 0;border-radius:5px;font-size:14px;">
                     <button onclick="checkpincode()"
                         style="background:none;border:none;margin-left:-70px;color:#FF4747;font-size:13.5px;font-weight:bold;">Check</button>
-                    <div id="pincoderesult" style="font-size: 13px;color:#444;">Please enter PIN code to check delivery time & Cash/Card
-                        on Delivery Availability</div>
+                    <div id="pincoderesult" style="font-size: 13px;color:#444;">Please enter PIN code to check delivery availability</div>
                     <div style="font-size: 14px;margin-top:22px;color:#444;">
                         <strong style="font-size: 14.5px;">Expected Delivery Time</strong>
                         <p style="margin-bottom: 7px;color:#888;font-size:13px;">6 days; Actual time may vary depending on other items in your order</p>
-                        <strong style="font-size: 14.5px;">Easy 7 days returns and exchanges</strong>
-                        <p style="margin-bottom: 7px;color:#888;font-size:13px;">Choose to return or exchange for a different size (if available) within 7 days.</p>
-                        <strong style="font-size: 14.5px;">Cash/Card on delivery available</strong>
-                        <p style="margin-bottom: 27px;color:#888;font-size:13px;">Available for orders between Rs. 299- Rs. 20,000</p>
-                        <p style="margin-bottom: 7px;">100% Original Products</p>
-                        <p style="margin-bottom: 7px;">Free Delivery on order above Rs. 700</p>
-                        <p style="margin-bottom: 7px;">Cash on delivery is available</p>
-                        <p style="margin-bottom: 7px;">Easy 7 days returns and exchanges</p>
+                        <strong style="font-size: 14.5px;">${cartDetail.return ? `Easy 7 days returns and exchanges` : `No returns available for this product, only in case of damaged goods returns shall be given`}</strong>
+                        <p style="margin-bottom: 7px;color:#888;font-size:13px;">Please check our <a href="/returnpolicy">return policy</a></p>
+                        <strong style="font-size: 14.5px;">${cartDetail.cod ? `Cash on delivery available` : `Cash on delivery not available, Pay with esewa or khalti`}</strong>
+                        <p style="margin-bottom: 27px;color:#888;font-size:13px;">${cartDetail.cod ? `Available for orders upto Rs. 5,000` : `Online payment with esewa or khalti, <strong style="color:red;">100% safe</strong>`}</p>
                         <p style="font-size: 15px;margin-top: 27px;">Sold by: <strong style="color:#000;">${cartDetail.seller.name}</strong> ( Supplied By Partner )</p>
                     </div>
                 </div>
@@ -246,16 +241,12 @@
                     <div id="pincoderesult" style="font-size: 13px;color:#444;">Please enter PIN code to check delivery time & Cash/Card
                         on Delivery Availability</div>
                     <div style="font-size: 14px;margin-top:22px;color:#444;">
-                        <strong style="font-size: 15px;">Expected Delivery Time</strong>
-                        <p style="margin-bottom: 7px;color:#888;font-size:14px;">6 days; Actual time may vary depending on other items in your order</p>
-                        <strong style="font-size: 15px;">Easy 7 days returns and exchanges</strong>
-                        <p style="margin-bottom: 7px;color:#888;font-size:14px;">Choose to return or exchange for a different size (if available) within 7 days.</p>
-                        <strong style="font-size: 15px;">Cash/Card on delivery available</strong>
-                        <p style="margin-bottom: 27px;color:#888;font-size:14px;">Available for orders between Rs. 299- Rs. 20,000</p>
-                        <p style="margin-bottom: 7px;">100% Original Products</p>
-                        <p style="margin-bottom: 7px;">Free Delivery on order above Rs. 700</p>
-                        <p style="margin-bottom: 7px;">Cash on delivery is available</p>
-                        <p style="margin-bottom: 7px;">Easy 7 days returns and exchanges</p>
+                        <strong style="font-size: 14.5px;">Expected Delivery Time</strong>
+                        <p style="margin-bottom: 7px;color:#888;font-size:13px;">6 days; Actual time may vary depending on other items in your order</p>
+                        <strong style="font-size: 14.5px;">${cartDetail.return ? `Easy 7 days returns and exchanges` : `No returns available for this product, only in case of damaged goods returns shall be given`}</strong>
+                        <p style="margin-bottom: 7px;color:#888;font-size:13px;">Please check our <a href="/returnpolicy">return policy</a></p>
+                        <strong style="font-size: 14.5px;">${cartDetail.cod ? `Cash on delivery available` : `Cash on delivery not available, Pay with esewa or khalti`}</strong>
+                        <p style="margin-bottom: 27px;color:#888;font-size:13px;">${cartDetail.cod ? `Available for orders upto Rs. 5,000` : `Online payment with esewa or khalti, <strong style="color:red;">100% safe</strong>`}</p>
                         <p style="font-size: 15px;margin-top: 27px;">Sold by: <strong style="color:#000;">${cartDetail.seller.name}</strong> ( Supplied By Partner )</p>
                     </div>
                 </div>
