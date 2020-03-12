@@ -42,10 +42,6 @@
                         style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
                         <option value="">WOMEN SUBCATEGORY</option>
                     </select>
-                    <select id="accessoriessubcategory-select" class="form-control" name="accessoriessubcategory"
-                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
-                        <option value="">ACCESSORIES SUBCATEGORY</option>
-                    </select>
                     <select id="color-select" class="form-control" name="color"
                         style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
                         <option value="">COLOR</option>
@@ -115,12 +111,6 @@
     $.getJSON("/api/product/womensubcategories", function (data) {
         $.each(data, function (i, womensubcategory) {
             $('#womensubcategory-select').append(`<option value="${womensubcategory._id}">${womensubcategory.name}</option>`)
-        })
-    })
-
-    $.getJSON("/api/product/accessoriessubcategories", function (data) {
-        $.each(data, function (i, accessoriessubcategory) {
-            $('#accessoriessubcategory-select').append(`<option value="${accessoriessubcategory._id}">${accessoriessubcategory.name}</option>`)
         })
     })
 
@@ -201,7 +191,6 @@
         document.getElementById('category-select').value = productDetail.category._id;
         document.getElementById('subcategory-select').value = productDetail.subcategory._id;
         document.getElementById('womensubcategory-select').value = productDetail.womensubcategory._id;
-        document.getElementById('accessoriessubcategory-select').value = productDetail.accessoriessubcategory._id;
         document.getElementById('color-select').value = productDetail.color._id;
         document.getElementById('size-select').value = productDetail.size._id;
         document.getElementById('seller-select').value = productDetail.seller._id;

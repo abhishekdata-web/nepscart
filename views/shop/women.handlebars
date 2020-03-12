@@ -307,11 +307,9 @@
 
     $.getJSON("/api/product/sizes", function (data) {
         $.each(data, function (i, size) {
-            if (i != 5) {
-                $('#ajax-size').append(`<div class="col-6 col-md-12 shop-checkbox" style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSize('${size._id}')"> 
+            $('#ajax-size').append(`<div class="col-6 col-md-12 shop-checkbox" style="font-size: 13px;"><input type="checkbox" style="margin-top:6px;position:relative;top:2px;" onclick="handleToggleSize('${size._id}')"> 
                 <span style="margin-left:4px;">${size.name}</span>
             </div>`)
-            }
         })
     })
 

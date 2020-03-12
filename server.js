@@ -499,7 +499,6 @@ app.post('/api/product/article', (req, res) => {
                     category: req.body.category,
                     subcategory: req.body.subcategory,
                     womensubcategory: req.body.womensubcategory,
-                    accessoriessubcategory: req.body.accessoriessubcategory,
                     color: req.body.color,
                     size: req.body.size,
                     seller: req.body.seller,
@@ -547,11 +546,6 @@ app.post('/api/product/shop', (req, res) => {
             findArgs['womensubcategory'] = req.body.womensubcategory;
         }
     }
-    if (req.body.accessoriessubcategory) {
-        if (req.body.accessoriessubcategory.length > 0) {
-            findArgs['accessoriessubcategory'] = req.body.accessoriessubcategory;
-        }
-    }
     if (req.body.color) {
         if (req.body.color.length > 0) {
             findArgs['color'] = req.body.color;
@@ -573,7 +567,6 @@ app.post('/api/product/shop', (req, res) => {
 
     Product.
         find(findArgs).
-        populate('accessoriessubcategory').
         populate('womensubcategory').
         populate('subcategory').
         populate('category').
@@ -610,7 +603,6 @@ app.get('/api/product/articles_by_id', (req, res) => {
         .populate('category')
         .populate('subcategory')
         .populate('womensubcategory')
-        .populate('accessoriessubcategory')
         .populate('color')
         .populate('size')
         .populate('seller')
@@ -635,9 +627,6 @@ app.get('/api/product/articles', (req, res) => {
     if (req.query.womensubcategory) {
         findArgs['womensubcategory'] = req.query.womensubcategory;
     }
-    if (req.query.accessoriessubcategory) {
-        findArgs['accessoriessubcategory'] = req.query.accessoriessubcategory;
-    }
     if (req.query.related) {
         findArgs['description'] = { "$regex": req.query.related, "$options": "i" };
     }
@@ -653,7 +642,6 @@ app.get('/api/product/articles', (req, res) => {
             .populate('category')
             .populate('subcategory')
             .populate('womensubcategory')
-            .populate('accessoriessubcategory')
             .populate('color')
             .populate('size')
             .populate('seller')
@@ -883,10 +871,6 @@ app.get('/shop/men/:subcategoryId', (req, res) => {
 
 app.get('/shop/women/:subcategoryId', (req, res) => {
     res.render('shop/women');
-})
-
-app.get('/shop/accessories/:subcategoryId', (req, res) => {
-    res.render('shop/accessories');
 })
 
 app.get('/shop-detail/:_id', (req, res) => {

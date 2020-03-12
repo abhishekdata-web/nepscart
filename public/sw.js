@@ -6,7 +6,6 @@ const cacheAssets = [
     // '/shop/men/all',
     // '/shop/women/all',
     // '/shop/women/5e4cce34d2e7a13e040f4daf',
-    // '/shop/accessories/all',
     '/user-login',
 
     '/cart',
@@ -30,7 +29,7 @@ const cacheAssets = [
     '/img/static/banner-mob.jpg',
     '/img/static/men.jpg',
     '/img/static/women.jpg',
-    '/img/static/accessories.jpg',
+    '/img/static/instantfood.jpg',
     '/img/register-offer.webp',
     '/img/static/women-tshirt.jpg',
     '/img/static/women-footwear.jpg',

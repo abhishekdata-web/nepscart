@@ -73,7 +73,7 @@
         let cartDetail = data[0];
 
         //show similar products
-        $.getJSON(`/api/product/articles?sortBy=sold&order=desc&limit=6&category=${cartDetail.category._id}&subcategory=${cartDetail.subcategory._id}&womensubcategory=${cartDetail.womensubcategory._id}&accessoriessubcategory=${cartDetail.accessoriessubcategory._id}`, function (similarData) {
+        $.getJSON(`/api/product/articles?sortBy=sold&order=desc&limit=6&category=${cartDetail.category._id}&subcategory=${cartDetail.subcategory._id}&womensubcategory=${cartDetail.womensubcategory._id}`, function (similarData) {
             $('#content2-loading').empty();
 
             $.each(similarData, function (i, article) {
@@ -238,8 +238,7 @@
                         style="border:1px solid #D4D5D9;padding:8px 66px 8px 10px;margin:15px 0 6px 0;border-radius:5px;font-size:14px;">
                     <button onclick="checkpincode()"
                         style="background:none;border:none;margin-left:-70px;color:#FF4747;font-size:13.5px;font-weight:bold;">Check</button>
-                    <div id="pincoderesult" style="font-size: 13px;color:#444;">Please enter PIN code to check delivery time & Cash/Card
-                        on Delivery Availability</div>
+                    <div id="pincoderesult" style="font-size: 13px;color:#444;">Please enter PIN code to check delivery availability</div>
                     <div style="font-size: 14px;margin-top:22px;color:#444;">
                         <strong style="font-size: 14.5px;">Expected Delivery Time</strong>
                         <p style="margin-bottom: 7px;color:#888;font-size:13px;">6 days; Actual time may vary depending on other items in your order</p>
