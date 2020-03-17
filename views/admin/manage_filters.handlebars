@@ -60,25 +60,6 @@
                 </div>
 
                 <div class="col-md-6" style="padding-top: 45px;">
-                    <h5 style="font-size:18px;margin-bottom: 20px;background:#ff3e6c;color:#fff;padding:10px 0;">
-                        ACCESSORIES SUB CATEGORIES</h5>
-                    <form id="accessoriessubcategory-form">
-                        <input type="text" name="name" placeholder="NAME" class="form-control"
-                            style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
-                        <div id="accessoriessubcategory-error" style="color:red;font-size:13px;"></div>
-                        <div id="accessoriessubcategory-success" style="color:green;font-size:13px;"></div>
-                        <button id="accessoriessubcategory-btn"
-                            style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
-                    </form>
-
-                    <div id="accessoriessubcategory-list" style="text-align: left;margin:30px 0 0 0;">
-
-                    </div>
-
-                    <div style="background:#ddd;height:12px;margin:30px 0 0 0;"></div>
-                </div>
-
-                <div class="col-md-6" style="padding-top: 45px;">
                     <h5 style="font-size:18px;margin-bottom: 20px;background:#FF4747;color:#fff;padding:10px 0;">
                         COLORS</h5>
                     <form id="color-form">
@@ -91,25 +72,6 @@
                     </form>
 
                     <div id="color-list" style="text-align: left;margin:30px 0 0 0;">
-
-                    </div>
-
-                    <div style="background:#ddd;height:12px;margin:30px 0 0 0;"></div>
-                </div>
-
-                <div class="col-md-6" style="padding-top: 45px;">
-                    <h5 style="font-size:18px;margin-bottom: 20px;background:#03A685;color:#fff;padding:10px 0;">
-                        SIZES</h5>
-                    <form id="size-form">
-                        <input type="text" name="name" placeholder="NAME" class="form-control"
-                            style="font-size: 14px;border-radius:0;padding:20px 10px;margin-bottom:10px;" required>
-                        <div id="size-error" style="color:red;font-size:13px;"></div>
-                        <div id="size-success" style="color:green;font-size:13px;"></div>
-                        <button id="size-btn"
-                            style="margin-top:10px;width:100%;background:#f6f6f6;color:#555;border:1px solid #ccc;padding:10px 0;">CREATE</button>
-                    </form>
-
-                    <div id="size-list" style="text-align: left;margin:30px 0 0 0;">
 
                     </div>
 
@@ -177,19 +139,6 @@
     }
     getWomenSubCategories();
 
-    const getAccessoriesSubCategories = () => {
-        $.getJSON(`/api/product/accessoriessubcategories`, function (data) {
-            data.forEach((accessoriessubcategory => {
-                $('#accessoriessubcategory-list').append(`<div>
-                    <form>
-                        <input type="text" name="name" value="${accessoriessubcategory.name}" placeholder="${accessoriessubcategory.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
-                    </form>
-                </div>`)
-            }))
-        })
-    }
-    getAccessoriesSubCategories();
-
     const getColors = () => {
         $.getJSON(`/api/product/colors`, function (data) {
             data.forEach((color => {
@@ -202,19 +151,6 @@
         })
     }
     getColors();
-
-    const getSizes = () => {
-        $.getJSON(`/api/product/sizes`, function (data) {
-            data.forEach((size => {
-                $('#size-list').append(`<div>
-                    <form>
-                        <input type="text" name="name" value="${size.name}" placeholder="${size.name}" style="font-size: 14px;border-radius:0;padding:10px;margin-bottom:10px;" required>
-                    </form>
-                </div>`)
-            }))
-        })
-    }
-    getSizes();
 
     const getSellers = () => {
         $.getJSON(`/api/product/sellers`, function (data) {
@@ -355,45 +291,6 @@
 
 
 
-    //create accessoriessubcategory filter
-    function processForm3(e) {
-        e.preventDefault();
-
-        $('#accessoriessubcategory-btn').empty().append(`<img src="/img/loader.svg">`);
-
-        var myform = document.getElementById("accessoriessubcategory-form");
-        let formData = new FormData(myform);
-
-        $.ajax({
-            url: '/api/product/accessoriessubcategory',
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (data, textStatus, jQxhr) {
-                if (data.success === true) {
-                    $('#accessoriessubcategory-btn').empty().append(`CREATE`);
-                    $('#accessoriessubcategory-error').empty();
-                    $('#accessoriessubcategory-success').empty().append(`<div style="margin-top:10px;">Filter Added Successfully</div>`);
-
-                    $('#accessoriessubcategory-list').empty();
-                    getAccessoriesSubCategories();
-                } else if (data.success === false) {
-                    $('#accessoriessubcategory-btn').empty().append(`CREATE`);
-                    $('#accessoriessubcategory-success').empty();
-                    $('#accessoriessubcategory-error').empty().append(`<div style="margin-top:10px;">${data.err.errmsg}</div>`);
-                    console.log(data)
-                }
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-    }
-
-    $('#accessoriessubcategory-form').submit(processForm3);
-
-
 
 
     //create color filter
@@ -434,46 +331,7 @@
 
     $('#color-form').submit(processForm4);
 
-
-
-
-    //create size filter
-    function processForm5(e) {
-        e.preventDefault();
-
-        $('#size-btn').empty().append(`<img src="/img/loader.svg">`);
-
-        var myform = document.getElementById("size-form");
-        let formData = new FormData(myform);
-
-        $.ajax({
-            url: '/api/product/size',
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (data, textStatus, jQxhr) {
-                if (data.success === true) {
-                    $('#size-btn').empty().append(`CREATE`);
-                    $('#size-error').empty();
-                    $('#size-success').empty().append(`<div style="margin-top:10px;">Filter Added Successfully</div>`);
-
-                    $('#size-list').empty();
-                    getSizes();
-                } else if (data.success === false) {
-                    $('#size-btn').empty().append(`CREATE`);
-                    $('#size-success').empty();
-                    $('#size-error').empty().append(`<div style="margin-top:10px;">${data.err.errmsg}</div>`);
-                    console.log(data)
-                }
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-    }
-
-    $('#size-form').submit(processForm5);
+    
 
 
 

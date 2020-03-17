@@ -21,7 +21,15 @@
                     <div style="font-size:13px;margin-top:10px;padding-top:10px;border-top: 1px solid #eee;">
                         <div style="margin-bottom: 10px;">
                             <span>Quantity: <strong>${history.quantity} item</strong></span>
-                        <strong style="float:right;"><a href="/order-track/${history.porder}">Track</a></strong>
+                            <strong style="float:right;"><a href="/order-track/${history.porder}">Track</a></strong>
+                            ${
+                                history.selectedsize != "none" ? 
+                                `<div>
+                                    <span>Size: <strong>${history.selectedsize}</strong></span>
+                                </div>`
+                                : 
+                                ""
+                            }
                         </div>
                         <a href="/shop-detail/${history.id}">
                             <img src="/productUploads/${history.file}" style="width: 80px;">

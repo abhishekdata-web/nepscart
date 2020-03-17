@@ -5,7 +5,7 @@
 <div class="page-top display-pc">
     <div class="container-fluid" style="margin-top: 5px;margin-bottom: 20px;">
         <a href="/" style="font-size:13px;">Home</a> / <a href="/blogs" style="font-size:13px;">Blog</a> / <a
-            href="/shop/all" style="font-weight: bold;color:#000;font-size:13px;">Shop</a>
+            href="/shop/women/all" style="font-weight: bold;color:#000;font-size:13px;">Shop</a>
     </div>
 </div>
 
@@ -82,7 +82,13 @@
                         <a href="/shop-detail/${article._id}" style="color:#000;">
                             <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;min-height:160px;background: rgb(255, 237, 243);">
                             <div style="font-size:13.5px;padding:12px 8px;">
-                                <strong>Ives</strong> <br>
+                                <strong>
+                                    ${article.ssize == true ? "S, " : ""}
+                                            ${article.msize == true ? "M, " : ""}
+                                            ${article.lsize == true ? "L, " : ""}
+                                            ${article.xlsize == true ? "XL" : ""}
+                                            ${article.ssize == false && article.msize == false && article.lsize == false && article.xlsize == false ? article.stock + " in stock" : ""}
+                                </strong> <br>
                                 <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
                                 <div style="text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">
                                     <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #888;text-decoration:line-through;">Rs.
@@ -96,7 +102,13 @@
                     <a href="/shop-detail/${article._id}" style="color:#000;">
                         <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;min-height:160px;background: rgb(244, 255, 249);">
                         <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
-                            <strong>Ives</strong> <br>
+                            <strong>
+                                ${article.ssize == true ? "S, " : ""}
+                                            ${article.msize == true ? "M, " : ""}
+                                            ${article.lsize == true ? "L, " : ""}
+                                            ${article.xlsize == true ? "XL" : ""}
+                                            ${article.ssize == false && article.msize == false && article.lsize == false && article.xlsize == false ? article.stock + " in stock" : ""}
+                            </strong> <br>
                             <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
                             <div style="text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">
                                 <strong>Rs. ${article.price}</strong> <span style="font-size:11.5px;padding-left:5px;color: #888;text-decoration:line-through;">Rs.
@@ -148,10 +160,75 @@
                 <span style="font-size: 20px;color:#FF4747;text-decoration:line-through;padding-left:10px;">Rs.
                     ${cartDetail.cutoffprice}</span>
                 <div style="color:#03A685;font-size:14px;font-weight:bold;padding-top:4px;">inclusive of all taxes</div>
+                ${
+                cartDetail.ssize == false && cartDetail.msize == false && cartDetail.lsize == false && cartDetail.xlsize == false ?
+                    ""
+                    :
+                    `<div style="margin-top:16px;font-size:14px;">
+                        <div id="size-error">
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Size</th>
+                                    <th>Chest</th>
+                                    <th>Waist</th>
+                                    <th>Sleeve length</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${
+                    cartDetail.ssize ?
+                        `<tr style="background: rgba(0,0,0,.05);">
+                                    <td><input type="radio" name="selectedsize" value="S" style="height:11px;"> S</td>
+                                    <td>38 inch</td>
+                                    <td>38 inch</td>
+                                    <td>7.5 inch</td>
+                                    </tr>`
+                        :
+                        ""
+                    }
+                                ${
+                    cartDetail.msize ?
+                        `<tr style="background: rgba(0,0,0,.05);">
+                                    <td><input type="radio" name="selectedsize" value="M" style="height:11px;"> M</td>
+                                    <td>38 inch</td>
+                                    <td>38 inch</td>
+                                    <td>7.5 inch</td>
+                                    </tr>`
+                        :
+                        ""
+                    }
+                                ${
+                    cartDetail.lsize ?
+                        `<tr style="background: rgba(0,0,0,.05);">
+                                    <td><input type="radio" name="selectedsize" value="L" style="height:11px;"> L</td>
+                                    <td>38 inch</td>
+                                    <td>38 inch</td>
+                                    <td>7.5 inch</td>
+                                    </tr>`
+                        :
+                        ""
+                    }
+                                ${
+                    cartDetail.xlsize ?
+                        `<tr style="background: rgba(0,0,0,.05);">
+                                    <td><input type="radio" name="selectedsize" value="XL" style="height:11px;"> XL</td>
+                                    <td>38 inch</td>
+                                    <td>38 inch</td>
+                                    <td>7.5 inch</td>
+                                    </tr>`
+                        :
+                        ""
+                    }
+                            </tbody>
+                        </table>
+                    </div>`
+                }
                 <button
                     id="addtocartbtn"
                     onclick="${cartDetail.stock - cartDetail.sold <= 0 ? '' : 'addToCart()'}"
-                    style="font-size:15px;font-weight:bold;margin:29px 15px 0 0;width:50%;background:#FF4747;color:#fff;border:none;padding:13px 0;border-radius:4px;">
+                    style="font-size:15px;font-weight:bold;margin:21px 15px 0 0;width:50%;background:#FF4747;color:#fff;border:none;padding:13px 0;border-radius:4px;">
                     <img src="/img/icon/shopping-bag.svg"
                         style="width: 17px;margin-right:10px;position:relative;top:-2px;"> ${cartDetail.stock - cartDetail.sold <= 0 ? 'OUT OF STOCK' : 'ADD TO BAG'}
                 </button>
@@ -160,12 +237,8 @@
                     <img src="/img/icon/help.svg" style="width: 18px;margin-right:10px;position:relative;top:-2px;">
                     GET HELP
                 </a>
-                <div style="margin-top:32px;">
-                    <strong style="font-size:15px;">PRODUCT DETAILS</strong> <img src="/img/icon/list.svg" style="width: 17px;margin-left:10px;position:relative;top:-1.5px;">
-                    <div style="font-size: 14px;color:#444;margin-top:8px;">${cartDetail.description}</div>
-                </div>
 
-                <div style="border-top:1px solid #D4D5D9;padding-top:32px;margin-top:32px;">
+                <div style="margin-top:32px;">
                     <strong style="font-size:15px;">DELIVERY OPTIONS</strong> <img src="/img/icon/truck.svg" style="width: 22px;margin-left:10px;position:relative;top:-1.5px;"><br>
                     <input type="number" placeholder="Enter pincode" id="pincode"
                         style="border:1px solid #D4D5D9;padding:8px 66px 8px 10px;margin:15px 0 6px 0;border-radius:5px;font-size:14px;">
@@ -175,12 +248,17 @@
                     <div style="font-size: 14px;margin-top:22px;color:#444;">
                         <strong style="font-size: 14.5px;">Expected Delivery Time</strong>
                         <p style="margin-bottom: 7px;color:#888;font-size:13px;">6 days; Actual time may vary depending on other items in your order</p>
-                        <strong style="font-size: 14.5px;">${cartDetail.return ? `Easy 7 days returns and exchanges` : `No returns available for this product, only in case of damaged goods returns shall be given`}</strong>
+                        <strong style="font-size: 14.5px;">${cartDetail.return ? `Easy 7 days size exchange` : `No return available for this product, only incase of damaged goods, refund shall be given`}</strong>
                         <p style="margin-bottom: 7px;color:#888;font-size:13px;">Please check our <a href="/returnpolicy">return policy</a></p>
                         <strong style="font-size: 14.5px;">${cartDetail.cod ? `Cash on delivery available` : `Cash on delivery not available, Pay with esewa or khalti`}</strong>
                         <p style="margin-bottom: 27px;color:#888;font-size:13px;">${cartDetail.cod ? `Available for orders upto Rs. 5,000` : `Online payment with esewa or khalti, <strong style="color:red;">100% safe</strong>`}</p>
                         <p style="font-size: 15px;margin-top: 27px;">Sold by: <strong style="color:#000;">${cartDetail.seller.name}</strong> ( Supplied By Partner )</p>
                     </div>
+                </div>
+
+                <div style="border-top:1px solid #D4D5D9;padding-top:32px;margin-top:32px;">
+                    <strong style="font-size:15px;">PRODUCT DETAILS</strong> <img src="/img/icon/list.svg" style="width: 17px;margin-left:10px;position:relative;top:-1.5px;">
+                    <div style="font-size: 14px;color:#444;margin-top:8px;">${cartDetail.description}</div>
                 </div>
             </div>
             `)
@@ -194,14 +272,78 @@
                 <div
                 style="font-size: 15px;color:#444;padding-top:4px;">
                 ${cartDetail.name}</div>
-                <div style="padding-top:4px;">
+                <div style="padding-top:4px;" id="product-price">
                     <strong style="font-size: 17px;">Rs. ${cartDetail.price}</strong>
                     <span style="font-size: 17px;color:#FF4747;text-decoration:line-through;padding-left:10px;">Rs.
                     ${cartDetail.cutoffprice}</span>
                 </div>
                 <div style="color:#03A685;font-size:15px;font-weight:bold;padding-top:4px;">inclusive of all taxes</div>
             </div>
-            <div style="background:#F5F5F6;height:12px;margin:15px 0;"></div>
+            ${
+                cartDetail.ssize == false && cartDetail.msize == false && cartDetail.lsize == false && cartDetail.xlsize == false ?
+                    ""
+                    :
+                    `<div class="container" style="margin-top:16px;font-size:14px;">
+                        <table class="table table-bordered" style="margin-bottom: 8px;">
+                            <thead>
+                                <tr>
+                                    <th>Size</th>
+                                    <th>Chest</th>
+                                    <th>Waist</th>
+                                    <th>Sleeve</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${
+                    cartDetail.ssize ?
+                        `<tr style="background: rgba(0,0,0,.05);">
+                                    <td><input type="radio" name="selectedsize" value="S" style="height:11px;"> S</td>
+                                    <td>38 inch</td>
+                                    <td>38 inch</td>
+                                    <td>7.5 inch</td>
+                                    </tr>`
+                        :
+                        ""
+                    }
+                                ${
+                    cartDetail.msize ?
+                        `<tr style="background: rgba(0,0,0,.05);">
+                                    <td><input type="radio" name="selectedsize" value="M" style="height:11px;"> M</td>
+                                    <td>38 inch</td>
+                                    <td>38 inch</td>
+                                    <td>7.5 inch</td>
+                                    </tr>`
+                        :
+                        ""
+                    }
+                                ${
+                    cartDetail.lsize ?
+                        `<tr style="background: rgba(0,0,0,.05);">
+                                    <td><input type="radio" name="selectedsize" value="L" style="height:11px;"> L</td>
+                                    <td>38 inch</td>
+                                    <td>38 inch</td>
+                                    <td>7.5 inch</td>
+                                    </tr>`
+                        :
+                        ""
+                    }
+                                ${
+                    cartDetail.xlsize ?
+                        `<tr style="background: rgba(0,0,0,.05);">
+                                    <td><input type="radio" name="selectedsize" value="XL" style="height:11px;"> XL</td>
+                                    <td>38 inch</td>
+                                    <td>38 inch</td>
+                                    <td>7.5 inch</td>
+                                    </tr>`
+                        :
+                        ""
+                    }
+                            </tbody>
+                        </table>
+                        <div id="size-error">
+                        </div>
+                    </div>`
+                }
             <div class="container">
                 <div class="fixed-bottom" style="background: #fff;">
                     <div class="container">
@@ -226,10 +368,6 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <strong style="font-size:15px;">PRODUCT DETAILS</strong> <img src="/img/icon/list.svg" style="width: 17px;margin-left:10px;position:relative;top:-1.5px;">
-                    <div style="font-size: 14px;color:#444;margin-top:8px;">${cartDetail.description}</div>
-                </div>
             </div>
             <div style="background:#F5F5F6;height:12px;margin:15px 0;"></div>
                 <div class="container">
@@ -242,11 +380,18 @@
                     <div style="font-size: 14px;margin-top:22px;color:#444;">
                         <strong style="font-size: 14.5px;">Expected Delivery Time</strong>
                         <p style="margin-bottom: 7px;color:#888;font-size:13px;">6 days; Actual time may vary depending on other items in your order</p>
-                        <strong style="font-size: 14.5px;">${cartDetail.return ? `Easy 7 days returns and exchanges` : `No returns available for this product, only in case of damaged goods returns shall be given`}</strong>
+                        <strong style="font-size: 14.5px;">${cartDetail.return ? `Easy 7 days size exchange` : `No return available for this product, only incase of damaged goods, refund shall be given`}</strong>
                         <p style="margin-bottom: 7px;color:#888;font-size:13px;">Please check our <a href="/returnpolicy">return policy</a></p>
                         <strong style="font-size: 14.5px;">${cartDetail.cod ? `Cash on delivery available` : `Cash on delivery not available, Pay with esewa or khalti`}</strong>
                         <p style="margin-bottom: 27px;color:#888;font-size:13px;">${cartDetail.cod ? `Available for orders upto Rs. 5,000` : `Online payment with esewa or khalti, <strong style="color:red;">100% safe</strong>`}</p>
                         <p style="font-size: 15px;margin-top: 27px;">Sold by: <strong style="color:#000;">${cartDetail.seller.name}</strong> ( Supplied By Partner )</p>
+                    </div>
+                </div>
+                <div style="background:#F5F5F6;height:12px;margin:15px 0;"></div>
+                <div class="container">
+                    <div>
+                        <strong style="font-size:15px;">PRODUCT DETAILS</strong> <img src="/img/icon/list.svg" style="width: 17px;margin-left:10px;position:relative;top:-1.5px;">
+                        <div style="font-size: 14px;color:#444;margin-top:8px;">${cartDetail.description}</div>
                     </div>
                 </div>
             </div>`)
@@ -262,30 +407,87 @@
 
 
     const addToCart = () => {
-        $('#addtocartbtn').empty().append(`<img src="/img/loader.svg">`);
+        if (document.getElementsByName("selectedsize").length <= 0) {
+            $('#addtocartbtn').empty().append(`<img src="/img/loader.svg">`);
 
-        $.ajax({
-            url: `/api/users/addToCart?productId=${cartDetailId}`,
-            dataType: 'json',
-            type: 'post',
-            contentType: 'application/x-www-form-urlencoded',
-            success: function (data, textStatus, jQxhr) {
-                console.log(data);
+            let selectedsize = "none";
 
-                $('#addtocartbtn').empty().append(`ADD TO BAG`);
-                //change cart value in the navbar
-                $('#nav-cart').empty().append(data.length);
+            $.ajax({
+                url: `/api/users/addToCart?productId=${cartDetailId}&selectedsize=${selectedsize}`,
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/x-www-form-urlencoded',
+                success: function (data, textStatus, jQxhr) {
+                    console.log(data.cart);
+                    console.log(data.updateOne);
 
-                if (data.isAuth == false) {
-                    $('#myModal').modal('show');
+                    if (data.updateOne == true) {
+                        window.location.replace("/cart");
+                    }
+
+                    $('#addtocartbtn').empty().append(`ADD TO BAG`);
+
+                    if (data.isAuth == false) {
+                        $('#myModal').modal('show');
+                    } else {
+                        //change cart value in the navbar
+                        $('#nav-cart').empty().append(data.cart.length);
+                    }
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    $('#addtocartbtn').empty().append(`ADD TO BAG`);
+
+                    console.log(errorThrown);
                 }
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                $('#addtocartbtn').empty().append(`ADD TO BAG`);
+            })
+        } else {
+            let selectedsize;
+            if (!$("input[name='selectedsize']:checked").val()) {
+                $('#size-error').empty().append(`<span style="color: red;font-weight:bold;">Please select a size</span>`);
 
-                console.log(errorThrown);
+                if (mq.matches) {
+
+                } else {
+                    $('html, body').animate({
+                        scrollTop: $("#product-price").offset().top
+                    }, 1000);
+                }
             }
-        })
+            else {
+                $('#addtocartbtn').empty().append(`<img src="/img/loader.svg">`);
+                
+                selectedsize = document.querySelector('input[name="selectedsize"]:checked').value;
+
+                $.ajax({
+                    url: `/api/users/addToCart?productId=${cartDetailId}&selectedsize=${selectedsize}`,
+                    dataType: 'json',
+                    type: 'post',
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function (data, textStatus, jQxhr) {
+                        console.log(data.cart);
+                        console.log(data.updateOne);
+
+                        if (data.updateOne == true) {
+                            window.location.replace("/cart");
+                        }
+
+                        $('#addtocartbtn').empty().append(`ADD TO BAG`);
+
+                        if (data.isAuth == false) {
+                            $('#myModal').modal('show');
+                        } else {
+                            //change cart value in the navbar
+                            $('#nav-cart').empty().append(data.cart.length);
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        $('#addtocartbtn').empty().append(`ADD TO BAG`);
+
+                        console.log(errorThrown);
+                    }
+                })
+            }
+        }
     }
 
     const deleteProduct = () => {

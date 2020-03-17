@@ -85,6 +85,7 @@
                         data.forEach((k, i) => {
                             if (item.id === k._id) {
                                 data[i].quantity = item.quantity;
+                                data[i].selectedsize = item.selectedsize;
                             }
                         })
                     })
@@ -142,6 +143,14 @@
                                 :
                                 item.quantity
                             }</button>
+                            ${
+                                item.selectedsize != "none" ? 
+                                `<button style="font-size:13.5px;background:#eee;border:none;padding:5px 8px;">Size:
+                                    ${item.selectedsize}
+                                </button>`
+                                : 
+                                ""
+                            }
                         </div>
                     </div>
                 </div>`)

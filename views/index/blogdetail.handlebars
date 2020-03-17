@@ -76,7 +76,13 @@
                         <a href="/shop-detail/${article._id}" style="color:#000;">
                             <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;min-height:160px;background: rgb(255, 237, 243);">
                             <div style="font-size:13.5px;padding:12px 8px;">
-                                <strong>Ives</strong> <br>
+                                <strong>
+                                    ${article.ssize == true ? "S, " : ""}
+                                            ${article.msize == true ? "M, " : ""}
+                                            ${article.lsize == true ? "L, " : ""}
+                                            ${article.xlsize == true ? "XL" : ""}
+                                            ${article.ssize == false && article.msize == false && article.lsize == false && article.xlsize == false ? article.stock + " in stock" : ""}
+                                </strong> <br>
                                 <div style="color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
                                 <div style="text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">
                                     <strong>Rs. ${article.price}</strong> <span style="font-size:12px;padding-left:5px;color: #888;text-decoration:line-through;">Rs.
@@ -90,7 +96,13 @@
                     <a href="/shop-detail/${article._id}" style="color:#000;">
                         <img src="/productUploads/${article.file}" style="width: 100%;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;min-height:160px;background: rgb(244, 255, 249);">
                         <div style="font-size:13.5px;padding:12px 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;">
-                            <strong>Ives</strong> <br>
+                            <strong>
+                                ${article.ssize == true ? "S, " : ""}
+                                            ${article.msize == true ? "M, " : ""}
+                                            ${article.lsize == true ? "L, " : ""}
+                                            ${article.xlsize == true ? "XL" : ""}
+                                            ${article.ssize == false && article.msize == false && article.lsize == false && article.xlsize == false ? article.stock + " in stock" : ""}
+                            </strong> <br>
                             <div style="font-size:12.5px;color:#555;margin-bottom:4px;text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${article.name}</div>
                             <div style="text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">
                                 <strong>Rs. ${article.price}</strong> <span style="font-size:11.5px;padding-left:5px;color: #888;text-decoration:line-through;">Rs.

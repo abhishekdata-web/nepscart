@@ -143,11 +143,11 @@ app.post('/api/users/addToCart', auth, (req, res) => {
         if (duplicate) {
             User.findOneAndUpdate(
                 { _id: req.user._id, 'cart.id': mongoose.Types.ObjectId(req.query.productId) },
-                { $inc: { 'cart.$.quantity': 1 } },
+                { $set: { 'cart.$.selectedsize': req.query.selectedsize }, $inc: { 'cart.$.quantity': 1 } },
                 { new: true },
-                () => {
+                (err, doc) => {
                     if (err) return res.json({ success: false, err });
-                    res.status(200).json(doc.cart)
+                    res.status(200).json({cart: doc.cart, updateOne: true})
                 }
             )
         } else {
@@ -158,6 +158,7 @@ app.post('/api/users/addToCart', auth, (req, res) => {
                         cart: {
                             id: mongoose.Types.ObjectId(req.query.productId),
                             quantity: 1,
+                            selectedsize: req.query.selectedsize,
                             date: Date.now()
                         }
                     }
@@ -165,7 +166,7 @@ app.post('/api/users/addToCart', auth, (req, res) => {
                 { new: true },
                 (err, doc) => {
                     if (err) return res.json({ success: false, err });
-                    res.status(200).json(doc.cart)
+                    res.status(200).json({cart: doc.cart, updateOne: false})
                 }
             )
         }
@@ -204,7 +205,7 @@ app.post('/api/users/addorder', auth, (req, res) => {
             name: item.name,
             file: item.file,
             seller: item.seller.name,
-            size: item.size.name,
+            selectedsize: item.selectedsize,
             id: item._id,
             quantity:
                 (item.stock - item.sold) - item.quantity < 0 ?
@@ -331,26 +332,6 @@ app.get('/api/product/womensubcategories', (req, res) => {
     })
 })
 
-app.post('/api/product/accessoriessubcategory', (req, res) => {
-    const accessoriessubcategory = new AccessoriesSubcategory(req.body);
-
-    accessoriessubcategory.save((err, doc) => {
-        if (err) return res.json({ success: false, err });
-        res.status(200).json({
-            success: true,
-            accessoriessubcategory: doc
-        })
-    })
-})
-
-app.get('/api/product/accessoriessubcategories', (req, res) => {
-    AccessoriesSubcategory.find({}, (err, accessoriessubcategories) => {
-        if (err) return res.status(400).send(err);
-
-        res.status(200).send(accessoriessubcategories);
-    })
-})
-
 app.post('/api/product/color', (req, res) => {
     const color = new Color(req.body);
 
@@ -388,26 +369,6 @@ app.get('/api/product/sellers', (req, res) => {
         if (err) return res.status(400).send(err);
 
         res.status(200).send(sellers);
-    })
-})
-
-app.post('/api/product/size', (req, res) => {
-    const size = new Size(req.body);
-
-    size.save((err, doc) => {
-        if (err) return res.json({ success: false, err });
-        res.status(200).json({
-            success: true,
-            size: doc
-        })
-    })
-})
-
-app.get('/api/product/sizes', (req, res) => {
-    Size.find({}, (err, sizes) => {
-        if (err) return res.status(400).send(err);
-
-        res.status(200).send(sizes);
     })
 })
 
@@ -506,6 +467,10 @@ app.post('/api/product/article', (req, res) => {
                     available: req.body.available,
                     cod: req.body.cod,
                     return: req.body.return,
+                    ssize: req.body.ssize,
+                    msize: req.body.msize,
+                    lsize: req.body.lsize,
+                    xlsize: req.body.xlsize,
                     file: filename,
                     file1: filename1,
                     file2: filename2,
@@ -551,11 +516,6 @@ app.post('/api/product/shop', (req, res) => {
             findArgs['color'] = req.body.color;
         }
     }
-    if (req.body.size) {
-        if (req.body.size.length > 0) {
-            findArgs['size'] = req.body.size;
-        }
-    }
     if (req.body.seller) {
         if (req.body.seller.length > 0) {
             findArgs['seller'] = req.body.seller;
@@ -571,7 +531,6 @@ app.post('/api/product/shop', (req, res) => {
         populate('subcategory').
         populate('category').
         populate('color').
-        populate('size').
         populate('seller').
         sort([[sortBy, order]]).
         skip(skip).
@@ -604,7 +563,6 @@ app.get('/api/product/articles_by_id', (req, res) => {
         .populate('subcategory')
         .populate('womensubcategory')
         .populate('color')
-        .populate('size')
         .populate('seller')
         .exec((err, docs) => {
             return res.status(200).send(docs);
@@ -643,7 +601,6 @@ app.get('/api/product/articles', (req, res) => {
             .populate('subcategory')
             .populate('womensubcategory')
             .populate('color')
-            .populate('size')
             .populate('seller')
             .sort([[sortBy, order]])
             .skip(random)
@@ -871,6 +828,10 @@ app.get('/shop/men/:subcategoryId', (req, res) => {
 
 app.get('/shop/women/:subcategoryId', (req, res) => {
     res.render('shop/women');
+})
+
+app.get('/shop/grocery/:subcategoryId', (req, res) => {
+    res.render('shop/grocery');
 })
 
 app.get('/shop-detail/:_id', (req, res) => {

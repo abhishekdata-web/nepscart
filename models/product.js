@@ -38,10 +38,21 @@ const productSchema = mongoose.Schema({
         ref: 'Color',
         required: true
     },
-    size: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Size',
-        required: true
+    ssize: {
+        required: true,
+        type: Boolean
+    },
+    msize: {
+        required: true,
+        type: Boolean
+    },
+    lsize: {
+        required: true,
+        type: Boolean
+    },
+    xlsize: {
+        required: true,
+        type: Boolean
     },
     seller: {
         type: mongoose.Schema.Types.ObjectId,

@@ -1,4 +1,4 @@
-const cacheName = 'v2';
+const cacheName = 'v1';
 
 const cacheAssets = [
     // '/',
@@ -8,10 +8,10 @@ const cacheAssets = [
     // '/shop/women/5e4cce34d2e7a13e040f4daf',
     '/user-login',
 
-    '/cart',
+    // '/cart',
     '/my-account',
     // '/nepscartpoints',
-    '/my-orders',
+    // '/my-orders',
     // '/partners',
     '/helpcentre',
     // '/blogs',

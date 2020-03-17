@@ -46,10 +46,46 @@
                         style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
                         <option value="">COLOR</option>
                     </select>
-                    <select id="size-select" class="form-control" name="size"
-                        style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
-                        <option value="">SIZE</option>
-                    </select>
+                    <div style="margin-top:30px;">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="ssize" id="ssize-yes" value="true" required>
+                            <label class="form-check-label">S-SIZE-YES</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ssize" id="ssize-no" value="false">
+                            <label class="form-check-label">S-SIZE-NO</label>
+                        </div>
+                    </div>
+                    <div style="margin-top:30px;">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="msize" id="msize-yes" value="true" required>
+                            <label class="form-check-label">M-SIZE-YES</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="msize" id="msize-no" value="false">
+                            <label class="form-check-label">M-SIZE-NO</label>
+                        </div>
+                    </div>
+                    <div style="margin-top:30px;">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="lsize" id="lsize-yes" value="true" required>
+                            <label class="form-check-label">L-SIZE-YES</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="lsize" id="lsize-no" value="false">
+                            <label class="form-check-label">L-SIZE-NO</label>
+                        </div>
+                    </div>
+                    <div style="margin-top:30px;">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="xlsize" id="xlsize-yes" value="true" required>
+                            <label class="form-check-label">XL-SIZE-YES</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="xlsize" id="xlsize-no" value="false">
+                            <label class="form-check-label">XL-SIZE-NO</label>
+                        </div>
+                    </div>
                     <select id="seller-select" class="form-control" name="seller"
                         style="font-size: 14px;border-radius:0;height:48px;margin-top:30px;" required>
                         <option value="">SELLER</option>
@@ -192,7 +228,6 @@
         document.getElementById('subcategory-select').value = productDetail.subcategory._id;
         document.getElementById('womensubcategory-select').value = productDetail.womensubcategory._id;
         document.getElementById('color-select').value = productDetail.color._id;
-        document.getElementById('size-select').value = productDetail.size._id;
         document.getElementById('seller-select').value = productDetail.seller._id;
         if(productDetail.available){
             document.getElementById("available-yes").checked = true;
@@ -213,6 +248,26 @@
             document.getElementById("cod-yes").checked = true;
         }else{
             document.getElementById("cod-no").checked = true;
+        }
+        if(productDetail.ssize){
+            document.getElementById("ssize-yes").checked = true;
+        }else{
+            document.getElementById("ssize-no").checked = true;
+        }
+        if(productDetail.msize){
+            document.getElementById("msize-yes").checked = true;
+        }else{
+            document.getElementById("msize-no").checked = true;
+        }
+        if(productDetail.lsize){
+            document.getElementById("lsize-yes").checked = true;
+        }else{
+            document.getElementById("lsize-no").checked = true;
+        }
+        if(productDetail.xlsize){
+            document.getElementById("xlsize-yes").checked = true;
+        }else{
+            document.getElementById("xlsize-no").checked = true;
         }
     })
 </script>

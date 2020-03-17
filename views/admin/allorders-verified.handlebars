@@ -72,6 +72,14 @@
                         <div style="font-size:13px;margin-top:10px;padding-top:10px;border-top: 1px solid #eee;">
                             <div style="margin-bottom: 10px;">
                                 <span>Quantity: <strong>${prod.quantity} item</strong></span>
+                                ${
+                                    prod.selectedsize != "none" ? 
+                                    `<div>
+                                        <span>Size: <strong>${prod.selectedsize}</strong></span>
+                                    </div>`
+                                    : 
+                                    ""
+                                }
                             </div>
                             <a href="/shop-detail/${prod.id}">
                                 <img src="/productUploads/${prod.file}" style="width: 80px;">
