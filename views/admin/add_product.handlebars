@@ -170,12 +170,6 @@
         })
     })
 
-    $.getJSON("/api/product/sizes", function (data) {
-        $.each(data, function (i, size) {
-            $('#size-select').append(`<option value="${size._id}">${size.name}</option>`)
-        })
-    })
-
 
 
 

@@ -410,7 +410,7 @@ app.get('/api/product/delete', (req, res) => {
 })
 
 app.post('/api/product/article', (req, res) => {
-    Product.findOne({ name: req.body.name })
+    Product.findOne({ 'name': req.body.name })
         .then(product => {
             if (product) {
                 return res.json({ success: false, message: 'Product title already exist' })
@@ -830,8 +830,8 @@ app.get('/shop/women/:subcategoryId', (req, res) => {
     res.render('shop/women');
 })
 
-app.get('/shop/food/:subcategoryId', (req, res) => {
-    res.render('shop/food');
+app.get('/shop/grocery/:subcategoryId', (req, res) => {
+    res.render('shop/grocery');
 })
 
 app.get('/shop-detail/:_id', (req, res) => {
