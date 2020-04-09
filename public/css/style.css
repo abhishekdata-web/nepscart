@@ -130,16 +130,17 @@ header{
 footer{
     margin-top: 35px;
     padding: 45px 0;
-    font-size: 15.5px;
-    color: #fff;
-    background: rgb(250, 87, 87);
+    font-size: 15px;
+    background: #fff;
+    line-height: 27px;
+    color: #333;
 }
 footer h6, footer strong{
-    color:#fff;
+    color:#333;
 }
 .footer-link a{
   display: block;  
-  color: #fff;
+  color: #555;
   font-size: 14px;
   padding-top:4px;
 }
