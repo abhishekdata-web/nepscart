@@ -830,10 +830,6 @@ app.get('/shop/women/:subcategoryId', (req, res) => {
     res.render('shop/women');
 })
 
-app.get('/shop/netflixshare', (req, res) => {
-    res.render('shop/netflixshare');
-})
-
 app.get('/shop-detail/:_id', (req, res) => {
     res.render('index/shop-detail');
 })

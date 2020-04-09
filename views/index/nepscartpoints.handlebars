@@ -40,7 +40,7 @@
         $('#content-loading').empty();
 
         if (data.isAuth == false) {
-            $('#ajax-point').append(`<a href="/user-login" style="color:#333;">LOGIN</a> <br> TO SEE YOUR POINTS`);
+            $('#ajax-point').append(`<div style="font-size:23px;"><a href="/user-login" style="color:#333;">LOGIN</a> <br> TO SEE YOUR POINTS</div>`);
             $('#point-value').append(`0`);
         } else {
             $('#ajax-point').append(`${data.point}`);
