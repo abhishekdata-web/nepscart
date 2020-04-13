@@ -1,4 +1,4 @@
-const cacheName = 'v10';
+const cacheName = 'v20';
 
 const cacheAssets = [
     // '/',
@@ -41,7 +41,7 @@ const cacheAssets = [
     '/img/icon/points.svg',
     '/img/heart.svg',
     '/img/icon/profile-nav.svg',
-    '/img/logo.svg',
+    // '/img/logo.png',
     '/img/icon/arrow-white.svg',
     '/img/loader.svg',
     '/img/loading.svg',

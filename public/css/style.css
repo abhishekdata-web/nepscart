@@ -17,8 +17,8 @@ input:focus{
 
 /* header================== */
 header{
-    padding: 15px 0;
-    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1);
+    padding: 14px 0 14px 0;
+    background: #fff;
 }
 
 .nav{
@@ -26,9 +26,9 @@ header{
 }
 
 .nav a{
-    padding-right: 38px;
+    padding-right: 46px;
     color: #444;
-    font-size: 14px;
+    font-size: 14.6px;
     font-weight: bold;
 }
 
@@ -155,12 +155,30 @@ footer h6, footer strong{
     line-height: 21px;
 }
 
+/* partner=========================== */
+.partner-section{
+    padding: 8vh 0 7vh 0;
+}
+.partner-title{
+    color: #222;
+    font-weight:bold;
+    font-size:38px;
+    line-height: 48px;
+    margin-bottom: 30px;
+}
+.partner-detail{
+    margin-bottom: 48px;
+    margin-top: 30px;
+    line-height: 36px;
+    font-size: 18px;
+}
 
 
 
 
 
-/* media queries==================== */
+
+/* media queries================================================================================================================= */
 @media only screen and (max-width: 800px) {
     /* universal css */
     .container-fluid{
@@ -177,7 +195,7 @@ footer h6, footer strong{
 
     /* header================== */
     header{
-        padding: 16px 0;
+        padding: 13px 0;
         box-shadow: 0 1px 2px 0 rgba(148,150,159,.3);
     }
 
@@ -212,4 +230,20 @@ footer h6, footer strong{
     footer{
         display: none;
     }
+
+    /* partner=========================== */
+    .partner-section{
+        padding: 5vh 0 7vh 0;
+    }
+    .partner-title{
+        font-size:28px;
+        line-height: 44px;
+        margin-bottom: 20px;
+    }
+    .partner-detail{
+        margin-bottom: 40px;
+        margin-top: 20px;
+        line-height: 34px;
+        font-size: 16px;
+    }    
   }

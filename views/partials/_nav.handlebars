@@ -1,20 +1,21 @@
-<section class="display-pc" style="padding-bottom:69px;">
-    <header class="fixed-top" style="background: #fff;">
+<section class="display-pc" style="padding-bottom:65px;">
+    <header class="fixed-top shadow-sm">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2">
-                    <a href="/" style="font-size:25px;font-weight:bold;">
-                        <span style="color: #ff9a00;">Neps</span><span style="color: #FF4747;">cart</span>
+                    <a href="/" style="color: #222;font-size:19.5px;font-weight:bold;margin-top: 4.9px;display: block;">
+                        <img src="/img/logo.png"
+                                style="width: 32px;position:relative;top:-2px;">
+                            nepsCart
                     </a>
                 </div>
                 <div class="col-md-7">
                     <div class="nav">
-                        <a href="/shop/men/all">MENS</a>
-                        <a href="/shop/women/all">WOMENS</a>
-                        <a href="/shop/netflixshare">GROCERY</a>
-                        <a href="/nepscartpoints">CASHBACK</a>
-                        <a href="/blogs">ARTICLES</a>
-                        <a href="/helpcentre">HELP CENTRE</a>
+                        <a href="/shop/men/all">Mens <img src="https://image.flaticon.com/icons/svg/36/36669.svg" style="width: 7px;margin-left: 2px;"></a>
+                        <a href="/shop/women/all">Womens <img src="https://image.flaticon.com/icons/svg/36/36669.svg" style="width: 7px;margin-left: 2px;"></a>
+                        <a href="/shop/netflixshare">Grocery <img src="https://image.flaticon.com/icons/svg/36/36669.svg" style="width: 7px;margin-left: 2px;"></a>
+                        <a href="/nepscartpoints">Cashback</a>
+                        <a href="/helpcentre">Help centre</a>
                     </div>
                 </div>
                 <div id="nav-pc" class="col-md-3" style="text-align:right;padding-top:6px;">
@@ -25,19 +26,33 @@
     </header>
 </section>
 
-<section class="display-mobile" style="padding-bottom:60.5px;">
+<section class="display-mobile" style="padding-bottom:56.5px;">
     <header class="fixed-top" style="background: #fff;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-7">
-                    <svg viewBox="0 0 24 24" onclick="openNav()" style="width: 24px;margin-right:14px;">
-                        <path
-                            d="M3.444 5.422a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444zm0 7.111a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444zm0 7.111a.733.733 0 110-1.466h17.047a.733.733 0 110 1.466H3.444z"
-                            fill="#3E4152" fillrule="evenodd"></path>
+                    <svg onclick="openNav()" viewBox="0 0 512 512" style="margin-right: 13px;" width="18px">
+                        <g>
+                            <g>
+                                <path style="fill:#333"
+                                    d="M479.18,91.897H32.821C14.69,91.897,0,77.207,0,59.077s14.69-32.821,32.821-32.821H479.18   c18.13,0,32.82,14.69,32.82,32.821S497.31,91.897,479.18,91.897z"
+                                    data-original="#FF485A" class="" data-old_color="#FF485A" />
+                                <path style="fill:#333"
+                                    d="M295.385,288.821H32.821C14.69,288.821,0,274.13,0,256s14.69-32.821,32.821-32.821h262.564   c18.13,0,32.821,14.69,32.821,32.821S313.515,288.821,295.385,288.821z"
+                                    data-original="#FF485A" class="" data-old_color="#FF485A" />
+                            </g>
+                            <path style="fill:#333"
+                                d="M479.18,288.821h-52.513c-18.13,0-32.821-14.69-32.821-32.821s14.69-32.821,32.821-32.821h52.513  c18.13,0,32.82,14.69,32.82,32.821S497.31,288.821,479.18,288.821z"
+                                data-original="#FFBBC0" class="active-path" data-old_color="#FFBBC0" />
+                            <path style="fill:#333"
+                                d="M479.18,485.744H32.821C14.69,485.744,0,471.053,0,452.923c0-18.13,14.69-32.821,32.821-32.821  H479.18c18.13,0,32.82,14.69,32.82,32.821C512,471.053,497.31,485.744,479.18,485.744z"
+                                data-original="#FF485A" class="" data-old_color="#FF485A" />
+                        </g>
                     </svg>
-                    <a href="/" style="font-size:19px;color:#444;font-weight:bold;position:relative;top:3px;">
-                        Nepscart
-                        <img src="/img/logo.svg" style="width: 20px;position:relative;top:-17px;left:-16px;">
+                    <a href="/" style="font-size:19px;color:#333;font-weight:bold;position:relative;top:2px;">
+                        <img src="/img/logo.png"
+                            style="width: 32px;position:relative;top:-1px;">
+                            nepsCart
                     </a>
                 </div>
                 <div id="nav-mobile" class="col-5" style="padding-top:4px;text-align:right;padding-left:0;">
@@ -105,7 +120,7 @@
                 $('#nav-pc').append(`<a href="/cart" style="font-size: 14px;padding-right:20px;font-weight: bold;color:#444;">
                     <img src="/img/heart.svg" style="width: 18px;">
                     Cart
-                    <span id="nav-cart" style="font-size:11.5px;background:#FF4747;color:#fff;border-radius:50%;padding:0 5px;position:absolute;top:-5px;right:230px;">
+                    <span id="nav-cart" style="font-size:10.5px;background:#FF4747;color:#fff;border-radius:50%;padding:0 5px;position:absolute;top:-2px;right:230px;">
                         ${data.cart.length}
                     </span>
                 </a>
@@ -121,16 +136,16 @@
                     out</a>`)
             } else {
                 $('#nav-mobile').append(`<a href="/nepscartpoints" style="padding-right:17px;">
-                    <img src="/img/icon/points.svg" style="width: 20px;">
+                    <img src="/img/icon/points.svg" style="width: 19.5px;">
                 </a>
                 <a href="/cart" style="padding-right:17px;">
-                    <img src="/img/heart.svg" style="width: 21px;">
+                    <img src="/img/heart.svg" style="width: 18px;">
                     <span id="nav-cart" style="font-size:11.5px;background:#FF4747;color:#fff;border-radius:50%;padding:0 5px;position:absolute;top:-5px;right:42px;">
                         ${data.cart.length}
                     </span>
                 </a>
                 <a href="/my-account">
-                    <img src="/img/icon/profile-nav.svg" style="width: 19px;">
+                    <img src="/img/icon/profile-nav.svg" style="width: 17px;">
                 </a>
                 `)
             }
