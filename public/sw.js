@@ -1,23 +1,23 @@
-const cacheName = 'v1';
+const cacheName = 'v10';
 
 const cacheAssets = [
-    // '/',
+    '/',
     '/offline',
-    // '/shop/men/all',
-    // '/shop/women/all',
-    // '/shop/women/5e4cce34d2e7a13e040f4daf',
+    '/shop/men/all',
+    '/shop/women/all',
+    '/shop/women/5e4cce34d2e7a13e040f4daf',
     '/user-login',
 
-    // '/cart',
+    '/cart',
     '/my-account',
-    // '/nepscartpoints',
-    // '/my-orders',
-    // '/partners',
-    // '/helpcentre',
-    // '/blogs',
+    '/nepscartpoints',
+    '/my-orders',
+    '/partners',
+    '/helpcentre',
+    '/blogs',
 
 
-    // '/css/style.css',
+    '/css/style.css',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css',
     'https://code.jquery.com/jquery-3.4.1.min.js',
     'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js',
@@ -41,7 +41,7 @@ const cacheAssets = [
     '/img/icon/points.svg',
     '/img/heart.svg',
     '/img/icon/profile-nav.svg',
-    // '/img/logo.png',
+    '/img/logo.svg',
     '/img/icon/arrow-white.svg',
     '/img/loader.svg',
     '/img/loading.svg',
