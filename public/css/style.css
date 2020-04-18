@@ -17,12 +17,12 @@ input:focus{
 
 /* header================== */
 header{
-    padding: 14px 0 14px 0;
+    padding: 12px 0 12px 0;
     background: #fff;
 }
 
 .nav{
-    margin-top:10px;
+    margin-top:13px;
 }
 
 .nav a{
@@ -128,7 +128,6 @@ header{
 
 /* footer============================= */
 footer{
-    margin-top: 35px;
     padding: 45px 0;
     font-size: 15px;
     background: #fff;
@@ -141,7 +140,7 @@ footer h6, footer strong{
 .footer-link a{
   display: block;  
   color: #555;
-  font-size: 14px;
+  font-size: 15px;
   padding-top:4px;
 }
 .footer-social div{
@@ -150,9 +149,9 @@ footer h6, footer strong{
 .footer-social div a{
     padding-right:8px;
 }
-.footer-secure div{
-    margin-bottom: 26px;
-    line-height: 21px;
+.footer-city div{
+    line-height: 28px;
+    color: #49ada2;
 }
 
 /* partner=========================== */

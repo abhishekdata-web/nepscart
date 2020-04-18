@@ -1,11 +1,11 @@
-<section class="display-pc" style="padding-bottom:65px;">
+<section class="display-pc" style="padding-bottom:69px;">
     <header class="fixed-top shadow-sm">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2">
                     <a href="/" style="color: #222;font-size:19.5px;font-weight:bold;margin-top: 4.9px;display: block;">
-                        <img src="/img/logo.png"
-                                style="width: 32px;position:relative;top:-2px;">
+                        <img src="/img/logo.svg"
+                                style="width: 36px;position:relative;top:-5px;">
                             nepsCart
                     </a>
                 </div>
@@ -18,7 +18,7 @@
                         <a href="/helpcentre">Help centre</a>
                     </div>
                 </div>
-                <div id="nav-pc" class="col-md-3" style="text-align:right;padding-top:6px;">
+                <div id="nav-pc" class="col-md-3" style="text-align:right;padding-top:10px;">
 
                 </div>
             </div>
@@ -26,7 +26,7 @@
     </header>
 </section>
 
-<section class="display-mobile" style="padding-bottom:56.5px;">
+<section class="display-mobile" style="padding-bottom:61.5px;">
     <header class="fixed-top" style="background: #fff;">
         <div class="container-fluid">
             <div class="row">
@@ -50,8 +50,8 @@
                         </g>
                     </svg>
                     <a href="/" style="font-size:19px;color:#333;font-weight:bold;position:relative;top:2px;">
-                        <img src="/img/logo.png"
-                            style="width: 32px;position:relative;top:-1px;">
+                        <img src="/img/logo.svg"
+                            style="width: 32px;position:relative;top:-5px;">
                             nepsCart
                     </a>
                 </div>
@@ -112,7 +112,7 @@
 
     $.getJSON("/api/users/auth", function (data) {
         if (data.isAuth) {
-            $('#sidenav-user-name').append(`${data.firstname}`);
+            $('#sidenav-user-name').append(`<a href="/my-account" style="color: #fff;">${data.firstname}</a>`);
             $('#sidenav-auth').append(`<a href="/my-account">My Account</a>
                 <a href="/my-orders">Orders</a>`);
 
@@ -150,7 +150,7 @@
                 `)
             }
         } else {
-            $('#sidenav-user-name').append(`Please Login`);
+            $('#sidenav-user-name').append(`<a href="/user-login" style="color: #fff;">Please Login</a>`);
 
             if (mq.matches) {
                 $('#nav-pc').append(`<a href="/user-login" style="font-size: 14px;padding-right:8px;font-weight: bold;color:#444;">
